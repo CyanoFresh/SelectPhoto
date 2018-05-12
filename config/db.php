@@ -2,7 +2,7 @@
 
 return \yii\helpers\ArrayHelper::merge([
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=APP_NAME',
+    'dsn' => 'mysql:host=localhost;dbname=selectphoto2',
     'username' => 'root',
     'password' => '',
     'charset' => 'utf8',

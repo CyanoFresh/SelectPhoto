@@ -5,6 +5,7 @@ $db = require(__DIR__ . '/db.php');
 
 return [
     'id' => 'APP_NAME-web',
+    'language' => 'ru',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
@@ -37,6 +38,7 @@ return [
             'showScriptName' => false,
             'rules' => [
                 '' => 'site/index',
+                'l/<link>' => 'link/index',
             ],
         ],
         'view' => [
@@ -55,4 +57,9 @@ return [
         ],*/
     ],
     'params' => $params,
+    'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin\Module',
+        ],
+    ],
 ];

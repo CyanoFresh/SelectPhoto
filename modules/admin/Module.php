@@ -19,6 +19,6 @@ class Module extends \yii\base\Module
     {
         parent::init();
 
-        // custom initialization code goes here
+        $this->layout = 'admin';
     }
 }
