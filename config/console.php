@@ -1,18 +1,17 @@
 <?php
 
-Yii::setAlias('@tests', dirname(__DIR__) . '/tests/codeception');
-
 $params = require(__DIR__ . '/params.php');
+$db = require(__DIR__ . '/db.php');
 
-$config = [
-    'id' => 'yii2-console',
+return \yii\helpers\ArrayHelper::merge([
+    'id' => 'APP_NAME-console',
     'language' => 'en',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'app\commands',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
     'components' => [
         'cache' => [
@@ -26,6 +25,7 @@ $config = [
                 ],
             ],
         ],
+        'db' => $db,
     ],
     'params' => $params,
     /*
@@ -35,14 +35,4 @@ $config = [
         ],
     ],
     */
-];
-
-if (YII_ENV_DEV) {
-    // configuration adjustments for 'dev' environment
-    $config['bootstrap'][] = 'gii';
-    $config['modules']['gii'] = [
-        'class' => 'yii\gii\Module',
-    ];
-}
-
-return $config;
+], require(__DIR__ . '/console-local.php'));
