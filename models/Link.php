@@ -4,16 +4,18 @@ namespace app\models;
 
 use app\models\query\LinkQuery;
 use Yii;
+use yii\helpers\FileHelper;
 
 /**
  * This is the model class for table "link".
  *
  * @property int $id
- * @property int $active
+ * @property boolean $active
  * @property string $link
  * @property string $name
  * @property int $project_id
- * @property int $allow_comment
+ * @property boolean $submitted
+ * @property boolean $allow_comment
  * @property int $created_at
  *
  * @property Project $project
@@ -40,7 +42,13 @@ class Link extends \yii\db\ActiveRecord
             [['link'], 'string', 'max' => 36],
             [['name'], 'string', 'max' => 255],
             [['link'], 'unique'],
-            [['project_id'], 'exist', 'skipOnError' => true, 'targetClass' => Project::className(), 'targetAttribute' => ['project_id' => 'id']],
+            [
+                ['project_id'],
+                'exist',
+                'skipOnError' => false,
+                'targetClass' => Project::class,
+                'targetAttribute' => ['project_id' => 'id']
+            ],
         ];
     }
 
@@ -55,6 +63,7 @@ class Link extends \yii\db\ActiveRecord
             'link' => 'Ссылка',
             'name' => 'Имя',
             'project_id' => 'Проект',
+            'submitted' => 'Завершено Пользователем',
             'allow_comment' => 'Разрешить комментирование',
             'created_at' => 'Дата Создания',
         ];
@@ -83,5 +92,53 @@ class Link extends \yii\db\ActiveRecord
     public static function find()
     {
         return new LinkQuery(get_called_class());
+    }
+
+    /**
+     * Remove all photos when deleted
+     * @inheritdoc
+     */
+    public function afterDelete()
+    {
+        parent::afterDelete();
+
+        FileHelper::removeDirectory('@webroot/uploads/' . $this->id);
+    }
+
+    /**
+     * @return bool
+     * @throws \yii\db\Exception
+     */
+    public function submit()
+    {
+        $this->submitted = true;
+
+        $transaction = Yii::$app->db->beginTransaction();
+
+        $this->save();
+
+        try {
+            $mail = Yii::$app->mailer
+                ->compose('checked', [
+                    'linkModel' => $this,
+                ])
+                ->setFrom(Yii::$app->params['fromEmail'])
+                ->setTo(Yii::$app->params['adminEmail'])
+                ->setSubject('Выбор фото для "' . $this->name . '" заврешен');
+
+            if (!$mail->send()) {
+                throw new \Exception('Не удалось отправить email');
+            }
+        } catch (\Exception $exception) {
+            $transaction->rollBack();
+
+            $this->submitted = false;
+
+            return false;
+        }
+
+        $transaction->commit();
+
+        return true;
     }
 }

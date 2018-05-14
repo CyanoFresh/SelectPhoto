@@ -1,3 +1,10 @@
+<?php
+
+/** @var $this \yii\web\View */
+/** @var $content string */
+
+$this->title = 'Админпанель';
+?>
 <div class="admin-default-index">
     <h1><?= $this->context->action->uniqueId ?></h1>
     <p>

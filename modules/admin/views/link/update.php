@@ -5,8 +5,8 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Изменить Link: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Links', 'url' => ['index']];
+$this->title = 'Изменить Ссылку: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Ссылки', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Редактирование';
 ?>

@@ -5,14 +5,17 @@
 
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\widgets\Breadcrumbs;
+
+\app\modules\admin\assets\AdminAsset::register($this);
 ?>
 
 <?php $this->beginContent('@app/views/layouts/main.php'); ?>
 
 <?php
 NavBar::begin([
-    'brandLabel' => Yii::$app->name,
-    'brandUrl' => Yii::$app->homeUrl,
+    'brandLabel' => 'SelectPhoto Admin',
+    'brandUrl' => ['/admin/default/index'],
     'options' => [
         'class' => 'navbar-inverse navbar-fixed-top',
     ],
@@ -33,7 +36,14 @@ echo Nav::widget([
 NavBar::end();
 ?>
 
+<div class="wrap">
+    <div class="container">
+        <?= Breadcrumbs::widget([
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+        ]) ?>
 
-<?= $content ?>
+        <?= $content ?>
+    </div>
+</div>
 
 <?php $this->endContent(); ?>

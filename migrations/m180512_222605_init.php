@@ -33,6 +33,7 @@ class m180512_222605_init extends Migration
             'link' => $this->string(36)->notNull(),
             'name' => $this->string(),
             'project_id' => $this->integer()->unsigned(),
+            'submitted' => $this->boolean()->defaultValue(false),
             'allow_comment' => $this->boolean()->defaultValue(true),
             'created_at' => $this->integer()->unsigned(),
         ], $tableOptions);

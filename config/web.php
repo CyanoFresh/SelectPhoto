@@ -12,6 +12,7 @@ return [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'defaultRoute' => 'link/index',
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -37,8 +38,9 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '' => 'site/index',
-                'l/<link>' => 'link/index',
+                '' => 'link/index',
+                'l/<link>' => 'link/view',
+                'l/<link:\w+>/<id:\d+>' => 'link/select_photo',
             ],
         ],
         'view' => [
@@ -47,14 +49,14 @@ return [
             'jsPosition' => [\yii\web\View::POS_END],
             'forceCharset' => 'UTF-8',
         ],
-        /*'assetManager' => [
+        'assetManager' => [
             'bundles' => [
                 'yii\bootstrap\BootstrapAsset' => [
                     'css' => [],
-                    'js' => [],
+//                    'js' => [],
                 ],
             ],
-        ],*/
+        ],
     ],
     'params' => $params,
     'modules' => [

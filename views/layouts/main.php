@@ -4,9 +4,6 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
@@ -20,7 +17,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
 
-    <title><?= $this->title ?> - <?= Yii::$app->name ?></title>
+    <title><?= $this->title ?> - SelectPhoto</title>
 
     <?php $this->head() ?>
 
@@ -34,19 +31,12 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= $content ?>
-    </div>
+<div class="content">
+    <?= $content ?>
 </div>
 
 <footer class="footer">
-    <div class="container">
-        <p class="pull-right">By <a href="//solomaha.com">Alex Solomaha</a></p>
-    </div>
+    Made by <a href="https://solomaha.com" target="_blank">Alex Solomaha</a>
 </footer>
 
 <?php $this->endBody() ?>
