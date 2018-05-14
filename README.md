@@ -1,40 +1,22 @@
-Yii2 EL Template
+SelectPhoto
 ============================
 
-This is my template for quick project development. Yii2 Basic template Lightweight + Environments + Refactor
+Web Application for photographer or other art worker.
 
-EL = Environments Lightweight
-
-Common uses: simple web applications without database, landing pages with forms, ajax applications
-
-DIRECTORY STRUCTURE
--------------------
-
-      assets/             contains assets definition
-      config/             contains application configurations
-      controllers/        contains Web controller classes
-      mail/               contains view files for e-mails
-      runtime/            contains files generated during runtime
-      vendor/             contains dependent 3rd-party packages
-      views/              contains view files for the Web application
-      web/                contains the entry script and Web resources
-
+**Use case**<br>
+You have taken ~30 photos. You want your client to select the best ones, which is suitable for him.
+You upload these photos and give that man a link. Client goes by that link, selects photos which he consider as suitable.
+You (admin) are notified by email when he finishes and can review selected on site.
 
 INSTALLATION
 ------------
 
-Get project files:
+1. Clone this and `cd` into repo files
 
-~~~
-git clone https://github.com/CyanoFresh/yii2-el-template PROJECTNAME
-cd PROJECTNAME
-composer install
-~~~
+2. Install packages:
 
-If installation has not started, run init command manually:
-
-~~~
-php init
-~~~
-
-Also check files in `config` folder for more customization
+    ~~~
+    composer install
+    ~~~
+    
+3. Configure app by files in the `/config/` directory
