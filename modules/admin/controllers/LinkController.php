@@ -2,12 +2,18 @@
 
 namespace app\modules\admin\controllers;
 
+use app\modules\admin\models\form\LinkUploadForm;
+use Ramsey\Uuid\Uuid;
 use Yii;
 use app\models\Link;
 use app\modules\admin\models\search\LinkSearch;
+use yii\helpers\Json;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
+use yii\web\UploadedFile;
 
 /**
  * LinkController implements the CRUD actions for Link model.
@@ -24,6 +30,9 @@ class LinkController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                    'upload' => ['POST'],
+                    'create' => ['POST'],
+                    'update' => ['POST'],
                 ],
             ],
         ];
@@ -51,8 +60,13 @@ class LinkController extends Controller
      */
     public function actionView($id)
     {
+        $linkModel = $this->findModel($id);
+
+        $uploadForm = new LinkUploadForm();
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $linkModel,
+            'uploadForm' => $uploadForm,
         ]);
     }
 
@@ -68,6 +82,12 @@ class LinkController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
+
+        $model->link = $model->link ? $model->link : Uuid::uuid4()->toString();
+        $model->active = $model->active ? $model->active : true;
+        $model->allow_comment = $model->allow_comment ? $model->allow_comment : true;
+        $model->disable_after_submit = $model->disable_after_submit ? $model->disable_after_submit : true;
+        $model->watermark = $model->watermark ? $model->watermark : true;
 
         return $this->render('create', [
             'model' => $model,
@@ -104,6 +124,25 @@ class LinkController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function actionUpload($id)
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        $uploadForm = new LinkUploadForm();
+        $uploadForm->file = UploadedFile::getInstance($uploadForm, 'file');
+
+        $ok = $uploadForm->upload($id);
+
+        return [
+            'ok' => $ok,
+            'errors' => $uploadForm->errors,
+        ];
     }
 
     /**

@@ -49,7 +49,7 @@ class Project extends \yii\db\ActiveRecord
             'active' => 'Активен',
             'name' => 'Название',
             'description' => 'Описание',
-            'created_at' => 'Создан',
+            'created_at' => 'Дата Создания',
         ];
     }
 

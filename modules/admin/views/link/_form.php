@@ -7,8 +7,6 @@
 use Ramsey\Uuid\Uuid;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
-$model->link = $model->isNewRecord ? Uuid::uuid4()->toString() : $model->link;
 ?>
 
 <div class="link-form">
@@ -16,19 +14,24 @@ $model->link = $model->isNewRecord ? Uuid::uuid4()->toString() : $model->link;
     <?php $form = ActiveForm::begin(); ?>
 
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <?= $form->field($model, 'link')->textInput(['maxlength' => 36]) ?>
+        </div>
+        <div class="col-sm-4">
+            <?= $form->field($model, 'project_id')->dropDownList([]) ?>
         </div>
     </div>
 
-    <?= $form->field($model, 'project_id')->dropDownList([]) ?>
+    <?= $form->field($model, 'active')->checkbox() ?>
 
     <?= $form->field($model, 'allow_comment')->checkbox() ?>
 
-    <?= $form->field($model, 'active')->checkbox() ?>
+    <?= $form->field($model, 'disable_after_submit')->checkbox() ?>
+
+    <?= $form->field($model, 'watermark')->checkbox() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Добавить' : 'Сохранить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

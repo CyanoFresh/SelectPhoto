@@ -18,7 +18,7 @@ class LinkSearch extends Link
     public function rules()
     {
         return [
-            [['id', 'active', 'project_id', 'allow_comment', 'created_at'], 'integer'],
+            [['id', 'active', 'project_id', 'allow_comment', 'submitted', 'created_at'], 'integer'],
             [['link', 'name'], 'safe'],
         ];
     }
@@ -63,7 +63,8 @@ class LinkSearch extends Link
             'active' => $this->active,
             'project_id' => $this->project_id,
             'allow_comment' => $this->allow_comment,
-            'created_at' => $this->created_at,
+//            'created_at' => $this->created_at,
+            'submitted' => $this->submitted,
         ]);
 
         $query->andFilterWhere(['like', 'link', $this->link])

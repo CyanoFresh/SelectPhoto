@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c8856df97c4241f308f36b55fda8d630",
+    "content-hash": "dc957b658e00f94a41d2ff7488ef7de0",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -327,6 +327,42 @@
                 "validator"
             ],
             "time": "2018-04-10T10:11:19+00:00"
+        },
+        {
+            "name": "enyo/dropzone",
+            "version": "v5.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/enyo/dropzone.git",
+                "reference": "7d0792d1346d83a8b0c0d2919121bdd2b8e7fee4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/enyo/dropzone/zipball/7d0792d1346d83a8b0c0d2919121bdd2b8e7fee4",
+                "reference": "7d0792d1346d83a8b0c0d2919121bdd2b8e7fee4",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matias Meno",
+                    "email": "m@tias.me",
+                    "homepage": "http://www.matiasmeno.com"
+                }
+            ],
+            "description": "Handles drag and drop of files for you.",
+            "homepage": "http://www.dropzonejs.com",
+            "keywords": [
+                "drag and drop",
+                "dragndrop",
+                "file upload",
+                "upload"
+            ],
+            "time": "2017-06-20T13:39:37+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",

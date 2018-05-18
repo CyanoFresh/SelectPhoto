@@ -3,7 +3,9 @@
 namespace app\models;
 
 use app\models\query\LinkQuery;
+use Ramsey\Uuid\Uuid;
 use Yii;
+use yii\behaviors\TimestampBehavior;
 use yii\helpers\FileHelper;
 
 /**
@@ -16,7 +18,10 @@ use yii\helpers\FileHelper;
  * @property int $project_id
  * @property boolean $submitted
  * @property boolean $allow_comment
+ * @property boolean $disable_after_submit
+ * @property boolean $watermark
  * @property int $created_at
+ * @property int $submitted_at
  *
  * @property Project $project
  * @property Photo[] $photos
@@ -37,8 +42,10 @@ class Link extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['active', 'project_id', 'allow_comment', 'created_at'], 'integer'],
-            [['link'], 'required'],
+            [['project_id', 'created_at', 'submitted_at'], 'integer'],
+            [['active', 'allow_comment', 'disable_after_submit', 'watermark'], 'boolean'],
+            [['active', 'allow_comment', 'disable_after_submit', 'watermark'], 'default', 'value' => true],
+            [['link', 'name'], 'required'],
             [['link'], 'string', 'max' => 36],
             [['name'], 'string', 'max' => 255],
             [['link'], 'unique'],
@@ -61,11 +68,27 @@ class Link extends \yii\db\ActiveRecord
             'id' => 'ID',
             'active' => 'Активна',
             'link' => 'Ссылка',
-            'name' => 'Имя',
+            'name' => 'Название',
             'project_id' => 'Проект',
             'submitted' => 'Завершено Пользователем',
             'allow_comment' => 'Разрешить комментирование',
+            'disable_after_submit' => 'Отключить после завершения',
+            'watermark' => 'Ставить watermark',
             'created_at' => 'Дата Создания',
+            'submitted_at' => 'Дата Завершения',
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'updatedAtAttribute' => false,
+            ]
         ];
     }
 
@@ -102,7 +125,15 @@ class Link extends \yii\db\ActiveRecord
     {
         parent::afterDelete();
 
-        FileHelper::removeDirectory('@webroot/uploads/' . $this->id);
+        FileHelper::removeDirectory($this->getDirPath());
+    }
+
+    /**
+     * @return string
+     */
+    public function getDirPath()
+    {
+        return Yii::getAlias('@webroot/uploads/' . $this->id);
     }
 
     /**
@@ -112,6 +143,10 @@ class Link extends \yii\db\ActiveRecord
     public function submit()
     {
         $this->submitted = true;
+
+        if ($this->disable_after_submit) {
+            $this->active = false;
+        }
 
         $transaction = Yii::$app->db->beginTransaction();
 

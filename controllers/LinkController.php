@@ -3,11 +3,12 @@
 namespace app\controllers;
 
 use app\models\Link;
+use app\models\Photo;
 use Props\NotFoundException;
 use Yii;
+use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\web\Response;
-use yii\web\UnauthorizedHttpException;
 
 class LinkController extends Controller
 {
@@ -21,7 +22,9 @@ class LinkController extends Controller
                 'class' => \yii\filters\VerbFilter::class,
                 'actions' => [
                     'selectPhoto' => ['POST'],
+                    'commentPhoto' => ['POST'],
                     'submit' => ['POST'],
+                    'view' => ['GET'],
                 ],
             ],
         ];
@@ -32,14 +35,8 @@ class LinkController extends Controller
      */
     public function actionIndex()
     {
-        $savedLinkId = Yii::$app->session->get('link_id', false);
-
-        if ($savedLinkId) {
-            $savedLinkModel = Link::findOne($savedLinkId);
-
-            if ($savedLinkModel && $savedLinkModel->active) {
-                return $this->redirect(['link/view', 'link' => $savedLinkModel->link]);
-            }
+        if ($savedLinkModel = $this->getSavedLinkModel()) {
+            return $this->redirect(['view', 'link' => $savedLinkModel->link]);
         }
 
         return $this->render('index');
@@ -63,29 +60,84 @@ class LinkController extends Controller
         ]);
     }
 
-    public function actionSelectPhoto($id)
+    /**
+     * @param string $link
+     * @param int $id
+     * @return mixed
+     * @throws NotFoundException
+     */
+    public function actionSelectPhoto($link, $id)
     {
-        $requestedLink = Yii::$app->request->get('link');
+        Yii::$app->response->format = Response::FORMAT_JSON;
 
-        return 'TODO';
+        $savedLinkModel = $this->getSavedLinkModel();
+
+        if (!$savedLinkModel or $link !== $savedLinkModel->link) {
+            throw new NotFoundException('Ссылка не найдена');
+        }
+
+        $photoModel = Photo::findOne($id);
+
+        if (!$photoModel || $photoModel->link_id !== $savedLinkModel->id) {
+            throw new NotFoundException('Фото не найдено');
+        }
+
+        $photoModel->selected = true;
+        $ok = $photoModel->save();
+
+        return [
+            'ok' => $ok,
+            'errors' => $photoModel->errors,
+        ];
     }
 
-    public function actionCommentPhoto($id)
+    /**
+     * @param string $link
+     * @param int $id
+     * @return mixed
+     * @throws BadRequestHttpException
+     * @throws NotFoundException
+     */
+    public function actionCommentPhoto($link, $id)
     {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
         $comment = Yii::$app->request->post('message');
-        return 'TODO';
+
+        if (!$comment) {
+            throw new BadRequestHttpException('Сообщение отсутствует');
+        }
+
+        $savedLinkModel = $this->getSavedLinkModel();
+
+        if (!$savedLinkModel or $link !== $savedLinkModel->link) {
+            throw new NotFoundException('Ссылка не найдена');
+        }
+
+        $photoModel = Photo::findOne($id);
+
+        if (!$photoModel || $photoModel->link_id !== $savedLinkModel->id) {
+            throw new NotFoundException('Фото не найдено');
+        }
+
+        $photoModel->comment = $comment;
+        $ok = $photoModel->save();
+
+        return [
+            'ok' => $ok,
+            'errors' => $photoModel->errors,
+        ];
     }
 
     /**
      * @param string $link
      * @return mixed
      * @throws NotFoundException
+     * @throws \yii\db\Exception
      */
     public function actionSubmit($link)
     {
-        if (Yii::$app->request->isAjax) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-        }
+        Yii::$app->response->format = Response::FORMAT_JSON;
 
         $link = Yii::$app->session->get('link', false);
 
@@ -95,21 +147,15 @@ class LinkController extends Controller
 
         $linkModel = Link::find()->link($link)->active()->one();
 
-        if (!$link || !$linkModel) {
+        if (!$linkModel) {
             throw new NotFoundException('Ссылка не существует');
         }
 
-        $result = $linkModel->submit();
+        $ok = $linkModel->submit();
 
-        if (Yii::$app->request->isAjax) {
-            return [
-                'ok' => $result,
-            ];
-        } else {
-            return $this->render('success', [
-                'linkModel' => $linkModel,
-            ]);
-        }
+        return [
+            'ok' => $ok,
+        ];
     }
 
     /**
@@ -126,5 +172,19 @@ class LinkController extends Controller
         }
 
         throw new NotFoundException('Ссылка не найдена');
+    }
+
+    /**
+     * @return Link
+     */
+    protected function getSavedLinkModel()
+    {
+        $savedLinkId = Yii::$app->session->get('link_id', false);
+
+        if ($savedLinkId) {
+            return Link::find()->where(['id' => $savedLinkId])->active()->one();
+        }
+
+        return null;
     }
 }

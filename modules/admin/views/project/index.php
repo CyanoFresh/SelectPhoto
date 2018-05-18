@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'created_at:datetime',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'app\components\ActionButtonColumn'],
         ],
     ]); ?>
     <?php Pjax::end(); ?>

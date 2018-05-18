@@ -31,11 +31,14 @@ class m180512_222605_init extends Migration
             'id' => $this->primaryKey()->unsigned(),
             'active' => $this->boolean()->defaultValue(true),
             'link' => $this->string(36)->notNull(),
-            'name' => $this->string(),
+            'name' => $this->string()->notNull(),
             'project_id' => $this->integer()->unsigned(),
             'submitted' => $this->boolean()->defaultValue(false),
             'allow_comment' => $this->boolean()->defaultValue(true),
-            'created_at' => $this->integer()->unsigned(),
+            'disable_after_submit' => $this->boolean()->defaultValue(true),
+            'watermark' => $this->boolean()->defaultValue(true),
+            'created_at' => $this->integer()->unsigned()->notNull(),
+            'submitted_at' => $this->integer()->unsigned(),
         ], $tableOptions);
 
         $this->createIndex('idx-link-project_id', 'link', 'project_id');
@@ -44,10 +47,9 @@ class m180512_222605_init extends Migration
 
         $this->createTable('photo', [
             'id' => $this->primaryKey()->unsigned(),
+            'link_id' => $this->integer()->unsigned(),
             'selected' => $this->boolean()->defaultValue(false),
             'filename' => $this->string()->notNull(),
-            'link_id' => $this->integer()->unsigned(),
-            'updated_at' => $this->integer()->unsigned(),
             'comment' => $this->text(),
         ], $tableOptions);
 

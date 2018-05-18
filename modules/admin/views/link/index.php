@@ -28,15 +28,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             'id',
-            'submitted:boolean',
             'name',
             'active:boolean',
+            'submitted:boolean',
 //            'link',
             'project_id',
 //            'allow_comment:boolean',
             'created_at:datetime',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'app\components\ActionButtonColumn'],
         ],
     ]); ?>
     <?php Pjax::end(); ?>

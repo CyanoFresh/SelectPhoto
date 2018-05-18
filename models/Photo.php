@@ -3,6 +3,7 @@
 namespace app\models;
 
 use app\models\query\PhotoQuery;
+use Yii;
 
 /**
  * This is the model class for table "photo".
@@ -11,7 +12,6 @@ use app\models\query\PhotoQuery;
  * @property int $selected
  * @property string $filename
  * @property int $link_id
- * @property int $updated_at
  * @property string $comment
  *
  * @property Link $link
@@ -32,11 +32,17 @@ class Photo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['selected', 'link_id', 'updated_at'], 'integer'],
+            [['selected', 'link_id'], 'integer'],
             [['filename'], 'required'],
             [['comment'], 'string'],
             [['filename'], 'string', 'max' => 255],
-            [['link_id'], 'exist', 'skipOnError' => true, 'targetClass' => Link::className(), 'targetAttribute' => ['link_id' => 'id']],
+            [
+                ['link_id'],
+                'exist',
+                'skipOnError' => true,
+                'targetClass' => Link::class,
+                'targetAttribute' => ['link_id' => 'id']
+            ],
         ];
     }
 
@@ -50,7 +56,6 @@ class Photo extends \yii\db\ActiveRecord
             'selected' => 'Выбрано',
             'filename' => 'Имя файла',
             'link_id' => 'Ссылка',
-            'updated_at' => 'Дата Изменения',
             'comment' => 'Комментарий',
         ];
     }
@@ -70,5 +75,13 @@ class Photo extends \yii\db\ActiveRecord
     public static function find()
     {
         return new PhotoQuery(get_called_class());
+    }
+
+    /**
+     * @return string
+     */
+    public function getFilePath()
+    {
+        return Yii::getAlias('@webroot/uploads/' . $this->link_id . '/' . $this->filename);
     }
 }
