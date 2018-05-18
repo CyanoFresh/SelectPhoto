@@ -32,9 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'active:boolean',
             'submitted:boolean',
 //            'link',
-            'project_id',
+//            'project_id',
 //            'allow_comment:boolean',
-            'created_at:datetime',
+//            'created_at:datetime',
 
             ['class' => 'app\components\ActionButtonColumn'],
         ],

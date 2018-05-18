@@ -30,7 +30,18 @@ h1.page-header {
     margin: 0 0 15px 0;
 }
 
+.footer {
+    margin-top: 40px;
+}
 
 .not-set {
     color: red;
+}
+
+.dropzone {
+    min-height: unset;
+    border: 3px dotted rgba(0, 0, 0, 0.3);
+    /* background: white; */
+    padding: 20px 20px;
+    margin-bottom: 30px;
 }

@@ -27,12 +27,10 @@ class LinkController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                     'upload' => ['POST'],
-                    'create' => ['POST'],
-                    'update' => ['POST'],
                 ],
             ],
         ];
