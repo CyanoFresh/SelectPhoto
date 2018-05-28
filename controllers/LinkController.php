@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use app\models\Link;
 use app\models\Photo;
-use Props\NotFoundException;
+use yii\web\NotFoundHttpException;
 use Yii;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -45,7 +45,7 @@ class LinkController extends Controller
     /**
      * @param string $link
      * @return string
-     * @throws NotFoundException
+     * @throws NotFoundHttpException
      */
     public function actionView($link)
     {
@@ -64,7 +64,7 @@ class LinkController extends Controller
      * @param string $link
      * @param int $id
      * @return mixed
-     * @throws NotFoundException
+     * @throws NotFoundHttpException
      */
     public function actionSelectPhoto($link, $id)
     {
@@ -73,13 +73,13 @@ class LinkController extends Controller
         $savedLinkModel = $this->getSavedLinkModel();
 
         if (!$savedLinkModel or $link !== $savedLinkModel->link) {
-            throw new NotFoundException('Ссылка не найдена');
+            throw new NotFoundHttpException('Ссылка не найдена');
         }
 
         $photoModel = Photo::findOne($id);
 
         if (!$photoModel || $photoModel->link_id !== $savedLinkModel->id) {
-            throw new NotFoundException('Фото не найдено');
+            throw new NotFoundHttpException('Фото не найдено');
         }
 
         $photoModel->selected = true;
@@ -96,7 +96,7 @@ class LinkController extends Controller
      * @param int $id
      * @return mixed
      * @throws BadRequestHttpException
-     * @throws NotFoundException
+     * @throws NotFoundHttpException
      */
     public function actionCommentPhoto($link, $id)
     {
@@ -111,13 +111,13 @@ class LinkController extends Controller
         $savedLinkModel = $this->getSavedLinkModel();
 
         if (!$savedLinkModel or $link !== $savedLinkModel->link) {
-            throw new NotFoundException('Ссылка не найдена');
+            throw new NotFoundHttpException('Ссылка не найдена');
         }
 
         $photoModel = Photo::findOne($id);
 
         if (!$photoModel || $photoModel->link_id !== $savedLinkModel->id) {
-            throw new NotFoundException('Фото не найдено');
+            throw new NotFoundHttpException('Фото не найдено');
         }
 
         $photoModel->comment = $comment;
@@ -132,7 +132,7 @@ class LinkController extends Controller
     /**
      * @param string $link
      * @return mixed
-     * @throws NotFoundException
+     * @throws NotFoundHttpException
      * @throws \yii\db\Exception
      */
     public function actionSubmit($link)
@@ -142,13 +142,13 @@ class LinkController extends Controller
         $link = Yii::$app->session->get('link', false);
 
         if ($link !== $link) {
-            throw new NotFoundException('Ссылка не существует');
+            throw new NotFoundHttpException('Ссылка не существует');
         }
 
         $linkModel = Link::find()->link($link)->active()->one();
 
         if (!$linkModel) {
-            throw new NotFoundException('Ссылка не существует');
+            throw new NotFoundHttpException('Ссылка не существует');
         }
 
         $ok = $linkModel->submit();
@@ -161,7 +161,7 @@ class LinkController extends Controller
     /**
      * @param string $link
      * @return Link
-     * @throws NotFoundException
+     * @throws NotFoundHttpException
      */
     protected function findLink($link)
     {
@@ -171,7 +171,7 @@ class LinkController extends Controller
             return $linkModel;
         }
 
-        throw new NotFoundException('Ссылка не найдена');
+        throw new NotFoundHttpException('Ссылка не найдена');
     }
 
     /**

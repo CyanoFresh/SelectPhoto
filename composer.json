@@ -8,7 +8,6 @@
     "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
     "rmrevin/yii2-minify-view": "^1.15",
     "ramsey/uuid": "^3.7",
-    "bower-asset/photoswipe": "^4.1",
     "enyo/dropzone": "^5.1"
   },
   "require-dev": {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "dc957b658e00f94a41d2ff7488ef7de0",
+    "content-hash": "e3017389c17f8f406a3a5d2a8b208892",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -62,25 +62,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/77d2a51d0520d2ee44173afdf4e40a9201f5964e",
                 "reference": "77d2a51d0520d2ee44173afdf4e40a9201f5964e",
-                "shasum": null
-            },
-            "type": "bower-asset",
-            "license": [
-                "MIT"
-            ]
-        },
-        {
-            "name": "bower-asset/photoswipe",
-            "version": "v4.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dimsemenov/PhotoSwipe.git",
-                "reference": "b6fdb82ed0b5b635c0943098f3046581a02ead77"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dimsemenov/PhotoSwipe/zipball/b6fdb82ed0b5b635c0943098f3046581a02ead77",
-                "reference": "b6fdb82ed0b5b635c0943098f3046581a02ead77",
                 "shasum": null
             },
             "type": "bower-asset",
