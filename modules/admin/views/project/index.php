@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'created_at:datetime',
 
-            ['class' => 'app\components\ActionButtonColumn'],
+            ['class' => 'app\modules\admin\components\ActionButtonColumn'],
         ],
     ]); ?>
     <?php Pjax::end(); ?>

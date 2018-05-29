@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'allow_comment:boolean',
 //            'created_at:datetime',
 
-            ['class' => 'app\components\ActionButtonColumn'],
+            ['class' => 'app\modules\admin\components\ActionButtonColumn'],
         ],
     ]); ?>
     <?php Pjax::end(); ?>

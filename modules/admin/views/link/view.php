@@ -86,20 +86,20 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-sm-4 col-md-3 photo photo-<?= $photo->id ?>">
                 <div class="panel <?= $photo->selected ? 'panel-primary' : 'panel-default' ?> text-center panel-photo">
                     <div class="panel-heading">
-                        #<?= $photo->id ?> - <?= $photo->filename ?>
+                        #<?= $photo->id ?>
                         <a class="btn btn-danger btn-xs btn-remove-photo" data-photo-id="<?= $photo->id ?>"
                            data-loading-text="Загрузка"></a>
                     </div>
                     <div class="panel-body">
                         <?= Html::a(
-                            Html::img(Yii::getAlias('@web/uploads/' . $model->id . '/' . $photo->filename), [
+                            Html::img(Yii::getAlias($photo->getFileUrl()), [
                                 'class' => 'img-responsive',
-                                'alt' => '#' . $photo->id . ' - ' . $photo->filename,
+                                'alt' => '#' . $photo->id,
                             ]),
-                            Yii::getAlias('@web/uploads/' . $model->id . '/' . $photo->filename),
+                            Yii::getAlias($photo->getFileUrl()),
                             [
                                 'data-gallery' => true,
-                                'title' => '#' . $photo->id . ' - ' . $photo->filename,
+                                'title' => '#' . $photo->id,
                             ]
                         ); ?>
                     </div>

@@ -49,7 +49,6 @@ class m180512_222605_init extends Migration
             'id' => $this->primaryKey()->unsigned(),
             'link_id' => $this->integer()->unsigned(),
             'selected' => $this->boolean()->defaultValue(false),
-            'filename' => $this->string()->notNull(),
             'comment' => $this->text(),
         ], $tableOptions);
 

@@ -2,7 +2,9 @@
 
 namespace app\modules\admin\models\form;
 
+use app\models\Link;
 use app\models\Photo;
+use app\modules\admin\components\ImageHelper;
 use Ramsey\Uuid\Uuid;
 use Yii;
 use yii\base\Model;
@@ -34,10 +36,10 @@ class LinkUploadForm extends Model
     }
 
     /**
-     * @param int $linkId
+     * @param Link $link
      * @return bool
      */
-    public function upload($linkId)
+    public function upload($link)
     {
         if (!$this->validate()) {
             return false;
@@ -46,20 +48,23 @@ class LinkUploadForm extends Model
         $transaction = Yii::$app->db->beginTransaction();
 
         $photoModel = new Photo();
-        $photoModel->link_id = $linkId;
-        $photoModel->filename = $this->file->name;
-
-        if (file_exists($photoModel->getFilePath())) {
-            $photoModel->filename = $photoModel->filename . '_' . Uuid::uuid4()->toString();
-        }
+        $photoModel->link_id = $link->id;
 
         if (!$photoModel->save()) {
             return false;
         }
 
-        // TODO: watermark
-
         FileHelper::createDirectory($photoModel->link->getDirPath());
+
+        $imageHelper = new ImageHelper();
+
+        // Create thumbnail
+        $imageHelper->thumbnail($this->file->tempName, $photoModel->getThumbnailPath());
+
+        if ($link->watermark) {
+            // Place watermark and save to the same temp path
+            $imageHelper->watermark($this->file->tempName, $this->file->tempName);
+        }
 
         if (!$this->file->saveAs($photoModel->getFilePath())) {
             $transaction->rollBack();

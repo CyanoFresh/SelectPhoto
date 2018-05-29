@@ -131,10 +131,12 @@ class LinkController extends Controller
      */
     public function actionUpload($id)
     {
+        $link = $this->findModel($id);
+
         $uploadForm = new LinkUploadForm();
         $uploadForm->file = UploadedFile::getInstance($uploadForm, 'file');
 
-        $ok = $uploadForm->upload($id);
+        $ok = $uploadForm->upload($link);
 
         if (!$ok) {
             Yii::$app->response->statusCode = 400;
@@ -157,6 +159,6 @@ class LinkController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('The requested Link does not exist.');
     }
 }

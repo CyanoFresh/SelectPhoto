@@ -10,7 +10,6 @@ use Yii;
  *
  * @property int $id
  * @property boolean $selected
- * @property string $filename
  * @property int $link_id
  * @property string $comment
  *
@@ -34,9 +33,7 @@ class Photo extends \yii\db\ActiveRecord
         return [
             [['link_id'], 'integer'],
             [['selected'], 'boolean'],
-            [['filename'], 'required'],
             [['comment'], 'string'],
-            [['filename'], 'string', 'max' => 255],
             [
                 ['link_id'],
                 'exist',
@@ -55,7 +52,6 @@ class Photo extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'selected' => 'Выбрано',
-            'filename' => 'Имя файла',
             'link_id' => 'Ссылка',
             'comment' => 'Комментарий',
         ];
@@ -83,6 +79,30 @@ class Photo extends \yii\db\ActiveRecord
      */
     public function getFilePath()
     {
-        return Yii::getAlias('@webroot/uploads/' . $this->link_id . '/' . $this->filename);
+        return Yii::getAlias('@webroot/uploads/' . $this->link_id . '/' . $this->id . '.jpg');
+    }
+
+    /**
+     * @return string
+     */
+    public function getFileUrl()
+    {
+        return Yii::getAlias('@web/uploads/' . $this->link_id . '/' . $this->id . '.jpg');
+    }
+
+    /**
+     * @return string
+     */
+    public function getThumbnailPath()
+    {
+        return Yii::getAlias('@webroot/uploads/' . $this->link_id . '/' . $this->id . '_thumb.jpg');
+    }
+
+    /**
+     * @return string
+     */
+    public function getThumbnailUrl()
+    {
+        return Yii::getAlias('@web/uploads/' . $this->link_id . '/' . $this->id . '_thumb.jpg');
     }
 }
