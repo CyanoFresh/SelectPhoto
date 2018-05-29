@@ -62,13 +62,14 @@ class LinkController extends Controller
 
     /**
      * @param string $link
-     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException
      */
-    public function actionSelectPhoto($link, $id)
+    public function actionSelectPhoto($link)
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
+
+        $id = Yii::$app->request->post('id');
 
         $savedLinkModel = $this->getSavedLinkModel();
 
@@ -82,7 +83,7 @@ class LinkController extends Controller
             throw new NotFoundHttpException('Фото не найдено');
         }
 
-        $photoModel->selected = true;
+        $photoModel->selected = !((bool)$photoModel->selected);
         $ok = $photoModel->save();
 
         return [

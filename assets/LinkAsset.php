@@ -9,6 +9,7 @@ class LinkAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
+        'css/site.css',
         'css/link.css',
     ];
     public $js = [

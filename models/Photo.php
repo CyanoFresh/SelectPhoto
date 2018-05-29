@@ -9,7 +9,7 @@ use Yii;
  * This is the model class for table "photo".
  *
  * @property int $id
- * @property int $selected
+ * @property boolean $selected
  * @property string $filename
  * @property int $link_id
  * @property string $comment
@@ -32,7 +32,8 @@ class Photo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['selected', 'link_id'], 'integer'],
+            [['link_id'], 'integer'],
+            [['selected'], 'boolean'],
             [['filename'], 'required'],
             [['comment'], 'string'],
             [['filename'], 'string', 'max' => 255],

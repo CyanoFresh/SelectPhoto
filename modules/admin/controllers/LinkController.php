@@ -9,6 +9,7 @@ use app\models\Link;
 use app\modules\admin\models\search\LinkSearch;
 use yii\helpers\Json;
 use yii\helpers\VarDumper;
+use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -130,17 +131,17 @@ class LinkController extends Controller
      */
     public function actionUpload($id)
     {
-        Yii::$app->response->format = Response::FORMAT_JSON;
-
         $uploadForm = new LinkUploadForm();
         $uploadForm->file = UploadedFile::getInstance($uploadForm, 'file');
 
         $ok = $uploadForm->upload($id);
 
-        return [
-            'ok' => $ok,
-            'errors' => $uploadForm->errors,
-        ];
+        if (!$ok) {
+            Yii::$app->response->statusCode = 400;
+            return $uploadForm->errors['file'][0];
+        }
+
+        return 'ok';
     }
 
     /**

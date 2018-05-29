@@ -14,30 +14,38 @@ $this->title = 'Выберите фото';
 $photosArray = [];
 
 foreach ($photosModels as $photosModel) {
-    $photosArray[$photosModel->id] = $photosModel->selected;
+    $photosArray[] = [
+        'src' => Url::home() . 'uploads/' . $photosModel->link_id . '/' . $photosModel->filename,
+        'thumb' => Url::home() . 'uploads/' . $photosModel->link_id . '/' . $photosModel->filename,
+        'selected' => (bool)$photosModel->selected,
+        'photo-id' => $photosModel->id,
+    ];
 }
 
 $this->registerJsVar('photos', $photosArray);
+$this->registerJsVar('selectPhotoUrl', Url::to(['link/select-photo', 'link' => $linkModel->link]));
 ?>
 
-<div class="alert alert-success">Выберите понравившиеся фото и нажмите <b>Завершить</b>.</div>
-
-<div id="lightgallery">
-    <?php foreach ($photosModels as $photosModel): ?>
-        <a href="<?= Url::home() . 'uploads/' . $photosModel->link_id . '/' . $photosModel->filename ?>"
-           title="<?= $photosModel->filename ?>">
-            <img src="<?= Url::home() . 'uploads/' . $photosModel->link_id . '/' . $photosModel->filename ?>"
-                 alt="<?= $photosModel->filename ?>"
-                 title="<?= $photosModel->filename ?>"
-                 data-selected="<?= $photosModel->selected ? 'true' : 'false' ?>"
-                 data-id="<?= $photosModel->id ?>"
-            >
-        </a>
-    <?php endforeach; ?>
-</div>
-
-<div class="text-center">
-    <div class="btn btn-primary btn-lg btn-submit-link"
-         href="<?= Url::to(['link/submit', 'link' => $linkModel->link]) ?>">Завершить выбор
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Выберите фото</h4>
+            </div>
+            <div class="modal-body">
+                <ol>
+                    <li>Листайте фото кнопками влево или вправо.</li>
+                    <li>Нажмайте кнопку <b>"Выбрать"</b> на понравившиеся фото.</li>
+                    <li>Не забудьте нажать <b>"Завершить"</b>, когда закончите выбирать.</li>
+                </ol>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-hide-forever" data-dismiss="modal">больше не показывать</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
     </div>
 </div>
+
+<div class="gallery"></div>

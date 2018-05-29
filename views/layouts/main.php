@@ -31,13 +31,7 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<div class="content">
-    <?= $content ?>
-</div>
-
-<footer class="footer">
-    Made by <a href="https://solomaha.com" target="_blank">Alex Solomaha</a>
-</footer>
+<?= $content ?>
 
 <?php $this->endBody() ?>
 </body>

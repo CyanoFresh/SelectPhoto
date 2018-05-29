@@ -27,8 +27,8 @@ class LinkUploadForm extends Model
                 'extensions' => 'jpg, png',
                 'mimeTypes' => 'image/jpeg,image/png',
                 'maxSize' => 10 * 1024 * 1024,
-                'maxWidth' => 1800,
-                'maxHeight' => 1500,
+                'maxWidth' => YII_DEBUG ? null : 1800,
+                'maxHeight' => YII_DEBUG ? null : 1500,
             ],
         ];
     }

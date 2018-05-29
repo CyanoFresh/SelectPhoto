@@ -1,6 +1,6 @@
 .SelectPhoto-controls {
     float: right;
-    margin: 7px 10px 0 0;
+    margin: 6px 5px 0 0;
 }
 
 .SelectPhoto-controls .btn {
@@ -9,4 +9,8 @@
 
 img {
     max-width: 100%;
+}
+
+.modal {
+    z-index: 9999999;
 }
