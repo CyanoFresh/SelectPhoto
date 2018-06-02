@@ -9,10 +9,13 @@ namespace app\models\query;
  */
 class PhotoQuery extends \yii\db\ActiveQuery
 {
-    /*public function active()
+    /**
+     * @return $this
+     */
+    public function selected()
     {
-        return $this->andWhere('[[status]]=1');
-    }*/
+        return $this->andWhere(['selected' => true]);
+    }
 
     /**
      * {@inheritdoc}

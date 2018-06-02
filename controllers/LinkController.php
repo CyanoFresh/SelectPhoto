@@ -94,18 +94,18 @@ class LinkController extends Controller
 
     /**
      * @param string $link
-     * @param int $id
      * @return mixed
      * @throws BadRequestHttpException
      * @throws NotFoundHttpException
      */
-    public function actionCommentPhoto($link, $id)
+    public function actionCommentPhoto($link)
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
 
-        $comment = Yii::$app->request->post('message');
+        $comment = Yii::$app->request->post('text');
+        $id = Yii::$app->request->post('id');
 
-        if (!$comment) {
+        if (!$comment or !$id) {
             throw new BadRequestHttpException('Сообщение отсутствует');
         }
 
@@ -140,16 +140,16 @@ class LinkController extends Controller
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
 
-        $link = Yii::$app->session->get('link', false);
+        $savedLinkModel = $this->getSavedLinkModel();
 
-        if ($link !== $link) {
-            throw new NotFoundHttpException('Ссылка не существует');
+        if (!$savedLinkModel or $link !== $savedLinkModel->link) {
+            throw new NotFoundHttpException('Ссылка не найдена');
         }
 
         $linkModel = Link::find()->link($link)->active()->one();
 
         if (!$linkModel) {
-            throw new NotFoundHttpException('Ссылка не существует');
+            throw new NotFoundHttpException('Ссылка не найдена');
         }
 
         $ok = $linkModel->submit();

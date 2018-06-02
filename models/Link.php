@@ -3,10 +3,13 @@
 namespace app\models;
 
 use app\models\query\LinkQuery;
+use app\models\query\PhotoQuery;
 use Ramsey\Uuid\Uuid;
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
 use yii\helpers\FileHelper;
+use yii\helpers\VarDumper;
 
 /**
  * This is the model class for table "link".
@@ -101,7 +104,7 @@ class Link extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery|PhotoQuery
      */
     public function getPhotos()
     {
@@ -156,6 +159,7 @@ class Link extends \yii\db\ActiveRecord
             $mail = Yii::$app->mailer
                 ->compose('checked', [
                     'linkModel' => $this,
+                    'selectedPhotoModels' => $this->getPhotos()->selected()->all(),
                 ])
                 ->setFrom(Yii::$app->params['fromEmail'])
                 ->setTo(Yii::$app->params['adminEmail'])
@@ -168,6 +172,9 @@ class Link extends \yii\db\ActiveRecord
             $transaction->rollBack();
 
             $this->submitted = false;
+            $this->active = true;
+
+            VarDumper::dump($exception);die;
 
             return false;
         }

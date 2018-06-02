@@ -49,6 +49,7 @@ class LinkUploadForm extends Model
 
         $photoModel = new Photo();
         $photoModel->link_id = $link->id;
+        $photoModel->filename = $this->file->name;
 
         if (!$photoModel->save()) {
             return false;

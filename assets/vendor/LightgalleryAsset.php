@@ -12,7 +12,11 @@ class LightgalleryAsset extends AssetBundle
         'css/lightgallery.css',
     ];
     public $js = [
-        'js/lightgallery-all.js',
+        'js/lg/lightgallery.js',
+        'js/lg/lg-thumbnail.js',
+        'js/lg/lg-fullscreen.js',
+        'js/lg/lg-hash.js',
+        'js/lg/lg-selectphoto.js',
     ];
     public $depends = [
         'yii\web\JqueryAsset',

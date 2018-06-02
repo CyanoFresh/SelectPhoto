@@ -11,6 +11,7 @@ use Yii;
  * @property int $id
  * @property boolean $selected
  * @property int $link_id
+ * @property string $filename
  * @property string $comment
  *
  * @property Link $link
@@ -31,9 +32,11 @@ class Photo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['link_id', 'filename'], 'required'],
             [['link_id'], 'integer'],
             [['selected'], 'boolean'],
-            [['comment'], 'string'],
+            [['selected'], 'default', 'value' => false],
+            [['comment', 'filename'], 'string'],
             [
                 ['link_id'],
                 'exist',
@@ -53,6 +56,7 @@ class Photo extends \yii\db\ActiveRecord
             'id' => 'ID',
             'selected' => 'Выбрано',
             'link_id' => 'Ссылка',
+            'filename' => 'Имя файла',
             'comment' => 'Комментарий',
         ];
     }
