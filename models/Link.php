@@ -146,6 +146,7 @@ class Link extends \yii\db\ActiveRecord
     public function submit()
     {
         $this->submitted = true;
+        $this->submitted_at = time();
 
         if ($this->disable_after_submit) {
             $this->active = false;

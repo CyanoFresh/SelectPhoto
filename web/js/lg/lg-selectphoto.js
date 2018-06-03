@@ -27,21 +27,28 @@
 
     SelectPhoto.prototype.init = function () {
         const that = this;
+        let html = '<form class="SelectPhoto-controls">';
 
-        this.core.$outer.find('.lg-toolbar').append(
-            '<form class="SelectPhoto-controls">' +
-            '<div id="comment-photo-form">' +
-            '<div class="input-group">' +
-            '<input type="text" class="form-control hidden-xs" placeholder="Введите комментарий...">' +
-            '<span class="input-group-btn">' +
-            '<button class="btn btn-default hidden-xs" type="submit">Комментировать</button>' +
-            '<a href="#" class="btn btn-primary finish-select"><i class="far fa-envelope hidden-xs"></i> Завершить</a>' +
-            '<a href="#" class="btn btn-success toggle-photo"><i class="far fa-check"></i> Выбрать</a>' +
-            '</span>' +
-            '</div>' +
-            '</div>' +
-            '</form>'
-        );
+        if (allowComment) {
+            html += '<div id="comment-photo-form">' +
+                '<div class="input-group">' +
+                '<input type="text" class="form-control hidden-xs" placeholder="Введите комментарий...">' +
+                '<span class="input-group-btn">' +
+                '<button class="btn btn-default hidden-xs" type="submit">Комментировать</button>';
+        }
+
+        html += '<a href="#" class="btn btn-primary finish-select"><i class="far fa-envelope hidden-xs"></i> Завершить</a>' +
+            '<a href="#" class="btn btn-success toggle-photo"><i class="far fa-check"></i> Выбрать</a>';
+
+        if (allowComment) {
+            html += '</span>' +
+                '</div>' +
+                '</div>';
+        }
+
+        html += '</form>';
+
+        this.core.$outer.find('.lg-toolbar').append(html);
 
         const $SelectPhotoControls = $('.SelectPhoto-controls');
 

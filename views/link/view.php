@@ -30,6 +30,7 @@ foreach ($photosModels as $photosModel) {
 
 $this->registerJsVar('photos', $photosArray);
 $this->registerJsVar('selectedPhotosCount', $selectedCount);
+$this->registerJsVar('allowComment', (bool)$linkModel->allow_comment);
 $this->registerJsVar('selectPhotoUrl', Url::to(['link/select-photo', 'link' => $linkModel->link]));
 $this->registerJsVar('commentPhotoUrl', Url::to(['link/comment-photo', 'link' => $linkModel->link]));
 $this->registerJsVar('submitLinkUrl', Url::to(['link/submit', 'link' => $linkModel->link]));

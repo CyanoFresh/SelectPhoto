@@ -3,10 +3,10 @@
     margin: 6px 5px 0 0;
 }
 
-/*.SelectPhoto-controls .btn {*/
-    /*margin: 0 5px;*/
-    /*display: inline-block;*/
-/*}*/
+.SelectPhoto-controls .btn {
+    margin: 0 5px;
+    display: inline-block;
+}
 
 .SelectPhoto-controls #comment-photo-form  {
     width: 800px;

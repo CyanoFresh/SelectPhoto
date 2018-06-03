@@ -9,6 +9,7 @@ use Yii;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\web\Response;
+use yii\web\UnauthorizedHttpException;
 
 class LinkController extends Controller
 {
@@ -113,6 +114,10 @@ class LinkController extends Controller
 
         if (!$savedLinkModel or $link !== $savedLinkModel->link) {
             throw new NotFoundHttpException('Ссылка не найдена');
+        }
+
+        if (!$savedLinkModel->allow_comment) {
+            throw new UnauthorizedHttpException('Комментирование не разрешено');
         }
 
         $photoModel = Photo::findOne($id);
