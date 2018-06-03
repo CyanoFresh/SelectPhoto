@@ -12,6 +12,7 @@ use yii\helpers\Url;
 $this->title = 'Выберите фото';
 
 $photosArray = [];
+$selectedCount = 0;
 
 foreach ($photosModels as $photosModel) {
     $photosArray[] = [
@@ -21,9 +22,14 @@ foreach ($photosModels as $photosModel) {
         'photo-id' => $photosModel->id,
         'comment' => $photosModel->comment,
     ];
+
+    if ($photosModel->selected) {
+        $selectedCount++;
+    }
 }
 
 $this->registerJsVar('photos', $photosArray);
+$this->registerJsVar('selectedPhotosCount', $selectedCount);
 $this->registerJsVar('selectPhotoUrl', Url::to(['link/select-photo', 'link' => $linkModel->link]));
 $this->registerJsVar('commentPhotoUrl', Url::to(['link/comment-photo', 'link' => $linkModel->link]));
 $this->registerJsVar('submitLinkUrl', Url::to(['link/submit', 'link' => $linkModel->link]));

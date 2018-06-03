@@ -15,7 +15,7 @@ class LightgalleryAsset extends AssetBundle
         'js/lg/lightgallery.js',
         'js/lg/lg-thumbnail.js',
         'js/lg/lg-fullscreen.js',
-        'js/lg/lg-hash.js',
+//        'js/lg/lg-hash.js',
         'js/lg/lg-selectphoto.js',
     ];
     public $depends = [

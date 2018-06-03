@@ -14,7 +14,7 @@ $(document).ready(function () {
             download: false,
             loop: false,
             SelectPhoto: true,
-            pager: true,
+            // pager: true,
             closable: false,
             hideBarsDelay: 1000 * 60 * 6,
         })

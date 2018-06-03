@@ -9,11 +9,42 @@
 /*}*/
 
 .SelectPhoto-controls #comment-photo-form  {
-    width: 700px;
+    width: 800px;
 }
 
 .SelectPhoto-controls #comment-photo-form input {
     color: #fff;
+}
+
+#lg-sp-count {
+    background: #0D87E9;
+    padding: 1px 6px;
+    margin-left: 10px;
+    color: #fff;
+    border-radius: 50%;
+}
+
+.lg-thumb-item {
+    position: relative;
+}
+
+.lg-thumb-item.sp-selected:after {
+    content: "\f00c";
+    font-family: "Font Awesome\ 5 Pro";
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 5px;
+    font-size: 10px;
+    background: #0D87E9;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    border-radius: 50%;
+    color: #fff;
+    box-shadow: 0 0 7px rgba(0,0,0,0.5);
 }
 
 img {

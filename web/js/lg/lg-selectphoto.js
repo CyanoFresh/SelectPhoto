@@ -3,6 +3,7 @@
      * From backend
      *
      * @var Array photos
+     * @var int selectedPhotosCount
      */
 
     'use strict';
@@ -25,6 +26,8 @@
     };
 
     SelectPhoto.prototype.init = function () {
+        const that = this;
+
         this.core.$outer.find('.lg-toolbar').append(
             '<form class="SelectPhoto-controls">' +
             '<div id="comment-photo-form">' +
@@ -40,7 +43,19 @@
             '</form>'
         );
 
-        let $SelectPhotoControls = $('.SelectPhoto-controls');
+        const $SelectPhotoControls = $('.SelectPhoto-controls');
+
+        setTimeout(function () {
+            that.core.$outer.find('.lg-toolbar #lg-counter').append(
+                '<span id="lg-sp-count">' + selectedPhotosCount + '</span>'
+            );
+
+            that.core.$outer.find('.lg-thumb-item').each(function (index, element) {
+                if (photos[index].selected) {
+                    $(element).addClass('sp-selected');
+                }
+            });
+        }, 100);
 
         $SelectPhotoControls.on('submit', function (e) {
             e.preventDefault();
@@ -51,20 +66,28 @@
         });
 
         $('.toggle-photo').on('click.lg', function (e) {
-
             e.preventDefault();
 
             let index = $(this).parents('.SelectPhoto-controls').data('index');
 
             if (photos[index].selected) {
                 photos[index].selected = false;
+                selectedPhotosCount--;
+
+                that.core.$outer.find('.lg-thumb-item:eq(' + index + ')').removeClass('sp-selected');
+
                 $('.toggle-photo').html('<i class="far fa-check"></i> Выбрать');
             } else {
                 photos[index].selected = true;
+                selectedPhotosCount++;
+
+                that.core.$outer.find('.lg-thumb-item:eq(' + index + ')').addClass('sp-selected');
+
                 $('.toggle-photo').html('<i class="far fa-check"></i> Выбрано');
             }
 
             selectPhoto(photos[index]['photo-id']);
+            that.updateSelectedCount();
         });
 
         this.core.$el.on('onAfterSlide.lg.tm', function (event, prevIndex, index) {
@@ -78,10 +101,12 @@
                 $('.toggle-photo').html('<i class="far fa-check"></i> Выбрать');
             }
 
-            if (photos[index].comment) {
-                $SelectPhoto.find('input').val(photos[index].comment);
-            }
+            $SelectPhoto.find('input').val(photos[index].comment);
         });
+    };
+
+    SelectPhoto.prototype.updateSelectedCount = function () {
+        $('#lg-counter #lg-sp-count').html(selectedPhotosCount);
     };
 
     SelectPhoto.prototype.destroy = function () {
