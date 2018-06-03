@@ -6,6 +6,7 @@
 /* @var $uploadForm \app\modules\admin\models\form\LinkUploadForm */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\DetailView;
 
 \app\assets\AdminLinkAsset::register($this);
@@ -13,6 +14,8 @@ use yii\widgets\DetailView;
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Ссылки', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo']))
 ?>
 <div class="link-view">
 
@@ -65,6 +68,36 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 
+    <?php if ($model->submitted): ?>
+        <div class="panel panel-primary">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                       aria-expanded="false" aria-controls="collapseOne">
+                        <b>Выбранные фото <i class="fas fa-chevron-down"></i></b>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                    <div class="row">
+                        <?php foreach ($model->photos as $photo): ?>
+                            <div class="col-sm-3">
+                                <i class="far fa-image"></i>
+                                &nbsp;
+                                #<?= $photo->id ?>
+                                &nbsp;
+                                <a href="<?= $photo->getFileUrl() ?>" target="_blank">
+                                     <?= $photo->filename ?>
+                                </a>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
     <h2>Фото</h2>
 
     <form action=" <?= \yii\helpers\Url::to(['/admin/link/upload', 'id' => $model->id]) ?>" method="post"
@@ -81,17 +114,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <hr>
 
-    <div class="row">
+    <div class="photos">
         <?php foreach ($model->photos as $photo): ?>
-            <div class="col-sm-2">
+            <div class="photo <?= $photo->selected ? 'selected' : '' ?>" data-id="<?= $photo->id ?>">
                 <?= Html::a(
-                    Html::img(Yii::getAlias($photo->getThumbnailUrl()), [
+                    Html::img($photo->getThumbnailUrl(), [
                         'class' => 'img-responsive',
                         'alt' => '#' . $photo->id,
                     ]),
-                    Yii::getAlias($photo->getFileUrl()),
+                    $photo->getFileUrl(),
                     [
-                        'title' => '#' . $photo->id,
+                        'title' => '#' . $photo->id . ' - ' . $photo->filename,
                     ]
                 ); ?>
             </div>

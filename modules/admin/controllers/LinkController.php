@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\Photo;
 use app\modules\admin\models\form\LinkUploadForm;
 use Ramsey\Uuid\Uuid;
 use Yii;
@@ -144,6 +145,25 @@ class LinkController extends Controller
         }
 
         return 'ok';
+    }
+
+    /**
+     * @throws NotFoundHttpException
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDeletePhoto()
+    {
+        $photoId = Yii::$app->request->post('id');
+
+        $photoModel = Photo::findOne($photoId);
+
+        if (!$photoModel) {
+            throw new NotFoundHttpException('Фото не найдено');
+        }
+
+        $ok = $photoModel->delete();
+
+        return Json::encode(['ok' => $ok]);
     }
 
     /**
