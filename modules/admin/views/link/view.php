@@ -74,7 +74,7 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo']))
                 <h4 class="panel-title">
                     <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
                        aria-expanded="false" aria-controls="collapseOne">
-                        <b>Выбранные фото <i class="fas fa-chevron-down"></i></b>
+                        <b>Выбранные фото (<?= (int)$model->getSelectedPhotos()->count() ?>) <i class="fas fa-chevron-down"></i></b>
                     </a>
                 </h4>
             </div>

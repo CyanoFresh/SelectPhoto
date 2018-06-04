@@ -28,6 +28,7 @@ use yii\helpers\VarDumper;
  *
  * @property Project $project
  * @property Photo[] $photos
+ * @property Photo[] $selectedPhotos
  */
 class Link extends \yii\db\ActiveRecord
 {
@@ -109,6 +110,14 @@ class Link extends \yii\db\ActiveRecord
     public function getPhotos()
     {
         return $this->hasMany(Photo::class, ['link_id' => 'id'])->inverseOf('link');
+    }
+
+    /**
+     * @return ActiveQuery|PhotoQuery
+     */
+    public function getSelectedPhotos()
+    {
+        return $this->getPhotos()->selected();
     }
 
     /**
