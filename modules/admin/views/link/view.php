@@ -19,7 +19,7 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo']))
 ?>
 <div class="link-view">
 
-    <h1 class="page-header">
+    <h2>
         <?= $this->title ?>
         <?= Html::a('<i class="fas fa-pencil-alt"></i>', ['update', 'id' => $model->id],
             ['class' => 'btn btn-primary']) ?>
@@ -30,7 +30,7 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo']))
                 'method' => 'post',
             ],
         ]) ?>
-    </h1>
+    </h2>
 
     <div class="row">
         <div class="col-sm-6">
@@ -74,7 +74,7 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo']))
                 <h4 class="panel-title">
                     <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
                        aria-expanded="false" aria-controls="collapseOne">
-                        <b>Выбранные фото (<?= (int)$model->getSelectedPhotos()->count() ?>) <i class="fas fa-chevron-down"></i></b>
+                        <b>Выбранные фото <span class="badge"><?= (int)$model->getSelectedPhotos()->count() ?></span> <i class="fas fa-chevron-down"></i></b>
                     </a>
                 </h4>
             </div>
@@ -98,7 +98,7 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo']))
         </div>
     <?php endif; ?>
 
-    <h2>Фото</h2>
+    <h3>Фото</h3>
 
     <form action=" <?= \yii\helpers\Url::to(['/admin/link/upload', 'id' => $model->id]) ?>" method="post"
           class="dropzone" enctype="multipart/form-data" id="dropzone">

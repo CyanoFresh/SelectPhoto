@@ -109,4 +109,17 @@ class Photo extends \yii\db\ActiveRecord
     {
         return Yii::getAlias('@web/uploads/' . $this->link_id . '/' . $this->id . '_thumb.jpg');
     }
+
+    public function afterDelete()
+    {
+        parent::afterDelete();
+
+        if (file_exists($this->getFilePath())) {
+            unlink($this->getFilePath());
+        }
+
+        if (file_exists($this->getThumbnailPath())) {
+            unlink($this->getThumbnailPath());
+        }
+    }
 }
