@@ -161,36 +161,19 @@ class Link extends \yii\db\ActiveRecord
             $this->active = false;
         }
 
-        $transaction = Yii::$app->db->beginTransaction();
+        $ok = $this->save();
 
-        $this->save();
+        $mail = Yii::$app->mailer
+            ->compose('checked', [
+                'linkModel' => $this,
+                'selectedPhotoModels' => $this->getPhotos()->selected()->all(),
+            ])
+            ->setFrom(Yii::$app->params['fromEmail'])
+            ->setTo(Yii::$app->params['adminEmail'])
+            ->setSubject('Выбор фото для "' . $this->name . '" заврешен');
 
-        try {
-            $mail = Yii::$app->mailer
-                ->compose('checked', [
-                    'linkModel' => $this,
-                    'selectedPhotoModels' => $this->getPhotos()->selected()->all(),
-                ])
-                ->setFrom(Yii::$app->params['fromEmail'])
-                ->setTo(Yii::$app->params['adminEmail'])
-                ->setSubject('Выбор фото для "' . $this->name . '" заврешен');
+        $ok = $ok && $mail->send();
 
-            if (!$mail->send()) {
-                throw new \Exception('Не удалось отправить email');
-            }
-        } catch (\Exception $exception) {
-            $transaction->rollBack();
-
-            $this->submitted = false;
-            $this->active = true;
-
-            VarDumper::dump($exception);die;
-
-            return false;
-        }
-
-        $transaction->commit();
-
-        return true;
+        return $ok;
     }
 }
