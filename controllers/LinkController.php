@@ -126,7 +126,7 @@ class LinkController extends Controller
             throw new NotFoundHttpException('Фото не найдено');
         }
 
-        $photoModel->comment = $comment;
+        $photoModel->comment = \yii\helpers\HtmlPurifier::process($comment);
         $ok = $photoModel->save();
 
         return [

@@ -33,3 +33,5 @@ $('.photo').click(function (e) {
         });
     }, 'json');
 });
+
+$('.has-comment').tooltip();

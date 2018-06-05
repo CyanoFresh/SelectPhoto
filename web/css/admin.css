@@ -139,6 +139,22 @@ h1.page-header {
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
 }
 
+.photos .photo.has-comment .comment-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px;
+    font-size: 10px;
+    background: #0D87E9;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    border-radius: 50%;
+    color: #fff;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
+}
+
 .photos .photo:hover:after {
     position: absolute;
     visibility: visible;

@@ -74,7 +74,8 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo']))
                 <h4 class="panel-title">
                     <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
                        aria-expanded="false" aria-controls="collapseOne">
-                        <b>Выбранные фото <span class="badge"><?= (int)$model->getSelectedPhotos()->count() ?></span> <i class="fas fa-chevron-down"></i></b>
+                        <b>Выбранные фото <span class="badge"><?= (int)$model->getSelectedPhotos()->count() ?></span> <i
+                                    class="fas fa-chevron-down"></i></b>
                     </a>
                 </h4>
             </div>
@@ -88,7 +89,7 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo']))
                                 #<?= $photo->id ?>
                                 &nbsp;
                                 <a href="<?= $photo->getFileUrl() ?>" target="_blank">
-                                     <?= $photo->filename ?>
+                                    <?= $photo->filename ?>
                                 </a>
                             </div>
                         <?php endforeach; ?>
@@ -116,7 +117,16 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo']))
 
     <div class="photos">
         <?php foreach ($model->photos as $photo): ?>
-            <div class="photo <?= $photo->selected ? 'selected' : '' ?>" data-id="<?= $photo->id ?>">
+            <div class="photo <?= $photo->selected ? 'selected' : '' ?> <?= $photo->comment ? 'has-comment' : '' ?>"
+                 data-id="<?= $photo->id ?>"
+                 title="<?= $photo->comment ?>"
+                 data-toggle="tooltip"
+                 data-placement="top">
+
+                <?php if ($photo->comment): ?>
+                    <div class="comment-icon"><i class="fas fa-comment"></i></div>
+                <?php endif; ?>
+
                 <?= Html::a(
                     Html::img($photo->getThumbnailUrl(), [
                         'class' => 'img-responsive',
