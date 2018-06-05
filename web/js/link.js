@@ -58,12 +58,19 @@ function selectPhoto(photoId) {
 }
 
 function commentPhoto(photoId, text) {
-    console.log(photoId, text);
     $.post(commentPhotoUrl, {id: photoId, text: text}, function (data) {
         console.log(data);
 
         if (!data.ok) {
-            alert('Произошла ошибка. Сообщите фотографу');
+            return alert('Произошла ошибка. Сообщите фотографу');
         }
+
+        $('.action-result').html('<i class="far fa-check"></i> Комментарий сохранен').fadeIn(function () {
+            let $el = $(this);
+
+            setTimeout(function () {
+                $el.fadeOut();
+            }, 1000);
+        });
     }, 'json');
 }

@@ -64,3 +64,20 @@ img {
     background: #000;
     z-index: 99999;
 }
+
+.action-result {
+    display: none;
+    position: absolute;
+    z-index: 9999;
+    background: #000;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 47px;
+    text-align: center;
+    line-height: 48px;
+    color: #fff;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+}

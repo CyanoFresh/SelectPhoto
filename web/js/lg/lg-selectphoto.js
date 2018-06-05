@@ -46,7 +46,8 @@
                 '</div>';
         }
 
-        html += '</form>';
+        html += '</form>' +
+            '<div class="action-result"></div>';
 
         this.core.$outer.find('.lg-toolbar').append(html);
 
@@ -83,14 +84,14 @@
 
                 that.core.$outer.find('.lg-thumb-item:eq(' + index + ')').removeClass('sp-selected');
 
-                $('.toggle-photo').html('<i class="far fa-check"></i> Выбрать');
+                $('.toggle-photo').html('<i class="far fa-check"></i> Выбрать').removeClass('btn-primary').addClass('btn-success');
             } else {
                 photos[index].selected = true;
                 selectedPhotosCount++;
 
                 that.core.$outer.find('.lg-thumb-item:eq(' + index + ')').addClass('sp-selected');
 
-                $('.toggle-photo').html('<i class="far fa-check"></i> Выбрано');
+                $('.toggle-photo').html('<i class="far fa-check"></i> Выбрано').removeClass('btn-success').addClass('btn-primary');
             }
 
             selectPhoto(photos[index]['photo-id']);
@@ -103,9 +104,9 @@
             $SelectPhoto.data('index', index);
 
             if (photos[index].selected) {
-                $('.toggle-photo').html('<i class="far fa-check"></i> Выбрано');
+                $('.toggle-photo').html('<i class="far fa-check"></i> Выбрано').removeClass('btn-success').addClass('btn-primary');
             } else {
-                $('.toggle-photo').html('<i class="far fa-check"></i> Выбрать');
+                $('.toggle-photo').html('<i class="far fa-check"></i> Выбрать').removeClass('btn-primary').addClass('btn-success');
             }
 
             $SelectPhoto.find('input').val(photos[index].comment);
