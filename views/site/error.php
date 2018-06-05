@@ -9,12 +9,13 @@ use yii\helpers\Html;
 
 $this->title = $name;
 ?>
-<div class="site-error">
 
-    <h1><?= $this->title ?></h1>
-
-    <div class="alert alert-danger">
-        <?= nl2br(Html::encode($message)) ?>
+<div class="fullpage">
+    <div class="fullpage-content">
+        <div class="fullpage-icon"><i class="fas fa-exclamation-triangle"></i></div>
+        <h1 class="fullpage-title"><?= $this->title ?></h1>
+        <div class="fullpage-description">
+            <?= nl2br(Html::encode($message)) ?>
+        </div>
     </div>
-
 </div>
