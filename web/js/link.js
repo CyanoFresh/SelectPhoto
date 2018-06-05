@@ -1,11 +1,3 @@
-/**
- * From backend
- *
- * @var string selectPhotoUrl
- * @var string commentPhotoLink
- * @var string submitLinkUrl
- */
-
 $(document).ready(function () {
     $('#gallery')
         .lightGallery({
@@ -19,12 +11,11 @@ $(document).ready(function () {
             hideBarsDelay: 1000 * 60 * 6,
         })
         .on('onAfterOpen.lg', function () {
-            $('.loader').fadeOut('slow', function () {
-                $(this).remove();
+            let $loader = $('.loader');
+
+            $loader.fadeOut('slow', function () {
+                $loader.remove();
             });
-        })
-        .on('onBeforeClose.lg', function () {
-            submitLink();
         });
 
     // Help window
@@ -36,41 +27,3 @@ $(document).ready(function () {
         localStorage.hideHelpModal = true;
     });
 });
-
-function submitLink() {
-    $.post(submitLinkUrl, function (data) {
-        console.log(data);
-
-        if (!data.ok) {
-            alert('Произошла ошибка. Сообщите фотографу');
-        }
-    }, 'json');
-}
-
-function selectPhoto(photoId) {
-    $.post(selectPhotoUrl, {id: photoId}, function (data) {
-        console.log(data);
-
-        if (!data.ok) {
-            alert('Произошла ошибка. Сообщите фотографу');
-        }
-    }, 'json');
-}
-
-function commentPhoto(photoId, text) {
-    $.post(commentPhotoUrl, {id: photoId, text: text}, function (data) {
-        console.log(data);
-
-        if (!data.ok) {
-            return alert('Произошла ошибка. Сообщите фотографу');
-        }
-
-        $('.action-result').html('<i class="far fa-check"></i> Комментарий сохранен').fadeIn(function () {
-            let $el = $(this);
-
-            setTimeout(function () {
-                $el.fadeOut();
-            }, 1000);
-        });
-    }, 'json');
-}

@@ -50,7 +50,7 @@ use yii\widgets\Breadcrumbs;
 
 <footer class="footer">
     <div class="container">
-        <p>Made by <a href="https://solomaha.com" target="_blank">Alex Solomaha</a></p>
+        <p>By <a href="https://solomaha.com" target="_blank">Alex Solomaha</a></p>
     </div>
 </footer>
 

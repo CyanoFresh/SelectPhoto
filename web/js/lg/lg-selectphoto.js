@@ -4,6 +4,10 @@
      *
      * @var Array photos
      * @var int selectedPhotosCount
+     * @var bool allowComment
+     * @var string selectPhotoUrl
+     * @var string commentPhotoLink
+     * @var string submitLinkUrl
      */
 
     'use strict';
@@ -37,8 +41,8 @@
                 '<button class="btn btn-default hidden-xs" type="submit">Комментировать</button>';
         }
 
-        html += '<a href="#" class="btn btn-primary finish-select"><i class="far fa-envelope hidden-xs"></i> Завершить</a>' +
-            '<a href="#" class="btn btn-success toggle-photo"><i class="far fa-check"></i> Выбрать</a>';
+        html += '<a href="#" class="btn btn-success toggle-photo"><i class="far fa-check"></i> Выбрать</a>' +
+            '<a href="#" class="btn btn-warning finish-select"><i class="far fa-envelope hidden-xs"></i> Завершить</a>';
 
         if (allowComment) {
             html += '</span>' +
@@ -70,7 +74,9 @@
 
             let index = $SelectPhotoControls.data('index');
 
-            commentPhoto(photos[index]['photo-id'], $SelectPhotoControls.find('input').val());
+            photos[index].comment = $SelectPhotoControls.find('input').val();
+
+            that.commentPhoto(photos[index]['photo-id'], $SelectPhotoControls.find('input').val());
         });
 
         $('.toggle-photo').on('click.lg', function (e) {
@@ -94,8 +100,14 @@
                 $('.toggle-photo').html('<i class="far fa-check"></i> Выбрано').removeClass('btn-success').addClass('btn-primary');
             }
 
-            selectPhoto(photos[index]['photo-id']);
+            that.selectPhoto(photos[index]['photo-id']);
             that.updateSelectedCount();
+        });
+
+        $('.finish-select').on('click.lg', function (e) {
+            e.preventDefault();
+
+            that.core.destroy();
         });
 
         this.core.$el.on('onAfterSlide.lg.tm', function (event, prevIndex, index) {
@@ -111,10 +123,52 @@
 
             $SelectPhoto.find('input').val(photos[index].comment);
         });
+
+        this.core.$el.on('onBeforeClose.lg', function () {
+            that.submitLink();
+        });
     };
 
     SelectPhoto.prototype.updateSelectedCount = function () {
         $('#lg-counter #lg-sp-count').html(selectedPhotosCount);
+    };
+
+    SelectPhoto.prototype.submitLink = function () {
+        $.post(submitLinkUrl, function (data) {
+            console.log(data);
+
+            if (!data.ok) {
+                alert('Произошла ошибка. Сообщите фотографу');
+            }
+        }, 'json');
+    };
+
+    SelectPhoto.prototype.selectPhoto = function (photoId) {
+        $.post(selectPhotoUrl, {id: photoId}, function (data) {
+            console.log(data);
+
+            if (!data.ok) {
+                alert('Произошла ошибка. Сообщите фотографу');
+            }
+        }, 'json');
+    };
+
+    SelectPhoto.prototype.commentPhoto = function (photoId, text) {
+        $.post(commentPhotoUrl, {id: photoId, text: text}, function (data) {
+            console.log(data);
+
+            if (!data.ok) {
+                return alert('Произошла ошибка. Сообщите фотографу');
+            }
+
+            $('.action-result').html('<i class="far fa-check"></i> Комментарий сохранен').fadeIn(function () {
+                let $el = $(this);
+
+                setTimeout(function () {
+                    $el.fadeOut();
+                }, 1000);
+            });
+        }, 'json');
     };
 
     SelectPhoto.prototype.destroy = function () {
