@@ -8,7 +8,7 @@ class ImageHelper extends BaseObject
 {
     public $thumbnailWidth = 100;
     public $thumbnailHeight = 80;
-    public $thumbnailQuality = 100;
+    public $thumbnailQuality = 85;
 
     public $watermarkPath;
 
@@ -28,20 +28,23 @@ class ImageHelper extends BaseObject
     {
         $sourceImage = imagecreatefromjpeg($sourcePath);
 
-        list($sourceWidth, $sourceHeight) = getimagesize($sourcePath);
+        if (!$sourceImage) {
+            return false;
+        }
 
-        // from https://stackoverflow.com/questions/33708620/php-create-thumbnail-maintaining-aspect-ratio-remove-blank-portion
+        // GET ORIGINAL IMAGE DIMENSIONS
+        list($sourceW, $sourceH) = getimagesize($sourcePath);
 
         // RESIZE IMAGE AND PRESERVE PROPORTIONS
         $thumb_w_resize = $this->thumbnailWidth;
         $thumb_h_resize = $this->thumbnailHeight;
 
-        if ($sourceWidth > $sourceHeight) {
-            $thumb_h_ratio = $this->thumbnailHeight / $sourceHeight;
-            $thumb_w_resize = (int)round($sourceWidth * $thumb_h_ratio);
+        if ($sourceW > $sourceH) {
+            $thumb_h_ratio = $this->thumbnailHeight / $sourceH;
+            $thumb_w_resize = (int)round($sourceW * $thumb_h_ratio);
         } else {
-            $thumb_w_ratio = $this->thumbnailWidth / $sourceWidth;
-            $thumb_h_resize = (int)round($this->thumbnailHeight * $thumb_w_ratio);
+            $thumb_w_ratio = $this->thumbnailWidth / $sourceW;
+            $thumb_h_resize = (int)round($sourceH * $thumb_w_ratio);
         }
 
         if ($thumb_w_resize < $this->thumbnailWidth) {
@@ -51,16 +54,15 @@ class ImageHelper extends BaseObject
         }
 
         // CREATE THE PROPORTIONAL IMAGE RESOURCE
-        $thumbnailImage = imagecreatetruecolor($thumb_w_resize, $thumb_h_resize);
+        $thumbImage = imagecreatetruecolor($thumb_w_resize, $thumb_h_resize);
 
-        if (!imagecopyresampled($thumbnailImage, $sourceImage, 0, 0, 0, 0, $thumb_w_resize, $thumb_h_resize,
-            $sourceWidth,
-            $sourceHeight)) {
+        if (!imagecopyresampled($thumbImage, $sourceImage, 0, 0, 0, 0, $thumb_w_resize, $thumb_h_resize, $sourceW,
+            $sourceH)) {
             return false;
         }
 
         // CREATE THE CENTERED CROPPED IMAGE TO THE SPECIFIED DIMENSIONS
-        $finalImage = imagecreatetruecolor($this->thumbnailWidth, $this->thumbnailHeight);
+        $result = imagecreatetruecolor($this->thumbnailWidth, $this->thumbnailHeight);
 
         $thumb_w_offset = 0;
         $thumb_h_offset = 0;
@@ -71,12 +73,11 @@ class ImageHelper extends BaseObject
             $thumb_h_offset = (int)round(($thumb_h_resize - $this->thumbnailHeight) / 2);
         }
 
-        if (!imagecopy($finalImage, $thumbnailImage, 0, 0, $thumb_w_offset, $thumb_h_offset, $thumb_w_resize,
-            $thumb_h_resize)) {
+        if (!imagecopy($result, $thumbImage, 0, 0, $thumb_w_offset, $thumb_h_offset, $thumb_w_resize, $thumb_h_resize)) {
             return false;
         }
 
-        return imagejpeg($finalImage, $savePath, $this->thumbnailQuality);
+        return imagejpeg($result, $savePath, 80);
     }
 
     /**
