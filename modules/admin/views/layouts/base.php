@@ -7,7 +7,7 @@
 \app\modules\admin\assets\AdminAsset::register($this);
 ?>
 
-<?php $this->beginContent('@app/views/layouts/main.php'); ?>
+<?php $this->beginContent('@app/views/layouts/base.php'); ?>
 
 <?= $content ?>
 
