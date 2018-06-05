@@ -4,6 +4,7 @@ namespace app\models;
 
 use app\models\query\ProjectQuery;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "project".
@@ -81,5 +82,10 @@ class Project extends \yii\db\ActiveRecord
     public static function find()
     {
         return new ProjectQuery(get_called_class());
+    }
+
+    public static function getList()
+    {
+        return ArrayHelper::map(self::find()->orderBy('name')->all(), 'id', 'name');
     }
 }

@@ -9,6 +9,7 @@ use app\assets\AppAsset;
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
+<!-- By Alex Solomaha https://solomaha.com -->
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>

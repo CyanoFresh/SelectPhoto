@@ -5,8 +5,8 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Добавить Project';
-$this->params['breadcrumbs'][] = ['label' => 'Projects', 'url' => ['index']];
+$this->title = 'Добавить Проект';
+$this->params['breadcrumbs'][] = ['label' => 'Проекты', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="project-create">

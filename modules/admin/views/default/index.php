@@ -1,18 +1,22 @@
 <?php
 
 /** @var $this \yii\web\View */
-/** @var $content string */
+/** @var $dataProvider \yii\data\ActiveDataProvider */
+
+use yii\widgets\ListView;
 
 $this->title = 'Админпанель';
 ?>
-<div class="admin-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
-    <p>
-        This is the view content for action "<?= $this->context->action->id ?>".
-        The action belongs to the controller "<?= get_class($this->context) ?>"
-        in the "<?= $this->context->module->id ?>" module.
-    </p>
-    <p>
-        You may customize this page by editing the following file:<br>
-    </p>
-</div>
+
+<h1 class="page-header">
+    Ссылки
+    <?= \yii\helpers\Html::a('<i class="fas fa-plus"></i>', ['/admin/link/create'], ['class' => 'btn btn-success']) ?>
+    <?= \yii\helpers\Html::a('<i class="fas fa-folder-open"></i> Создать проект', ['/admin/project/create'], ['class' => 'btn btn-default']) ?>
+</h1>
+
+<?= ListView::widget([
+    'dataProvider' => $dataProvider,
+    'summaryOptions' => ['class' => 'alert alert-info'],
+    'layout' => "{summary}\n<div class='row'>{items}</div>\n{pager}",
+    'itemView' => '_link',
+]) ?>

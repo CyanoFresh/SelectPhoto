@@ -27,6 +27,7 @@ use yii\widgets\Breadcrumbs;
         ['label' => 'Админпанель', 'url' => ['/admin/default/index']],
         ['label' => 'Проекты', 'url' => ['/admin/project/index']],
         ['label' => 'Ссылки', 'url' => ['/admin/link/index']],
+        ['label' => 'Выйти', 'url' => ['/admin/auth/logout'], 'linkOptions' => ['data-method' => 'post']],
     ];
 
     echo Nav::widget([
@@ -49,9 +50,7 @@ use yii\widgets\Breadcrumbs;
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; <?= \yii\helpers\Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-
-        <p class="pull-right">2018</p>
+        <p>Made by <a href="https://solomaha.com" target="_blank">Alex Solomaha</a></p>
     </div>
 </footer>
 

@@ -16,7 +16,7 @@ $model->active = $model->isNewRecord ? true : $model->active;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 3]) ?>
+    <?= $form->field($model, 'description')->textarea(['rows' => 2]) ?>
 
     <?= $form->field($model, 'active')->checkbox() ?>
 

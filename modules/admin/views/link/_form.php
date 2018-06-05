@@ -7,6 +7,7 @@
 use Ramsey\Uuid\Uuid;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+
 ?>
 
 <div class="link-form">
@@ -21,7 +22,9 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'link')->textInput(['maxlength' => 36]) ?>
         </div>
         <div class="col-sm-4">
-            <?= $form->field($model, 'project_id')->dropDownList([]) ?>
+            <?= $form->field($model, 'project_id')->dropDownList(\app\models\Project::getList(), [
+                'prompt' => 'Выберите проект'
+            ]) ?>
         </div>
     </div>
 
@@ -34,7 +37,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'watermark')->checkbox() ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Добавить' : 'Сохранить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Добавить' : 'Сохранить',
+            ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

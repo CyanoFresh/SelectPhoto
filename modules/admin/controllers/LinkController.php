@@ -8,6 +8,7 @@ use Ramsey\Uuid\Uuid;
 use Yii;
 use app\models\Link;
 use app\modules\admin\models\search\LinkSearch;
+use yii\filters\AccessControl;
 use yii\helpers\Json;
 use yii\helpers\VarDumper;
 use yii\web\BadRequestHttpException;
@@ -33,6 +34,15 @@ class LinkController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                     'upload' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];

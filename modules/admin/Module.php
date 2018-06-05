@@ -2,6 +2,9 @@
 
 namespace app\modules\admin;
 
+use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
+
 /**
  * admin module definition class
  */

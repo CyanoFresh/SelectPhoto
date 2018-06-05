@@ -177,3 +177,62 @@ h1.page-header {
     text-decoration: none;
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
+
+.panel-link {
+    display: block;
+    position: relative;
+    color: #8b8b8b;
+}
+
+.panel-link .panel-body {
+    min-height: 170px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.panel-link.link-active {
+    color: #444;
+}
+
+.panel-link:hover, .panel-link:focus {
+    text-decoration: none;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .3);
+    color: #000000;
+}
+
+.panel-link .link-name {
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    line-height: 1.1;
+}
+
+.panel-link .link-submitted {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #2196F3;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 50%;
+    color: #fff;
+    /*font-size: 13px;*/
+    text-align: center;
+    margin: 10px;
+}
+
+.panel-link .link-project {
+    position: absolute;
+    top: 0;
+     left: 35px;
+    /* background: #d7d7d7; */
+    /* padding: 1px 6px; */
+    /* border-radius: 3px; */
+    /* text-align: center; */
+    margin: 8px 10px;
+    /* color: #222; */
+    /* font-weight: bold; */
+    font-size: 15px;
+}
