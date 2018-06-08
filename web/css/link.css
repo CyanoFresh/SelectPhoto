@@ -142,12 +142,16 @@ img {
     /*box-shadow: 0 0 10px rgba(81, 45, 168, 0.51);*/
 }
 
-.btn-round i.hidden-xs {
+.btn-round i {
     margin-right: 4px;
 }
 
 @media (max-width: 980px) {
     .SelectPhoto-controls > .btn {
+        margin-right: 0;
+    }
+
+    .btn-round i {
         margin-right: 0;
     }
 }
