@@ -64,8 +64,10 @@
             });
         }, 100);
 
+        let $openComment = false;
+
         if (allowComment) {
-            const $openComment = $('.open-comment');
+            $openComment = $('.open-comment');
 
             $openComment.popover({
                 title: false,
@@ -84,6 +86,7 @@
                 },
                 html: true,
                 placement: 'bottom',
+                trigger: 'focus',
             });
 
             $('body').on('submit', '#comment-photo-form', function (e) {
@@ -139,7 +142,7 @@
         });
 
         this.core.$el.on('onBeforeSlide.lg', function (event, prevIndex, index) {
-            let $SelectPhoto = $('.SelectPhoto-controls');
+            const $SelectPhoto = $('.SelectPhoto-controls');
 
             $SelectPhoto.data('index', index);
 
@@ -149,7 +152,9 @@
                 $('.toggle-photo').html('<i class="fas fa-check hidden-xs"></i> Выбрать').removeClass('btn-primary').addClass('btn-success');
             }
 
-            $SelectPhoto.find('input').val(photos[index].comment);
+            if (allowComment && $openComment) {
+                $openComment.popover('hide');
+            }
         });
 
         this.core.$el.on('onBeforeClose.lg', function () {
