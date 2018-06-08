@@ -55,6 +55,7 @@ $this->registerJsVar('submitLinkUrl', Url::to(['link/submit', 'link' => $linkMod
                 </ol>
             </div>
             <div class="modal-footer">
+                <p class="pull-left text-muted">SelectPhoto by <a href="https://solomaha.com/" class="product-font" target="_blank">Alex Solomaha</a></p>
                 <button type="button" class="btn btn-default btn-hide-forever" data-dismiss="modal">
                     больше не показывать
                 </button>

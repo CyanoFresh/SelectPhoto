@@ -43,7 +43,8 @@ class m180512_222605_init extends Migration
 
         $this->createIndex('idx-link-project_id', 'link', 'project_id');
         $this->createIndex('idx-link-link', 'link', 'link', true);
-        $this->addForeignKey('fk-link-project_id', 'link', 'project_id', 'project', 'id', 'NO ACTION', 'CASCADE');
+
+        $this->addForeignKey('fk-link-project_id', 'link', 'project_id', 'project', 'id', 'SET NULL', 'CASCADE');
 
         $this->createTable('photo', [
             'id' => $this->primaryKey()->unsigned(),
@@ -54,6 +55,7 @@ class m180512_222605_init extends Migration
         ], $tableOptions);
 
         $this->createIndex('idx-photo-link_id', 'photo', 'link_id');
+
         $this->addForeignKey('fk-photo-link_id', 'photo', 'link_id', 'link', 'id', 'CASCADE', 'CASCADE');
     }
 
