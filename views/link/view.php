@@ -82,7 +82,7 @@ $this->registerJsVar('submitLinkUrl', Url::to(['link/submit', 'link' => $linkMod
             <div class="modal-body">
                 <ol>
                     <li>Листайте фото кнопками влево и вправо.</li>
-                    <li>Нажмайте кнопку <a class="btn btn-xs btn-round btn-success">Выбрать</a> на понравившиеся фото. Вы можете
+                    <li>Нажимайте кнопку <a class="btn btn-xs btn-round btn-success">Выбрать</a> на понравившиеся фото. Вы можете
                         отменить выбор повторным нажатием.
                     </li>
                     <li>
