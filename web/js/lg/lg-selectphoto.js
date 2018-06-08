@@ -73,9 +73,11 @@
                     const $this = $(this);
                     const index = $this.parents('.SelectPhoto-controls').data('index');
 
+                    let comment = photos[index].comment || '';
+
                     return '<form id="comment-photo-form" data-index="' + index + '">' +
                         '<div class="form-group">' +
-                        '<textarea class="form-control" placeholder="Введите комментарий..." id="comment-photo-text">' + photos[index].comment + '</textarea>' +
+                        '<textarea class="form-control" placeholder="Введите комментарий..." id="comment-photo-text">' + comment + '</textarea>' +
                         '</div>' +
                         '<button class="btn btn-primary btn-block" type="submit"><i class="fas fa-reply"></i> Отправить</button>' +
                         '</form>';
