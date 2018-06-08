@@ -9,6 +9,7 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
+        'https://fonts.googleapis.com/css?family=Roboto:400,500',
         'css/theme.css',
     ];
     public $depends = [
