@@ -27,3 +27,5 @@ $(document).ready(function () {
         localStorage.hideHelpModal = true;
     });
 });
+
+document.addEventListener('contextmenu', event => event.preventDefault());
