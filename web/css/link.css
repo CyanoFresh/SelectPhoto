@@ -3,13 +3,22 @@
     margin: 6px 5px 0 0;
 }
 
-.SelectPhoto-controls .btn {
+.SelectPhoto-controls > .btn {
     margin: 0 5px;
-    display: inline-block;
 }
 
 .SelectPhoto-controls #comment-photo-form {
-    width: 800px;
+    width: 100%;
+}
+
+.SelectPhoto-controls #comment-photo-form textarea {
+    background: #efefef;
+    max-width: 100%;
+}
+
+.SelectPhoto-controls .popover {
+    max-width: none;
+    width: 300px;
 }
 
 .SelectPhoto-controls #comment-photo-form input {
@@ -77,7 +86,7 @@ img {
     text-align: center;
     line-height: 48px;
     color: #fff;
-    font-size: 20px;
+    font-size: 18px;
     text-transform: uppercase;
     font-weight: bold;
 }
@@ -106,4 +115,39 @@ img {
 .lg-sp-author:focus {
     text-decoration: none;
     color: #fff;
+}
+
+.lg-outer .lg-toogle-thumb {
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.btn-round {
+    border-radius: 30px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14);
+    font-weight: 500;
+    transition: 0.5s;
+}
+
+.btn-round.btn-success {
+    background: linear-gradient(45deg, #439A46, #00ea28);
+}
+
+.btn-round.btn-primary {
+    background: linear-gradient(45deg, #1f80d5, #00bfff);
+    /*box-shadow: 0 0 10px rgba(31, 128, 213, 0.51);*/
+}
+
+.btn-round.finish-select {
+    background: linear-gradient(45deg, #E91E63, #9C27B0);
+    /*box-shadow: 0 0 10px rgba(81, 45, 168, 0.51);*/
+}
+
+.btn-round i.hidden-xs {
+    margin-right: 4px;
+}
+
+@media (max-width: 980px) {
+    .SelectPhoto-controls > .btn {
+        margin-right: 0;
+    }
 }

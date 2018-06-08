@@ -18,7 +18,6 @@
 
     const SelectPhoto = function (element) {
 
-        // You can access all lightgallery variables and functions like this.
         this.core = $(element).data('lightGallery');
 
         this.$el = $(element);
@@ -31,37 +30,33 @@
 
     SelectPhoto.prototype.init = function () {
         const that = this;
-        let html = '<form class="SelectPhoto-controls">';
+        let html = '<div class="SelectPhoto-controls">';
 
         if (allowComment) {
-            html += '<div id="comment-photo-form">' +
-                '<div class="input-group">' +
-                '<input type="text" class="form-control hidden-xs" placeholder="Введите комментарий...">' +
-                '<span class="input-group-btn">' +
-                '<button class="btn btn-default hidden-xs" type="submit">Комментировать</button>';
+            html +=
+                '<a href="#" class="btn btn-default btn-round open-comment"><i class="fas fa-comment"></i> <span class="hidden-xs">Комментировать</span></a>'
+            ;
         }
 
-        html += '<a href="#" class="btn btn-success toggle-photo"><i class="far fa-check"></i> Выбрать</a>' +
-            '<a href="#" class="btn btn-warning finish-select"><i class="far fa-envelope hidden-xs"></i> Завершить</a>';
+        html +=
+            '<a href="#" class="btn btn-success btn-round toggle-photo"><i class="fas fa-check hidden-xs"></i> Выбрать</a>' +
+            '<a href="#" class="btn btn-warning btn-round finish-select"><i class="fas fa-cloud-upload hidden-xs"></i> Завершить</a>'
+        ;
 
-        if (allowComment) {
-            html += '</span>' +
-                '</div>' +
-                '</div>';
-        }
-
-        html += '</form>' +
-            '<div class="action-result"></div>';
+        html +=
+            '</div>' +
+            '<div class="action-result"></div>'
+        ;
 
         this.core.$outer.find('.lg-toolbar').append(html);
 
-        const $SelectPhotoControls = $('.SelectPhoto-controls');
-
         setTimeout(function () {
+            // Selected photos counter
             that.core.$outer.find('.lg-toolbar #lg-counter').append(
                 '<span id="lg-sp-count">' + selectedPhotosCount + '</span>'
             );
 
+            // Mark selected thumbnails
             that.core.$outer.find('.lg-thumb-item').each(function (index, element) {
                 if (photos[index].selected) {
                     $(element).addClass('sp-selected');
@@ -69,20 +64,51 @@
             });
         }, 100);
 
-        $SelectPhotoControls.on('submit', function (e) {
-            e.preventDefault();
+        if (allowComment) {
+            const $openComment = $('.open-comment');
 
-            let index = $SelectPhotoControls.data('index');
+            $openComment.popover({
+                title: false,
+                content: function () {
+                    const $this = $(this);
+                    const index = $this.parents('.SelectPhoto-controls').data('index');
 
-            photos[index].comment = $SelectPhotoControls.find('input').val();
+                    return '<form id="comment-photo-form" data-index="' + index + '">' +
+                        '<div class="form-group">' +
+                        '<textarea class="form-control" placeholder="Введите комментарий..." id="comment-photo-text">' + photos[index].comment + '</textarea>' +
+                        '</div>' +
+                        '<button class="btn btn-primary btn-block" type="submit"><i class="fas fa-reply"></i> Отправить</button>' +
+                        '</form>';
+                },
+                html: true,
+                placement: 'bottom',
+            });
 
-            that.commentPhoto(photos[index]['photo-id'], $SelectPhotoControls.find('input').val());
-        });
+            $('body').on('submit', '#comment-photo-form', function (e) {
+                e.preventDefault();
+
+                const commentText = $('#comment-photo-text').val();
+                const index = $(this).data('index');
+
+                if (commentText === '') {
+                    return false;
+                }
+
+                // Close popover
+                $openComment.trigger('click');
+
+                // Update local comment
+                photos[index].comment = commentText;
+
+                // Save comment to the backend
+                that.commentPhoto(photos[index]['photo-id'], commentText);
+            });
+        }
 
         $('.toggle-photo').on('click.lg', function (e) {
             e.preventDefault();
 
-            let index = $(this).parents('.SelectPhoto-controls').data('index');
+            const index = $(this).parents('.SelectPhoto-controls').data('index');
 
             if (photos[index].selected) {
                 photos[index].selected = false;
@@ -90,14 +116,14 @@
 
                 that.core.$outer.find('.lg-thumb-item:eq(' + index + ')').removeClass('sp-selected');
 
-                $('.toggle-photo').html('<i class="far fa-check"></i> Выбрать').removeClass('btn-primary').addClass('btn-success');
+                $('.toggle-photo').html('<i class="fas fa-check hidden-xs"></i> Выбрать').removeClass('btn-primary').addClass('btn-success');
             } else {
                 photos[index].selected = true;
                 selectedPhotosCount++;
 
                 that.core.$outer.find('.lg-thumb-item:eq(' + index + ')').addClass('sp-selected');
 
-                $('.toggle-photo').html('<i class="far fa-check"></i> Выбрано').removeClass('btn-success').addClass('btn-primary');
+                $('.toggle-photo').html('<i class="fas fa-check hidden-xs"></i> Выбрано').removeClass('btn-success').addClass('btn-primary');
             }
 
             that.selectPhoto(photos[index]['photo-id']);
@@ -110,15 +136,15 @@
             that.core.destroy();
         });
 
-        this.core.$el.on('onAfterSlide.lg.tm', function (event, prevIndex, index) {
+        this.core.$el.on('onBeforeSlide.lg', function (event, prevIndex, index) {
             let $SelectPhoto = $('.SelectPhoto-controls');
 
             $SelectPhoto.data('index', index);
 
             if (photos[index].selected) {
-                $('.toggle-photo').html('<i class="far fa-check"></i> Выбрано').removeClass('btn-success').addClass('btn-primary');
+                $('.toggle-photo').html('<i class="fas fa-check hidden-xs"></i> Выбрано').removeClass('btn-success').addClass('btn-primary');
             } else {
-                $('.toggle-photo').html('<i class="far fa-check"></i> Выбрать').removeClass('btn-primary').addClass('btn-success');
+                $('.toggle-photo').html('<i class="fas fa-check hidden-xs"></i> Выбрать').removeClass('btn-primary').addClass('btn-success');
             }
 
             $SelectPhoto.find('input').val(photos[index].comment);
