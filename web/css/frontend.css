@@ -41,3 +41,7 @@ body {
     width: 100%;
     flex-shrink: 0;
 }
+
+.btn-sp {
+    border-radius: 10px;
+}

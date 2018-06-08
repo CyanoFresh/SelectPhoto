@@ -9,11 +9,11 @@ class FrontendAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
+        'css/frontend.css',
     ];
-    public $js = [
-        'js/site.js',
-    ];
+//    public $js = [
+//        'js/frontend.js',
+//    ];
     public $depends = [
         'app\assets\AppAsset',
     ];

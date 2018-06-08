@@ -9,7 +9,7 @@ class AdminAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/admin.css',
+        'css/admin/admin.css',
     ];
     public $depends = [
         'app\assets\AppAsset',

@@ -9,7 +9,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\DetailView;
 
-\app\assets\AdminLinkAsset::register($this);
+\app\modules\admin\assets\AdminLinkAsset::register($this);
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Ссылки', 'url' => ['index']];

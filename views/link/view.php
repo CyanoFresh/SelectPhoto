@@ -28,6 +28,40 @@ foreach ($photosModels as $photosModel) {
     }
 }
 
+if (class_exists('yii\debug\Module')) {
+    $this->off(\yii\web\View::EVENT_END_BODY, [\yii\debug\Module::getInstance(), 'renderToolbar']);
+}
+
+$this->registerMetaTag([
+    'name' => 'og:title',
+    'content' => 'Выберите фото',
+]);
+
+$this->registerMetaTag([
+    'name' => 'og:type',
+    'content' => 'website',
+]);
+
+$this->registerMetaTag([
+    'name' => 'og:url',
+    'content' => Url::current([], true),
+]);
+
+$this->registerMetaTag([
+    'name' => 'og:image',
+    'content' => Url::home(true) . $photosModels[1]->getFileUrl(),
+]);
+
+$this->registerMetaTag([
+    'name' => 'og:site_name',
+    'content' => 'SelectPhoto',
+]);
+
+$this->registerMetaTag([
+    'name' => 'og:description',
+    'content' => 'Выберите наилучшие фото и нажмите кнопку "отправить", чтобы фотограф знал, когда вы завершите',
+]);
+
 $this->registerJsVar('photos', $photosArray);
 $this->registerJsVar('selectedPhotosCount', $selectedCount);
 $this->registerJsVar('allowComment', (bool)$linkModel->allow_comment);
@@ -48,14 +82,17 @@ $this->registerJsVar('submitLinkUrl', Url::to(['link/submit', 'link' => $linkMod
             <div class="modal-body">
                 <ol>
                     <li>Листайте фото кнопками влево и вправо.</li>
-                    <li>Нажмайте кнопку <a class="btn btn-xs btn-success">Выбрать</a> на понравившиеся фото. Вы можете отменить выбор повторным нажатием.</li>
+                    <li>Нажмайте кнопку <a class="btn btn-xs btn-success">Выбрать</a> на понравившиеся фото. Вы можете
+                        отменить выбор повторным нажатием.
+                    </li>
                     <li>
                         Чтобы фотограф знал, когда вы закончите, нажмите <a class="btn btn-xs btn-warning">Завершить</a>
                     </li>
                 </ol>
             </div>
             <div class="modal-footer">
-                <p class="pull-left text-muted">SelectPhoto by <a href="https://solomaha.com/" class="product-font" target="_blank">Alex Solomaha</a></p>
+                <p class="pull-left text-muted">SelectPhoto by <a href="https://solomaha.com/" class="product-font"
+                                                                  target="_blank">Alex Solomaha</a></p>
                 <button type="button" class="btn btn-default btn-hide-forever" data-dismiss="modal">
                     больше не показывать
                 </button>
