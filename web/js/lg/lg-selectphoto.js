@@ -86,7 +86,6 @@
                 },
                 html: true,
                 placement: 'bottom',
-                trigger: 'focus',
             });
 
             $('body').on('submit', '#comment-photo-form', function (e) {
