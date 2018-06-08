@@ -105,26 +105,33 @@ h1.page-header {
     margin-bottom: 30px;
 }
 
-.photos {
-    display: flex;
-    margin: 10px 0;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    /*flex-flow: row wrap;*/
-}
-
-.photos .photo {
+.photo .panel {
+    display: block;
     position: relative;
-    width: 100px;
-    margin-bottom: 5px;
+    height: 150px;
+    background: no-repeat center;
+    background-size: cover;
 }
 
-.photos .photo.selected:before {
-    content: "\f00c";
-    font-family: "Font Awesome\ 5 Pro";
+.photo .panel a.btn-remove {
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.photo .panel:hover a.btn-remove {
+    opacity: 1;
+}
+
+.photo .photo-props {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+}
+
+.photo .photo-props .selected-icon {
+    display: inline-block;
     font-weight: bold;
-    position: absolute;
     top: 0;
     left: 0;
     margin: 5px;
@@ -139,59 +146,8 @@ h1.page-header {
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
 }
 
-.photos .photo.has-comment .comment-icon {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 5px;
-    font-size: 10px;
-    background: #0D87E9;
-    width: 18px;
-    height: 18px;
-    line-height: 18px;
-    text-align: center;
-    border-radius: 50%;
-    color: #fff;
-    box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
-}
-
-.photos .photo:hover:after {
-    position: absolute;
-    visibility: visible;
-    background: rgba(0, 0, 0, 0.3);
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    line-height: 80px;
-    font-size: 30px;
-    content: '\f00d';
-    font-family: "Font Awesome\ 5 Pro";
-    color: #fff;
-    cursor: pointer;
-}
-
-.photos .photo:after {
-    position: absolute;
-    visibility: hidden;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    line-height: 80px;
-    font-size: 30px;
-    content: '\f00d';
-    font-family: "Font Awesome\ 5 Pro";
-    color: transparent;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.panel-title a:hover, .panel-title a:focus {
-    text-decoration: none;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+.popover {
+    width: 200px;
 }
 
 .panel-link {

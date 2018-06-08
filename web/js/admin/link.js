@@ -15,8 +15,10 @@ function copy(id) {
     document.execCommand("copy");
 }
 
+// $('.has-comment').tooltip();
+$('[data-toggle="popover"]').popover();
 
-$('.photo').click(function (e) {
+$('.btn-remove').click(function (e) {
     e.preventDefault();
 
     const $photo = $(this);
@@ -28,10 +30,10 @@ $('.photo').click(function (e) {
             return alert('Ошибка при удалении фото');
         }
 
-        $photo.fadeOut(function () {
-            $photo.remove();
+        const $parent = $photo.parents('.photo');
+
+        $parent.fadeOut(function () {
+            $parent.remove();
         });
     }, 'json');
 });
-
-$('.has-comment').tooltip();

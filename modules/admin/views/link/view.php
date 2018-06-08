@@ -115,28 +115,28 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo']))
 
     <hr>
 
-    <div class="photos">
+    <div class="row">
         <?php foreach ($model->photos as $photo): ?>
-            <div class="photo <?= $photo->selected ? 'selected' : '' ?> <?= $photo->comment ? 'has-comment' : '' ?>"
-                 data-id="<?= $photo->id ?>"
-                 title="<?= $photo->comment ?>"
-                 data-toggle="tooltip"
-                 data-placement="top">
+            <div class="col-lg-3 col-md-4 photo">
+                <div class="panel panel-default" style="background-image: url('<?= $photo->getFileUrl() ?>')">
+                    <div class="photo-props">
+                        <?php if ($photo->selected): ?>
+                            <a class="btn btn-round btn-sm btn-primary"><i class="fas fa-check"></i></a>
+                        <?php endif; ?>
 
-                <?php if ($photo->comment): ?>
-                    <div class="comment-icon"><i class="fas fa-comment"></i></div>
-                <?php endif; ?>
+                        <?php if ($photo->comment): ?>
+                            <a class="btn btn-round btn-sm btn-success"
+                               title="#<?= $photo->id ?> - <?= $photo->filename ?>"
+                               data-toggle="popover"
+                               data-placement="top"
+                               data-content="<?= $photo->comment ?>">
+                                <i class="fas fa-comment"></i> Комментарий
+                            </a>
+                        <?php endif; ?>
 
-                <?= Html::a(
-                    Html::img($photo->getThumbnailUrl(), [
-                        'class' => 'img-responsive',
-                        'alt' => '#' . $photo->id,
-                    ]),
-                    $photo->getFileUrl(),
-                    [
-                        'title' => '#' . $photo->id . ' - ' . $photo->filename,
-                    ]
-                ); ?>
+                        <a href="#" class="btn btn-round btn-sm btn-danger btn-remove" data-id="<?= $photo->id ?>"><i class="fas fa-times"></i></a>
+                    </div>
+                </div>
             </div>
         <?php endforeach; ?>
     </div>

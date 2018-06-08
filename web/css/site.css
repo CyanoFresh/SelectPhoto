@@ -1,0 +1,14 @@
+.btn-round {
+    border-radius: 30px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14);
+    font-weight: 500;
+    transition: 0.5s;
+}
+
+.btn-round.btn-success {
+    background: linear-gradient(45deg, #439A46, #00ea28);
+}
+
+.btn-round.btn-primary {
+    background: linear-gradient(45deg, #1f80d5, #00bfff);
+}

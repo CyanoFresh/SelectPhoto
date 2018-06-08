@@ -11,6 +11,7 @@ class AppAsset extends AssetBundle
     public $css = [
         'https://fonts.googleapis.com/css?family=Roboto:400,500',
         'css/theme.css',
+        'css/site.css',
     ];
     public $depends = [
         'yii\web\YiiAsset',
