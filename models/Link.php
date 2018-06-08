@@ -150,7 +150,6 @@ class Link extends \yii\db\ActiveRecord
 
     /**
      * @return bool
-     * @throws \yii\db\Exception
      */
     public function submit()
     {
@@ -161,18 +160,15 @@ class Link extends \yii\db\ActiveRecord
             $this->active = false;
         }
 
-        $ok = $this->save();
-
-        $mail = Yii::$app->mailer
+        $ok = $this->save() && Yii::$app->mailer
             ->compose('checked', [
                 'linkModel' => $this,
                 'selectedPhotoModels' => $this->getPhotos()->selected()->all(),
             ])
             ->setFrom(Yii::$app->params['fromEmail'])
             ->setTo(Yii::$app->params['adminEmail'])
-            ->setSubject('Выбор фото для "' . $this->name . '" заврешен');
-
-        $ok = $ok && $mail->send();
+            ->setSubject('Выбор фото для "' . $this->name . '" заврешен')
+            ->send();
 
         return $ok;
     }

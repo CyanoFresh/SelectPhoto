@@ -10,6 +10,7 @@ class LinkAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
 //        'css/site.css',
+        'https://fonts.googleapis.com/css?family=Product+Sans',
         'css/link.css',
     ];
     public $js = [
