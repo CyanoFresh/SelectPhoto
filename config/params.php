@@ -4,7 +4,7 @@ use yii\helpers\ArrayHelper;
 
 $params = [
     'fromEmail' => [
-        'robot@example.com' => 'SelectPhoto'
+//        'robot@example.com' => 'SelectPhoto'
     ],
     'adminEmail' => 'admin@example.com',
     'users' => [],
