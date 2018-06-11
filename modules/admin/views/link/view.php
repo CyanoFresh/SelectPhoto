@@ -90,7 +90,7 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo', 'id' => $linkMod
             <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body">
                     <div class="row">
-                        <?php foreach ($linkModel->photos as $photo): ?>
+                        <?php foreach ($linkModel->selectedPhotos as $photo): ?>
                             <div class="col-sm-3">
                                 <i class="far fa-image"></i>
                                 &nbsp;
