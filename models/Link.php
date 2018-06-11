@@ -109,7 +109,9 @@ class Link extends \yii\db\ActiveRecord
      */
     public function getPhotos()
     {
-        return $this->hasMany(Photo::class, ['link_id' => 'id'])->inverseOf('link');
+        return $this->hasMany(Photo::class, ['link_id' => 'id'])
+            ->orderBy('sort_order')
+            ->inverseOf('link');
     }
 
     /**

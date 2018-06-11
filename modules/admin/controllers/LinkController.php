@@ -3,6 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use app\models\Photo;
+use app\modules\admin\components\PhotoSorter;
 use app\modules\admin\models\form\LinkUploadForm;
 use Ramsey\Uuid\Uuid;
 use Yii;
@@ -13,6 +14,7 @@ use yii\helpers\Json;
 use yii\helpers\VarDumper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\Response;
@@ -72,11 +74,8 @@ class LinkController extends Controller
     {
         $linkModel = $this->findModel($id);
 
-        $uploadForm = new LinkUploadForm();
-
         return $this->render('view', [
-            'model' => $linkModel,
-            'uploadForm' => $uploadForm,
+            'linkModel' => $linkModel,
         ]);
     }
 
@@ -158,16 +157,46 @@ class LinkController extends Controller
     }
 
     /**
+     * @param int $id Link ID
+     * @return mixed
+     * @throws ForbiddenHttpException
      * @throws NotFoundHttpException
-     * @throws \yii\db\StaleObjectException
      */
-    public function actionDeletePhoto()
+    public function actionOrderPhotos($id)
     {
+        $link = $this->findModel($id);
+
+        $requestPhotoIDs = Yii::$app->request->post('photoIDs');
+        $linkPhotoIDs = $link->getPhotos()->select(['id'])->column();
+
+        $photoSorter = new PhotoSorter([
+            'validate' => true,
+            'validIDs' => $linkPhotoIDs,
+        ]);
+
+        try {
+            $ok = $photoSorter->orderByIDs($requestPhotoIDs);
+        } catch (\DomainException $exception) {
+            throw new ForbiddenHttpException($exception->getMessage());
+        }
+
+        return Json::encode(['ok' => $ok]);
+    }
+
+    /**
+     * @param int $id
+     * @return mixed
+     * @throws NotFoundHttpException
+     */
+    public function actionDeletePhoto($id)
+    {
+        $link = $this->findModel($id);
+
         $photoId = Yii::$app->request->post('id');
 
         $photoModel = Photo::findOne($photoId);
 
-        if (!$photoModel) {
+        if (!$photoModel or $link->id !== $photoModel->link_id) {
             throw new NotFoundHttpException('Фото не найдено');
         }
 
@@ -189,6 +218,6 @@ class LinkController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested Link does not exist.');
+        throw new NotFoundHttpException('Ссылка не найдена');
     }
 }

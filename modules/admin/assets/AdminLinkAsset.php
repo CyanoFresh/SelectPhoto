@@ -13,6 +13,7 @@ class AdminLinkAsset extends AssetBundle
     ];
     public $depends = [
         'app\assets\vendor\DropzoneAsset',
+        'app\modules\admin\assets\vendors\SortableAsset',
         'app\assets\AppAsset',
     ];
 }

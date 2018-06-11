@@ -13,6 +13,7 @@ use Yii;
  * @property int $link_id
  * @property string $filename
  * @property string $comment
+ * @property int $sort_order
  *
  * @property Link $link
  */
@@ -32,8 +33,8 @@ class Photo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['link_id', 'filename'], 'required'],
-            [['link_id'], 'integer'],
+            [['link_id', 'filename', 'sort_order'], 'required'],
+            [['link_id', 'sort_order'], 'integer'],
             [['selected'], 'boolean'],
             [['selected'], 'default', 'value' => false],
             [['comment', 'filename'], 'string'],
@@ -58,6 +59,7 @@ class Photo extends \yii\db\ActiveRecord
             'link_id' => 'Ссылка',
             'filename' => 'Имя файла',
             'comment' => 'Комментарий',
+            'sort_order' => 'Порядок сортировки',
         ];
     }
 
@@ -110,6 +112,9 @@ class Photo extends \yii\db\ActiveRecord
         return Yii::getAlias('@web/uploads/' . $this->link_id . '/' . $this->id . '_thumb.jpg');
     }
 
+    /**
+     * Delete thumbnail and main image from FS if exist
+     */
     public function afterDelete()
     {
         parent::afterDelete();
