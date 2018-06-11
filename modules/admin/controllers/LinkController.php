@@ -202,7 +202,7 @@ class LinkController extends Controller
             throw new NotFoundHttpException('Фото не найдено');
         }
 
-        $ok = $photoModel->delete();
+        $ok = $photoModel->delete() === 1;
 
         return Json::encode(['ok' => $ok]);
     }

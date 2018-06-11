@@ -142,8 +142,9 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo', 'id' => $linkMod
                             </a>
                         <?php endif; ?>
 
-                        <a href="#" class="btn btn-round btn-sm btn-danger btn-remove" data-id="<?= $photo->id ?>"><i
-                                    class="fas fa-times"></i></a>
+                        <a href="#" class="btn btn-round btn-sm btn-danger btn-remove">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
                     </div>
                 </div>
             </div>

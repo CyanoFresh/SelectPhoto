@@ -15,22 +15,21 @@ function copy(id) {
     document.execCommand("copy");
 }
 
-// $('.has-comment').tooltip();
 $('[data-toggle="popover"]').popover();
 
 $('.btn-remove').click(function (e) {
     e.preventDefault();
 
     const $photo = $(this);
+    const $parent = $photo.parents('.photo');
+    const photoId = $parent.data('id');
 
-    $.post(deletePhotoUrl, {id: $photo.data('id')}, function (res) {
+    $.post(deletePhotoUrl, {id: photoId}, function (res) {
         console.log(res);
 
         if (!res.ok) {
             return alert('Ошибка при удалении фото');
         }
-
-        const $parent = $photo.parents('.photo');
 
         $parent.fadeOut(function () {
             $parent.remove();

@@ -105,6 +105,10 @@ h1.page-header {
     margin-bottom: 30px;
 }
 
+.photo {
+    cursor: move;
+}
+
 .photo .panel {
     display: block;
     position: relative;
@@ -115,7 +119,7 @@ h1.page-header {
 
 .photo .panel a.btn-remove {
     opacity: 0;
-    transition: 0.4s;
+    transition: 0.3s;
 }
 
 .photo .panel:hover a.btn-remove {
