@@ -20,9 +20,8 @@ $('[data-toggle="popover"]').popover();
 $('.btn-remove').click(function (e) {
     e.preventDefault();
 
-    const $photo = $(this);
-    const $parent = $photo.parents('.photo');
-    const photoId = $parent.data('id');
+    const $photo = $(this).parents('.photo');
+    const photoId = $photo.data('id');
 
     $.post(deletePhotoUrl, {id: photoId}, function (res) {
         console.log(res);
@@ -31,8 +30,8 @@ $('.btn-remove').click(function (e) {
             return alert('Ошибка при удалении фото');
         }
 
-        $parent.fadeOut(function () {
-            $parent.remove();
+        $photo.fadeOut(function () {
+            $photo.remove();
         });
     }, 'json');
 });
