@@ -52,6 +52,10 @@ const sortable = Sortable.create(document.getElementById('photos'), {
 
         $.post(orderPhotosUrl, {photoIDs: photoIDs}, function (res) {
             console.log(res);
+
+            if (!res.ok) {
+                return alert('Не удалось сохранить порядок');
+            }
         }, 'json');
     },
 });

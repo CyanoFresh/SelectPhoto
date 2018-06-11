@@ -12,6 +12,7 @@ return \yii\helpers\ArrayHelper::merge([
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
+        '@webroot' => '@app/web',
     ],
     'components' => [
         'cache' => [
