@@ -22,10 +22,17 @@ class ImageHelper extends BaseObject
     /**
      * @param string $sourcePath
      * @param string $savePath
+     * @param int|null $thumbnailWidth
+     * @param int|null $thumbnailHeight
+     * @param int|null $thumbnailQuality
      * @return bool
      */
-    public function thumbnail($sourcePath, $savePath)
+    public function thumbnail($sourcePath, $savePath, $thumbnailWidth = null, $thumbnailHeight = null, $thumbnailQuality = null)
     {
+        $thumbnailWidth = $thumbnailWidth ?? $this->thumbnailWidth;
+        $thumbnailHeight = $thumbnailHeight ?? $this->thumbnailHeight;
+        $thumbnailQuality = $thumbnailQuality ?? $this->thumbnailQuality;
+
         $sourceImage = imagecreatefromjpeg($sourcePath);
 
         if (!$sourceImage) {
@@ -36,21 +43,21 @@ class ImageHelper extends BaseObject
         list($sourceW, $sourceH) = getimagesize($sourcePath);
 
         // RESIZE IMAGE AND PRESERVE PROPORTIONS
-        $thumb_w_resize = $this->thumbnailWidth;
-        $thumb_h_resize = $this->thumbnailHeight;
+        $thumb_w_resize = $thumbnailWidth;
+        $thumb_h_resize = $thumbnailHeight;
 
         if ($sourceW > $sourceH) {
-            $thumb_h_ratio = $this->thumbnailHeight / $sourceH;
+            $thumb_h_ratio = $thumbnailHeight / $sourceH;
             $thumb_w_resize = (int)round($sourceW * $thumb_h_ratio);
         } else {
-            $thumb_w_ratio = $this->thumbnailWidth / $sourceW;
+            $thumb_w_ratio = $thumbnailWidth / $sourceW;
             $thumb_h_resize = (int)round($sourceH * $thumb_w_ratio);
         }
 
-        if ($thumb_w_resize < $this->thumbnailWidth) {
-            $thumb_h_ratio = $this->thumbnailWidth / $thumb_w_resize;
-            $thumb_h_resize = (int)round($this->thumbnailHeight * $thumb_h_ratio);
-            $thumb_w_resize = $this->thumbnailWidth;
+        if ($thumb_w_resize < $thumbnailWidth) {
+            $thumb_h_ratio = $thumbnailWidth / $thumb_w_resize;
+            $thumb_h_resize = (int)round($thumbnailHeight * $thumb_h_ratio);
+            $thumb_w_resize = $thumbnailWidth;
         }
 
         // CREATE THE PROPORTIONAL IMAGE RESOURCE
@@ -62,22 +69,22 @@ class ImageHelper extends BaseObject
         }
 
         // CREATE THE CENTERED CROPPED IMAGE TO THE SPECIFIED DIMENSIONS
-        $result = imagecreatetruecolor($this->thumbnailWidth, $this->thumbnailHeight);
+        $result = imagecreatetruecolor($thumbnailWidth, $thumbnailHeight);
 
         $thumb_w_offset = 0;
         $thumb_h_offset = 0;
 
-        if ($this->thumbnailWidth < $thumb_w_resize) {
-            $thumb_w_offset = (int)round(($thumb_w_resize - $this->thumbnailWidth) / 2);
+        if ($thumbnailWidth < $thumb_w_resize) {
+            $thumb_w_offset = (int)round(($thumb_w_resize - $thumbnailWidth) / 2);
         } else {
-            $thumb_h_offset = (int)round(($thumb_h_resize - $this->thumbnailHeight) / 2);
+            $thumb_h_offset = (int)round(($thumb_h_resize - $thumbnailHeight) / 2);
         }
 
         if (!imagecopy($result, $thumbImage, 0, 0, $thumb_w_offset, $thumb_h_offset, $thumb_w_resize, $thumb_h_resize)) {
             return false;
         }
 
-        return imagejpeg($result, $savePath, 80);
+        return imagejpeg($result, $savePath, $thumbnailQuality);
     }
 
     /**

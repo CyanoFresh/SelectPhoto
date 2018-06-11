@@ -108,7 +108,7 @@ h1.page-header {
 .photo .panel {
     display: block;
     position: relative;
-    height: 150px;
+    height: 180px;
     background: no-repeat center;
     background-size: cover;
 }

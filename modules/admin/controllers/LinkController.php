@@ -36,6 +36,8 @@ class LinkController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                     'upload' => ['POST'],
+                    'order-photos' => ['POST'],
+                    'delete-photo' => ['POST'],
                 ],
             ],
             'access' => [
@@ -150,7 +152,7 @@ class LinkController extends Controller
 
         if (!$ok) {
             Yii::$app->response->statusCode = 400;
-            return $uploadForm->errors['file'][0];
+            return VarDumper::dumpAsString($uploadForm->errors);
         }
 
         return 'ok';

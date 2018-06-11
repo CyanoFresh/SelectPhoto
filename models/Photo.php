@@ -97,19 +97,25 @@ class Photo extends \yii\db\ActiveRecord
     }
 
     /**
+     * @param string $size (ex. 300x180)
      * @return string
      */
-    public function getThumbnailPath()
+    public function getThumbnailPath($size = null)
     {
-        return Yii::getAlias('@webroot/uploads/' . $this->link_id . '/' . $this->id . '_thumb.jpg');
+        $size = $size ?? '';
+
+        return Yii::getAlias('@webroot/uploads/' . $this->link_id . '/' . $this->id . '_thumb' . $size . '.jpg');
     }
 
     /**
+     * @param string $size (ex. 300x180)
      * @return string
      */
-    public function getThumbnailUrl()
+    public function getThumbnailUrl($size = null)
     {
-        return Yii::getAlias('@web/uploads/' . $this->link_id . '/' . $this->id . '_thumb.jpg');
+        $size = $size ?? '';
+
+        return Yii::getAlias('@web/uploads/' . $this->link_id . '/' . $this->id . '_thumb' . $size . '.jpg');
     }
 
     /**

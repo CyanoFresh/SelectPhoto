@@ -8,7 +8,9 @@ use app\modules\admin\components\ImageHelper;
 use Ramsey\Uuid\Uuid;
 use Yii;
 use yii\base\Model;
+use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
+use yii\helpers\VarDumper;
 use yii\web\UploadedFile;
 
 class LinkUploadForm extends Model
@@ -47,11 +49,21 @@ class LinkUploadForm extends Model
 
         $transaction = Yii::$app->db->beginTransaction();
 
+        $lastSortOrder = Photo::find()->where(['link_id' => $link->id])->orderBy('sort_order DESC')->select('sort_order')->scalar();
+
+        if (!$lastSortOrder) {
+            $lastSortOrder = 1;
+        } else {
+            $lastSortOrder = (int)$lastSortOrder + 1;
+        }
+
         $photoModel = new Photo();
         $photoModel->link_id = $link->id;
         $photoModel->filename = $this->file->name;
+        $photoModel->sort_order = $lastSortOrder;
 
         if (!$photoModel->save()) {
+            $this->addError('file', $photoModel->errors);
             return false;
         }
 
@@ -59,8 +71,10 @@ class LinkUploadForm extends Model
 
         $imageHelper = new ImageHelper();
 
-        // Create thumbnail
+        // Create frontend thumbnail
         $imageHelper->thumbnail($this->file->tempName, $photoModel->getThumbnailPath());
+        // Create admin thumbnail
+        $imageHelper->thumbnail($this->file->tempName, $photoModel->getThumbnailPath('300x180'), 300, 180, 95);
 
         if ($link->watermark) {
             // Place watermark and save to the same temp path

@@ -126,7 +126,7 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo', 'id' => $linkMod
     <div class="row" id="photos">
         <?php foreach ($linkModel->photos as $photo): ?>
             <div class="col-lg-3 col-md-4 photo" data-id="<?= $photo->id ?>">
-                <div class="panel panel-default" style="background-image: url('<?= $photo->getFileUrl() ?>')">
+                <div class="panel panel-default" style="background-image: url('<?= $photo->getThumbnailUrl('300x180') ?>')">
                     <div class="photo-props">
                         <?php if ($photo->selected): ?>
                             <a class="btn btn-round btn-sm btn-primary"><i class="fas fa-check"></i></a>
