@@ -50,3 +50,8 @@ INSTALLATION
     ~~~
     
 3. Configure app by editing files in the `./config/` directory
+4. Create database structure:
+
+    ```bash
+    php yii migrate
+    ```

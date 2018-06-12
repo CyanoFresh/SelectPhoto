@@ -39,7 +39,7 @@
         }
 
         html +=
-            '<a href="#" class="btn btn-success btn-round toggle-photo"><i class="fas fa-check hidden-xs"></i> Выбрать</a>' +
+            '<a href="#" class="btn btn-primary btn-round toggle-photo"><i class="fas fa-check hidden-xs"></i> Выбрать</a>' +
             '<a href="#" class="btn btn-warning btn-round finish-select"><i class="fas fa-cloud-upload hidden-xs"></i> Завершить</a>'
         ;
 
@@ -120,14 +120,14 @@
 
                 that.core.$outer.find('.lg-thumb-item:eq(' + index + ')').removeClass('sp-selected');
 
-                $('.toggle-photo').html('<i class="fas fa-check hidden-xs"></i> Выбрать').removeClass('btn-primary').addClass('btn-success');
+                $('.toggle-photo').html('<i class="fas fa-check hidden-xs"></i> Выбрать').removeClass('btn-success').addClass('btn-primary');
             } else {
                 photos[index].selected = true;
                 selectedPhotosCount++;
 
                 that.core.$outer.find('.lg-thumb-item:eq(' + index + ')').addClass('sp-selected');
 
-                $('.toggle-photo').html('<i class="fas fa-check hidden-xs"></i> Выбрано').removeClass('btn-success').addClass('btn-primary');
+                $('.toggle-photo').html('<i class="fas fa-check hidden-xs"></i> Выбрано').removeClass('btn-primary').addClass('btn-success');
             }
 
             that.selectPhoto(photos[index]['photo-id']);
@@ -146,9 +146,9 @@
             $SelectPhoto.data('index', index);
 
             if (photos[index].selected) {
-                $('.toggle-photo').html('<i class="fas fa-check hidden-xs"></i> Выбрано').removeClass('btn-success').addClass('btn-primary');
+                $('.toggle-photo').html('<i class="fas fa-check hidden-xs"></i> Выбрано').removeClass('btn-primary').addClass('btn-success');
             } else {
-                $('.toggle-photo').html('<i class="fas fa-check hidden-xs"></i> Выбрать').removeClass('btn-primary').addClass('btn-success');
+                $('.toggle-photo').html('<i class="fas fa-check hidden-xs"></i> Выбрать').removeClass('btn-success').addClass('btn-primary');
             }
 
             if (allowComment && $openComment) {
