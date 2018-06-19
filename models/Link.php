@@ -169,7 +169,7 @@ class Link extends \yii\db\ActiveRecord
             ])
             ->setFrom(Yii::$app->params['fromEmail'])
             ->setTo(Yii::$app->params['adminEmail'])
-            ->setSubject('Выбор фото для "' . $this->name . '" заврешен');
+            ->setSubject('Выбор фото для "' . $this->name . '" завершен');
 
         $ok = $this->save() && $message->send();
 

@@ -27,7 +27,7 @@ return [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            'viewPath' => '@app/mail',
+            'viewPath' => '@app/views/mail',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
