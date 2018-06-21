@@ -49,21 +49,6 @@ class Photo extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'selected' => 'Выбрано',
-            'link_id' => 'Ссылка',
-            'filename' => 'Имя файла',
-            'comment' => 'Комментарий',
-            'sort_order' => 'Порядок сортировки',
-        ];
-    }
-
-    /**
      * @return \yii\db\ActiveQuery
      */
     public function getLink()

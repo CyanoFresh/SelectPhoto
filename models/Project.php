@@ -3,6 +3,7 @@
 namespace app\models;
 
 use app\models\query\ProjectQuery;
+use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\ArrayHelper;
 
@@ -46,11 +47,11 @@ class Project extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'active' => 'Активен',
-            'name' => 'Название',
-            'description' => 'Описание',
-            'created_at' => 'Дата Создания',
+            'id' => Yii::t('app', 'ID'),
+            'active' => Yii::t('app', 'Активен'),
+            'name' => Yii::t('app', 'Название'),
+            'description' => Yii::t('app', 'Описание'),
+            'created_at' => Yii::t('app', 'Дата Создания'),
         ];
     }
 

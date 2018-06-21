@@ -75,13 +75,13 @@ class LinkController extends Controller
         $savedLinkModel = $this->getSavedLinkModel();
 
         if (!$savedLinkModel or $link !== $savedLinkModel->link) {
-            throw new NotFoundHttpException('Ссылка не найдена');
+            throw new NotFoundHttpException(Yii::t('app', 'Ссылка не найдена'));
         }
 
         $photoModel = Photo::findOne($id);
 
         if (!$photoModel || $photoModel->link_id !== $savedLinkModel->id) {
-            throw new NotFoundHttpException('Фото не найдено');
+            throw new NotFoundHttpException(Yii::t('app', 'Фото не найдено'));
         }
 
         $photoModel->selected = !((bool)$photoModel->selected);
@@ -90,7 +90,7 @@ class LinkController extends Controller
             return [
                 'ok' => false,
                 'errors' => [
-                    'Выбрано максимальное количество фото',
+                    Yii::t('app', 'Выбрано максимальное количество фото'),
                 ],
             ];
         }
@@ -117,23 +117,23 @@ class LinkController extends Controller
         $id = Yii::$app->request->post('id');
 
         if (!$comment or !$id) {
-            throw new BadRequestHttpException('Сообщение отсутствует');
+            throw new BadRequestHttpException(Yii::t('app', 'Сообщение отсутствует'));
         }
 
         $savedLinkModel = $this->getSavedLinkModel();
 
         if (!$savedLinkModel or $link !== $savedLinkModel->link) {
-            throw new NotFoundHttpException('Ссылка не найдена');
+            throw new NotFoundHttpException(Yii::t('app', 'Ссылка не найдена'));
         }
 
         if (!$savedLinkModel->allow_comment) {
-            throw new UnauthorizedHttpException('Комментирование не разрешено');
+            throw new UnauthorizedHttpException(Yii::t('app', 'Комментирование не разрешено'));
         }
 
         $photoModel = Photo::findOne($id);
 
         if (!$photoModel || $photoModel->link_id !== $savedLinkModel->id) {
-            throw new NotFoundHttpException('Фото не найдено');
+            throw new NotFoundHttpException(Yii::t('app', 'Фото не найдено'));
         }
 
         $photoModel->comment = \yii\helpers\HtmlPurifier::process($comment);
@@ -149,7 +149,6 @@ class LinkController extends Controller
      * @param string $link
      * @return mixed
      * @throws NotFoundHttpException
-     * @throws \yii\db\Exception
      */
     public function actionSubmit($link)
     {
@@ -158,13 +157,13 @@ class LinkController extends Controller
         $savedLinkModel = $this->getSavedLinkModel();
 
         if (!$savedLinkModel or $link !== $savedLinkModel->link) {
-            throw new NotFoundHttpException('Ссылка не найдена');
+            throw new NotFoundHttpException(Yii::t('app', 'Ссылка не найдена'));
         }
 
         $linkModel = Link::find()->link($link)->active()->one();
 
         if (!$linkModel) {
-            throw new NotFoundHttpException('Ссылка не найдена');
+            throw new NotFoundHttpException(Yii::t('app', 'Ссылка не найдена'));
         }
 
         $ok = $linkModel->submit();
@@ -187,7 +186,7 @@ class LinkController extends Controller
             return $linkModel;
         }
 
-        throw new NotFoundHttpException('Ссылка не найдена');
+        throw new NotFoundHttpException(Yii::t('app', 'Ссылка не найдена'));
     }
 
     /**

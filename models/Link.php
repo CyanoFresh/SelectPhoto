@@ -51,9 +51,26 @@ class Link extends \yii\db\ActiveRecord
     {
         return [
             [['project_id', 'max_photos', 'created_at', 'submitted_at'], 'integer'],
-            [['active', 'allow_comment', 'disable_after_submit', 'watermark', 'show_tutorial', 'disable_right_click'], 'boolean'],
             [
-                ['active', 'allow_comment', 'disable_after_submit', 'watermark', 'show_tutorial', 'disable_right_click'],
+                [
+                    'active',
+                    'allow_comment',
+                    'disable_after_submit',
+                    'watermark',
+                    'show_tutorial',
+                    'disable_right_click'
+                ],
+                'boolean'
+            ],
+            [
+                [
+                    'active',
+                    'allow_comment',
+                    'disable_after_submit',
+                    'watermark',
+                    'show_tutorial',
+                    'disable_right_click'
+                ],
                 'default',
                 'value' => true
             ],
@@ -79,21 +96,21 @@ class Link extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'active' => 'Активна',
-            'link' => 'Ссылка',
-            'name' => 'Название',
-            'project_id' => 'Проект',
-            'submitted' => 'Завершено Пользователем',
-            'allow_comment' => 'Разрешить комментирование',
-            'disable_after_submit' => 'Отключить после завершения',
-            'watermark' => 'Ставить watermark',
-            'max_photos' => 'Макс. Фото',
-            'show_tutorial' => 'Показывать инструкцию',
-            'disable_right_click' => 'Отключить скачивание фото',
-            'greeting_message' => 'Сообщение Приветствия',
-            'created_at' => 'Дата Создания',
-            'submitted_at' => 'Дата Завершения',
+            'id' => Yii::t('app', 'ID'),
+            'active' => Yii::t('app', 'Активна'),
+            'link' => Yii::t('app', 'Ссылка'),
+            'name' => Yii::t('app', 'Название'),
+            'project_id' => Yii::t('app', 'Проект'),
+            'submitted' => Yii::t('app', 'Завершено Пользователем'),
+            'allow_comment' => Yii::t('app', 'Разрешить комментирование'),
+            'disable_after_submit' => Yii::t('app', 'Отключить после завершения'),
+            'watermark' => Yii::t('app', 'Ставить watermark'),
+            'max_photos' => Yii::t('app', 'Макс. Фото'),
+            'show_tutorial' => Yii::t('app', 'Показывать инструкцию'),
+            'disable_right_click' => Yii::t('app', 'Отключить скачивание фото'),
+            'greeting_message' => Yii::t('app', 'Сообщение Приветствия'),
+            'created_at' => Yii::t('app', 'Дата Создания'),
+            'submitted_at' => Yii::t('app', 'Дата Завершения'),
         ];
     }
 
@@ -183,7 +200,9 @@ class Link extends \yii\db\ActiveRecord
             ])
             ->setFrom(Yii::$app->params['fromEmail'])
             ->setTo(Yii::$app->params['adminEmail'])
-            ->setSubject('Выбор фото для "' . $this->name . '" завершен');
+            ->setSubject(Yii::t('app', 'Выбор фото для "{name}" завершен', [
+                'name' => $this->name,
+            ]));
 
         $ok = $this->save() && $message->send();
 
