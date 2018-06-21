@@ -16,8 +16,8 @@ use yii\widgets\Breadcrumbs;
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'SelectPhoto',
-        'brandOptions' => ['class' => 'product-font'],
+        'brandLabel' => 'SelectPhoto<span>beta</span>',
+        'brandOptions' => ['class' => 'brand product-font'],
         'brandUrl' => ['/admin/default/index'],
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',

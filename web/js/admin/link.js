@@ -1,6 +1,7 @@
 Dropzone.options.dropzone = {
     paramName: 'LinkUploadForm[file]',
     acceptedFiles: 'image/jpeg,image/png',
+    dictDefaultMessage: '<i class="fas fa-upload"></i> Перенесите файлы сюда для загрузки',
     error: function (file, message) {
         console.log(message);
         $(file.previewElement).addClass("dz-error").find('.dz-error-message').text(message);

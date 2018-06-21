@@ -1,7 +1,6 @@
 <?php
 
 /** @var $this \yii\web\View */
-
 /** @var $model \app\models\Link */
 
 use yii\helpers\Url;
@@ -25,6 +24,7 @@ if ($photo) {
             <div class="link-info">
                 <div class="link-name">
                     <?= $model->name ?>
+
                     <?php if ($model->submitted): ?>
                         <div class="link-submitted" title="Завершено пользователем">
                             <i class="far fa-check fa-fw"></i>

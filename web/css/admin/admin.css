@@ -106,16 +106,47 @@ h1.page-header {
     border-radius: 4px;
 }
 
+.panel:hover {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
 /* End Theme styles */
 
 /* Link View styles */
 
+.brand {
+    position: relative;
+}
+
+.brand span {
+    display: block;
+    position: absolute;
+    top: 11px;
+    right: -13px;
+    font-size: 10px;
+    background: #F44336;
+    padding: 0 4px;
+    text-transform: uppercase;
+    line-height: 15px;
+    border-radius: 4px;
+}
+
 .dropzone {
-    min-height: unset;
-    border: 3px dotted rgba(0, 0, 0, 0.3);
-    /* background: white; */
-    padding: 20px 20px;
-    margin-bottom: 30px;
+    border: 2px dashed #0087F7;
+    border-radius: 5px;
+    background: white;
+    padding: 5px;
+}
+
+.dropzone .dz-message {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.dropzone .dz-message i {
+    display: block;
+    font-size: 50px;
+    margin-bottom: 20px;
 }
 
 .photo {
@@ -241,88 +272,5 @@ h1.page-header {
     padding: 0 3px;
     top: -4px;
 }
-
-/*.panel-link .link-bg {*/
-/*position: absolute;*/
-/*left: 0;*/
-/*right: 0;*/
-/*bottom: 0;*/
-/*top: 0;*/
-/*z-index: 0;*/
-/*display: block;*/
-/*background-position: center;*/
-/*background-size: cover;*/
-/*}*/
-
-/*.panel-link {*/
-/*display: block;*/
-/*position: relative;*/
-/*color: #8b8b8b;*/
-/*}*/
-
-/*.panel-link .panel-body {*/
-/*min-height: 170px;*/
-/*display: flex;*/
-/*justify-content: center;*/
-/*align-items: center;*/
-/*}*/
-
-/*.panel-link.link-active {*/
-/*color: #444;*/
-/*}*/
-
-/*.panel-link:hover, .panel-link:focus {*/
-/*text-decoration: none;*/
-/*box-shadow: 0 3px 10px rgba(0, 0, 0, .3);*/
-/*color: #000000;*/
-/*}*/
-
-/*.panel-link .link-name {*/
-/*text-align: center;*/
-/*font-size: 40px;*/
-/*font-weight: bold;*/
-/*line-height: 1.1;*/
-/*}*/
-
-/*.panel-link .link-submitted {*/
-/*position: absolute;*/
-/*top: 0;*/
-/*left: 0;*/
-/*background: #2196F3;*/
-/*width: 25px;*/
-/*height: 25px;*/
-/*line-height: 25px;*/
-/*border-radius: 50%;*/
-/*color: #fff;*/
-/*text-align: center;*/
-/*margin: 10px;*/
-/*}*/
-
-/*.panel-link .link-project {*/
-/*position: absolute;*/
-/*top: 0;*/
-/*left: 35px;*/
-/*margin: 8px 10px;*/
-/*font-size: 15px;*/
-/*}*/
-
-/*.panel-link.photo-bg .link-name {*/
-/*color: #fff;*/
-/*text-shadow: 1px 1px 10px #000;*/
-/*z-index: 1;*/
-/*}*/
-
-/*.panel-link.photo-bg .link-project .label.label-default {*/
-/*border-radius: 16px;*/
-/*padding: 6px 16px 6px 12px;*/
-/*font-size: 14px;*/
-/*font-weight: 400;*/
-/*background: #ffffff;*/
-/*color: #222;*/
-/*}*/
-
-/*.panel-link .link-project .label.label-default .fas {*/
-/*margin-right: 3px;*/
-/*}*/
 
 /* End Link List styles */
