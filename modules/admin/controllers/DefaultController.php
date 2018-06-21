@@ -27,7 +27,7 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Link::find()->joinWith(['project', 'photos']),
+            'query' => Link::find(),
             'sort' => ['defaultOrder' => ['created_at' => SORT_DESC]]
         ]);
 

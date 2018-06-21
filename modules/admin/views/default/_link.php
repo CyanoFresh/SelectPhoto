@@ -26,12 +26,13 @@ if ($photo) {
                 <div class="link-name">
                     <?= $model->name ?>
                     <?php if ($model->submitted): ?>
-                        <div class="link-submitted" title="Завершено пользователем"><i class="far fa-check fa-fw"></i>
+                        <div class="link-submitted" title="Завершено пользователем">
+                            <i class="far fa-check fa-fw"></i>
                         </div>
                     <?php endif; ?>
                 </div>
                 <div class="link-project">
-                    <?= $model->project ? $model->project->name : 'Без проекта' ?>
+                    <?= $model->project_id ? $model->project->name : 'Без проекта' ?>
                 </div>
             </div>
             <div class="link-controls">
