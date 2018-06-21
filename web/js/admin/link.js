@@ -28,24 +28,26 @@ $('.btn-remove').click(function (e) {
     }, 'json');
 });
 
-const sortable = Sortable.create(document.getElementById('photos'), {
-    onUpdate: function () {
-        const photoIDs = [];
+if (window.innerWidth >= 768) {
+    Sortable.create(document.getElementById('photos'), {
+        onUpdate: function () {
+            const photoIDs = [];
 
-        $('#photos > .photo').each(function () {
-            const id = +$(this).data('id');
+            $('#photos > .photo').each(function () {
+                const id = +$(this).data('id');
 
-            photoIDs.push(id);
-        });
+                photoIDs.push(id);
+            });
 
-        console.log(photoIDs);
+            console.log(photoIDs);
 
-        $.post(orderPhotosUrl, {photoIDs: photoIDs}, function (res) {
-            console.log(res);
+            $.post(orderPhotosUrl, {photoIDs: photoIDs}, function (res) {
+                console.log(res);
 
-            if (!res.ok) {
-                return alert('Не удалось сохранить порядок');
-            }
-        }, 'json');
-    },
-});
+                if (!res.ok) {
+                    return alert('Не удалось сохранить порядок');
+                }
+            }, 'json');
+        },
+    });
+}
