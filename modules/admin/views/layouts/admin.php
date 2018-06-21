@@ -16,7 +16,8 @@ use yii\widgets\Breadcrumbs;
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'SelectPhoto Admin',
+        'brandLabel' => 'SelectPhoto',
+        'brandOptions' => ['class' => 'product-font'],
         'brandUrl' => ['/admin/default/index'],
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -50,7 +51,7 @@ use yii\widgets\Breadcrumbs;
 
 <footer class="footer">
     <div class="container">
-        <p>By <a href="https://solomaha.com" target="_blank">Alex Solomaha</a></p>
+        <p>By <a href="https://solomaha.com" class="product-font" target="_blank">Alex Solomaha</a></p>
     </div>
 </footer>
 

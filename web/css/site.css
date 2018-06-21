@@ -12,3 +12,8 @@
 .btn-round.btn-primary {
     background: linear-gradient(45deg, #1f80d5, #00bfff);
 }
+
+.product-font {
+    font-family: 'Product Sans';
+    font-weight: bold;
+}

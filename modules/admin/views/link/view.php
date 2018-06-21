@@ -82,7 +82,11 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo', 'id' => $linkMod
                     'disable_after_submit:boolean',
                     'show_tutorial:boolean',
                     'disable_right_click:boolean',
-                    'max_photos',
+                    [
+                        'attribute' => 'max_photos',
+                        'format' => 'raw',
+                        'value' => $linkModel->max_photos === 0 ? '∞' : $linkModel->max_photos,
+                    ],
                     'greeting_message',
                     'created_at:datetime',
                 ],
