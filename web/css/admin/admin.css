@@ -203,6 +203,10 @@ h1.page-header {
     overflow: hidden;
 }
 
+.panel-link.panel-link-submitted .link-name {
+    color: #0D87E9;
+}
+
 .panel-link .link-project {
     font-size: 14px;
     color: #00000099;
