@@ -1,12 +1,41 @@
+if (LINK.options.disableRightClick) {
+    document.addEventListener('contextmenu', function (event) {
+        event.preventDefault();
+    });
+
+    $(document).keydown(function (event) {
+        if (event.keyCode === 123 || (event.ctrlKey && event.shiftKey && event.keyCode === 73)) { // Prevent Ctrl+Shift+I
+            return false;
+        }
+    });
+}
+
+/**
+ * @param {string} title
+ * @param {String} body
+ * @param {Function} [before]
+ */
+function showDialog(title, body, before) {
+    const $dialogModal = $('#dialogModal');
+
+    $dialogModal.find('.modal-title').html(title);
+    $dialogModal.find('.modal-body').html(body);
+
+    if (before && typeof before === 'function') {
+        before($dialogModal);
+    }
+
+    $dialogModal.modal('show');
+}
+
 $(document).ready(function () {
     $('#gallery')
         .lightGallery({
             dynamic: true,
-            dynamicEl: photos,
+            dynamicEl: LINK.photos,
             download: false,
             loop: false,
             SelectPhoto: true,
-            // pager: true,
             closable: false,
             hideBarsDelay: 1000 * 60 * 6,
         })
@@ -19,7 +48,7 @@ $(document).ready(function () {
         });
 
     // Help window
-    if (!localStorage || !localStorage.hideHelpModal) {
+    if (!localStorage.hideHelpModal) {
         $('#helpModal').modal('show');
     }
 
@@ -27,5 +56,3 @@ $(document).ready(function () {
         localStorage.hideHelpModal = true;
     });
 });
-
-document.addEventListener('contextmenu', event => event.preventDefault());

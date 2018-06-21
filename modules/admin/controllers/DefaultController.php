@@ -28,6 +28,7 @@ class DefaultController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Link::find(),
+            'sort' => ['defaultOrder' => ['created_at' => SORT_DESC]]
         ]);
 
         return $this->render('index', [

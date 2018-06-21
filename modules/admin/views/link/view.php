@@ -22,6 +22,8 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo', 'id' => $linkMod
 
     <h2>
         <?= $this->title ?>
+        <?= Html::a('<i class="fas fa-copy"></i>', '#',
+            ['class' => 'btn btn-success', 'onclick' => "copy('copyTarget')", 'title' => 'Копировать ссылку в буфер обмена']) ?>
         <?= Html::a('<i class="fas fa-pencil-alt"></i>', ['update', 'id' => $linkModel->id],
             ['class' => 'btn btn-primary']) ?>
         <?= Html::a('<i class="fas fa-trash-alt"></i>', ['delete', 'id' => $linkModel->id], [
@@ -44,7 +46,7 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo', 'id' => $linkMod
                         'value' =>
                             '<div class="input-group input-group-sm">' .
                             '<input type="text" value="' .
-                            \yii\helpers\Url::to([
+                            Url::to([
                                 '/link/view',
                                 'link' => $linkModel->link
                             ], true) .
@@ -56,8 +58,19 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo', 'id' => $linkMod
                         'format' => 'raw',
                     ],
                     'name',
-                    'project_id',
+                    [
+                        'attribute' => 'project_id',
+                        'visible' => (bool)$linkModel->project,
+                        'format' => 'raw',
+                        'value' => Html::a($linkModel->project->name, ['/admin/project/view', 'id' => $linkModel->project_id]),
+                    ],
+                    'watermark:boolean',
                     'submitted:boolean',
+                    [
+                        'attribute' => 'submitted_at',
+                        'format' => 'datetime',
+                        'visible' => (bool)$linkModel->submitted,
+                    ],
                 ],
             ]) ?>
         </div>
@@ -67,9 +80,11 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo', 'id' => $linkMod
                 'attributes' => [
                     'allow_comment:boolean',
                     'disable_after_submit:boolean',
-                    'watermark:boolean',
+                    'show_tutorial:boolean',
+                    'disable_right_click:boolean',
+                    'max_photos',
+                    'greeting_message',
                     'created_at:datetime',
-                    'submitted_at:datetime',
                 ],
             ]) ?>
         </div>
@@ -109,7 +124,7 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo', 'id' => $linkMod
 
     <h3>Фото</h3>
 
-    <form action=" <?= \yii\helpers\Url::to(['/admin/link/upload', 'id' => $linkModel->id]) ?>" method="post"
+    <form action=" <?= Url::to(['/admin/link/upload', 'id' => $linkModel->id]) ?>" method="post"
           class="dropzone" enctype="multipart/form-data" id="dropzone">
 
         <input id="form-token" type="hidden" name="<?= Yii::$app->request->csrfParam ?>"
@@ -126,7 +141,8 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo', 'id' => $linkMod
     <div class="row" id="photos">
         <?php foreach ($linkModel->photos as $photo): ?>
             <div class="col-lg-3 col-md-4 photo" data-id="<?= $photo->id ?>">
-                <div class="panel panel-default" style="background-image: url('<?= $photo->getThumbnailUrl('300x180') ?>')">
+                <div class="panel panel-default"
+                     style="background-image: url('<?= $photo->getThumbnailUrl('300x180') ?>')">
                     <div class="photo-props">
                         <?php if ($photo->selected): ?>
                             <a class="btn btn-round btn-sm btn-primary"><i class="fas fa-check"></i></a>

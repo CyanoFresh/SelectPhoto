@@ -85,6 +85,16 @@ class LinkController extends Controller
         }
 
         $photoModel->selected = !((bool)$photoModel->selected);
+
+        if ($photoModel->selected && $savedLinkModel->max_photos !== 0 && (int)$savedLinkModel->getSelectedPhotos()->count() >= $savedLinkModel->max_photos) {
+            return [
+                'ok' => false,
+                'errors' => [
+                    'Выбрано максимальное количество фото',
+                ],
+            ];
+        }
+
         $ok = $photoModel->save();
 
         return [

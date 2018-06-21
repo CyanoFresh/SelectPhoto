@@ -12,8 +12,6 @@ $this->params['breadcrumbs'][] = 'Редактирование';
 ?>
 <div class="link-update">
 
-    <h1 class="page-header"><?= $this->title ?></h1>
-
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>

@@ -1,3 +1,4 @@
+/* Yii2 styles */
 html,
 body {
     height: 100%;
@@ -85,6 +86,10 @@ a.desc:after {
     margin: 0 0 15px 0;
 }
 
+/* End Yii2 styles */
+
+/* Theme styles */
+
 .form-control {
     background: #efefef;
 }
@@ -96,6 +101,14 @@ h1 {
 h1.page-header {
     margin-top: 0;
 }
+
+.panel {
+    border-radius: 4px;
+}
+
+/* End Theme styles */
+
+/* Link View styles */
 
 .dropzone {
     min-height: unset;
@@ -154,61 +167,154 @@ h1.page-header {
     width: 200px;
 }
 
+/* End Link View styles */
+
+/* Link List styles */
+
 .panel-link {
-    display: block;
     position: relative;
-    color: #8b8b8b;
+    display: block;
 }
 
-.panel-link .panel-body {
-    min-height: 170px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.panel-link.link-disabled .link-name {
+    color: rgba(113, 113, 113, 0.87);
 }
 
-.panel-link.link-active {
-    color: #444;
-}
-
-.panel-link:hover, .panel-link:focus {
+.panel-link:hover,
+.panel-link:focus {
+    color: #222;
     text-decoration: none;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, .3);
-    color: #000000;
+}
+
+.panel-link .panel-image {
+    height: 160px;
+    background-position: center;
+    background-size: cover;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    background-color: #efefef;
 }
 
 .panel-link .link-name {
-    text-align: center;
-    font-size: 40px;
-    font-weight: bold;
-    line-height: 1.1;
-}
-
-.panel-link .link-submitted {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: #2196F3;
-    width: 25px;
-    height: 25px;
-    line-height: 25px;
-    border-radius: 50%;
-    color: #fff;
-    /*font-size: 13px;*/
-    text-align: center;
-    margin: 10px;
+    font-size: 24px;
+    color: #000000de;
+    font-weight: 500;
 }
 
 .panel-link .link-project {
-    position: absolute;
-    top: 0;
-     left: 35px;
-    /* background: #d7d7d7; */
-    /* padding: 1px 6px; */
-    /* border-radius: 3px; */
-    /* text-align: center; */
-    margin: 8px 10px;
-    /* color: #222; */
-    /* font-weight: bold; */
-    font-size: 15px;
+    font-size: 14px;
+    color: #00000099;
 }
+
+.panel-link .panel-body {
+    display: flex;
+    flex-direction: row;
+}
+
+.panel-link .panel-body .link-info {
+    flex-grow: 1;
+}
+
+.panel-link .panel-body .link-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.panel-link .link-submitted {
+    position: relative;
+    display: inline-block;
+    background: #2196F3;
+    border-radius: 50%;
+    color: #fff;
+    text-align: center;
+    margin-left: 5px;
+    font-size: 12px;
+    padding: 0 3px;
+    top: -4px;
+}
+
+/*.panel-link .link-bg {*/
+/*position: absolute;*/
+/*left: 0;*/
+/*right: 0;*/
+/*bottom: 0;*/
+/*top: 0;*/
+/*z-index: 0;*/
+/*display: block;*/
+/*background-position: center;*/
+/*background-size: cover;*/
+/*}*/
+
+/*.panel-link {*/
+/*display: block;*/
+/*position: relative;*/
+/*color: #8b8b8b;*/
+/*}*/
+
+/*.panel-link .panel-body {*/
+/*min-height: 170px;*/
+/*display: flex;*/
+/*justify-content: center;*/
+/*align-items: center;*/
+/*}*/
+
+/*.panel-link.link-active {*/
+/*color: #444;*/
+/*}*/
+
+/*.panel-link:hover, .panel-link:focus {*/
+/*text-decoration: none;*/
+/*box-shadow: 0 3px 10px rgba(0, 0, 0, .3);*/
+/*color: #000000;*/
+/*}*/
+
+/*.panel-link .link-name {*/
+/*text-align: center;*/
+/*font-size: 40px;*/
+/*font-weight: bold;*/
+/*line-height: 1.1;*/
+/*}*/
+
+/*.panel-link .link-submitted {*/
+/*position: absolute;*/
+/*top: 0;*/
+/*left: 0;*/
+/*background: #2196F3;*/
+/*width: 25px;*/
+/*height: 25px;*/
+/*line-height: 25px;*/
+/*border-radius: 50%;*/
+/*color: #fff;*/
+/*text-align: center;*/
+/*margin: 10px;*/
+/*}*/
+
+/*.panel-link .link-project {*/
+/*position: absolute;*/
+/*top: 0;*/
+/*left: 35px;*/
+/*margin: 8px 10px;*/
+/*font-size: 15px;*/
+/*}*/
+
+/*.panel-link.photo-bg .link-name {*/
+/*color: #fff;*/
+/*text-shadow: 1px 1px 10px #000;*/
+/*z-index: 1;*/
+/*}*/
+
+/*.panel-link.photo-bg .link-project .label.label-default {*/
+/*border-radius: 16px;*/
+/*padding: 6px 16px 6px 12px;*/
+/*font-size: 14px;*/
+/*font-weight: 400;*/
+/*background: #ffffff;*/
+/*color: #222;*/
+/*}*/
+
+/*.panel-link .link-project .label.label-default .fas {*/
+/*margin-right: 3px;*/
+/*}*/
+
+/* End Link List styles */

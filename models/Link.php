@@ -23,6 +23,10 @@ use yii\helpers\VarDumper;
  * @property boolean $allow_comment
  * @property boolean $disable_after_submit
  * @property boolean $watermark
+ * @property boolean $show_tutorial
+ * @property boolean $disable_right_click
+ * @property string $greeting_message
+ * @property int $max_photos
  * @property int $created_at
  * @property int $submitted_at
  *
@@ -46,13 +50,19 @@ class Link extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['project_id', 'created_at', 'submitted_at'], 'integer'],
-            [['active', 'allow_comment', 'disable_after_submit', 'watermark'], 'boolean'],
-            [['active', 'allow_comment', 'disable_after_submit', 'watermark'], 'default', 'value' => true],
+            [['project_id', 'max_photos', 'created_at', 'submitted_at'], 'integer'],
+            [['active', 'allow_comment', 'disable_after_submit', 'watermark', 'show_tutorial', 'disable_right_click'], 'boolean'],
+            [
+                ['active', 'allow_comment', 'disable_after_submit', 'watermark', 'show_tutorial', 'disable_right_click'],
+                'default',
+                'value' => true
+            ],
             [['link', 'name'], 'required'],
+            [['link'], 'default', 'value' => $this->generateLink()],
             [['link'], 'string', 'max' => 36],
-            [['name'], 'string', 'max' => 255],
             [['link'], 'unique'],
+            [['name'], 'string', 'max' => 255],
+            [['greeting_message'], 'string'],
             [
                 ['project_id'],
                 'exist',
@@ -78,6 +88,10 @@ class Link extends \yii\db\ActiveRecord
             'allow_comment' => 'Разрешить комментирование',
             'disable_after_submit' => 'Отключить после завершения',
             'watermark' => 'Ставить watermark',
+            'max_photos' => 'Макс. Фото',
+            'show_tutorial' => 'Показывать инструкцию',
+            'disable_right_click' => 'Отключить скачивание фото',
+            'greeting_message' => 'Сообщение Приветствия',
             'created_at' => 'Дата Создания',
             'submitted_at' => 'Дата Завершения',
         ];
@@ -174,5 +188,15 @@ class Link extends \yii\db\ActiveRecord
         $ok = $this->save() && $message->send();
 
         return $ok;
+    }
+
+    /**
+     * Get first part of UUID v4
+     *
+     * @return string
+     */
+    public function generateLink()
+    {
+        return mb_substr(Uuid::uuid4()->toString(), 0, 8);
     }
 }

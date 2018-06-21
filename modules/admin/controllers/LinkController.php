@@ -94,11 +94,8 @@ class LinkController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        $model->link = $model->link ? $model->link : Uuid::uuid4()->toString();
-        $model->active = $model->active ? $model->active : true;
-        $model->allow_comment = $model->allow_comment ? $model->allow_comment : true;
-        $model->disable_after_submit = $model->disable_after_submit ? $model->disable_after_submit : true;
-        $model->watermark = $model->watermark ? $model->watermark : true;
+        $model->loadDefaultValues();
+        $model->link = $model->link ?? $model->generateLink();
 
         return $this->render('create', [
             'model' => $model,

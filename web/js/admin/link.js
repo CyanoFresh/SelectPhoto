@@ -7,14 +7,6 @@ Dropzone.options.dropzone = {
     },
 };
 
-function copy(id) {
-    /* Select the text field */
-    document.getElementById(id).select();
-
-    /* Copy the text inside the text field */
-    document.execCommand("copy");
-}
-
 $('[data-toggle="popover"]').popover();
 
 $('.btn-remove').click(function (e) {

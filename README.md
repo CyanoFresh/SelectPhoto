@@ -43,14 +43,21 @@ INSTALLATION
 
 1. Clone this and `cd` into repo files
 
-2. Install packages:
+2. Check requirements:
+
+    ~~~bash
+    php requirements.php
+    ~~~
+
+3. Install packages:
 
     ~~~
     composer install
     ~~~
     
-3. Configure app by editing files in the `./config/` directory
-4. Create database structure:
+4. Configure app by editing files in the `./config/` directory
+
+5. Create database structure:
 
     ```bash
     php yii migrate
