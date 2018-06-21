@@ -16,7 +16,7 @@ if ($photo) {
 
 <div class="col-md-3 col-lg-4">
 
-    <a class="panel panel-default panel-link <?= $model->active ? '' : 'link-disabled' ?> <?= $model->submitted ? '' : 'panel-link-submitted' ?>"
+    <a class="panel panel-default panel-link <?= $model->active ? '' : 'link-disabled' ?> <?= $model->submitted ? 'panel-link-submitted' : '' ?>"
        href="<?= Url::to(['/admin/link/view', 'id' => $model->id]) ?>"
     >
         <div class="panel-image" style="background-image: url(<?= $photoUrl ?>)"></div>
