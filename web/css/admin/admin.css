@@ -199,6 +199,8 @@ h1.page-header {
     font-size: 24px;
     color: #000000de;
     font-weight: 500;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .panel-link .link-project {
@@ -213,6 +215,8 @@ h1.page-header {
 
 .panel-link .panel-body .link-info {
     flex-grow: 1;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .panel-link .panel-body .link-controls {
@@ -228,7 +232,7 @@ h1.page-header {
     border-radius: 50%;
     color: #fff;
     text-align: center;
-    margin-left: 5px;
+    margin-left: 3px;
     font-size: 12px;
     padding: 0 3px;
     top: -4px;
