@@ -18,8 +18,8 @@ class ProjectSearch extends Project
     public function rules()
     {
         return [
-            [['id', 'active', 'created_at'], 'integer'],
-            [['name', 'description'], 'safe'],
+            [['id', 'active'], 'integer'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -61,11 +61,9 @@ class ProjectSearch extends Project
         $query->andFilterWhere([
             'id' => $this->id,
             'active' => $this->active,
-            'created_at' => $this->created_at,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'description', $this->description]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

@@ -104,10 +104,11 @@ h1.page-header {
 
 .panel {
     border-radius: 4px;
+    transition: .3s;
 }
 
 .panel:hover {
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* End Theme styles */
