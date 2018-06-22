@@ -7,6 +7,12 @@ You upload your photos and allow others to select and comment the best ones.
 
 ### Use case (photographer)
 
+Some photographers need their clients to select multiple (ex. 10) photos from a big photo shooting (ex. 60).
+This app provides image gallery with controls for selecting and commenting photos. Also has handy 
+admin panel, where photographer can see which photos (with original file names) are selected by client, comments.
+
+**second variant:**
+
 You have taken ~30 photos. You want your client to select the best ones, which is suitable for him.
 You upload these photos and give that man a link. Client goes by that link, selects photos which he consider as suitable.
 You (admin) are notified by email when he finishes and can review selected on site.
