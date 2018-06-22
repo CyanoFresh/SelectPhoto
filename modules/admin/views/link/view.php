@@ -12,7 +12,7 @@ use yii\widgets\DetailView;
 \app\modules\admin\assets\AdminLinkAsset::register($this);
 
 $this->title = $linkModel->name;
-$this->params['breadcrumbs'][] = ['label' => 'Ссылки', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Ссылки'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->registerJsVar('orderPhotosUrl', Url::to(['order-photos', 'id' => $linkModel->id]));
@@ -23,7 +23,11 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo', 'id' => $linkMod
     <h2>
         <?= $this->title ?>
         <?= Html::a('<i class="fas fa-copy"></i>', '#',
-            ['class' => 'btn btn-success', 'onclick' => "copy('copyTarget')", 'title' => 'Копировать ссылку в буфер обмена']) ?>
+            [
+                'class' => 'btn btn-success',
+                'onclick' => "copy('copyTarget')",
+                'title' => Yii::t('app', 'Копировать ссылку в буфер обмена')
+            ]) ?>
         <?= Html::a('<i class="fas fa-pencil-alt"></i>', ['update', 'id' => $linkModel->id],
             ['class' => 'btn btn-primary']) ?>
         <?= Html::a('<i class="fas fa-trash-alt"></i>', ['delete', 'id' => $linkModel->id], [
@@ -52,7 +56,8 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo', 'id' => $linkMod
                             ], true) .
                             '" class="form-control" id="copyTarget" readonly>' .
                             '<span class="input-group-btn">' .
-                            '<button title="Копировать" class="btn btn-primary" type="button" onclick="copy(\'copyTarget\')"><i class="far fa-copy"></i></button>' .
+                            '<button title="' . Yii::t('app',
+                                'Копировать ссылку в буфер обмена') . '" class="btn btn-primary" type="button" onclick="copy(\'copyTarget\')"><i class="far fa-copy"></i></button>' .
                             '</span>' .
                             '</div>',
                         'format' => 'raw',
@@ -62,7 +67,8 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo', 'id' => $linkMod
                         'attribute' => 'project_id',
                         'visible' => (bool)$linkModel->project,
                         'format' => 'raw',
-                        'value' => Html::a($linkModel->project->name, ['/admin/project/view', 'id' => $linkModel->project_id]),
+                        'value' => Html::a($linkModel->project->name,
+                            ['/admin/project/view', 'id' => $linkModel->project_id]),
                     ],
                     'watermark:boolean',
                     'submitted:boolean',
@@ -100,7 +106,7 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo', 'id' => $linkMod
                 <h4 class="panel-title">
                     <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
                        aria-expanded="false" aria-controls="collapseOne">
-                        <b>Выбранные фото <span
+                        <b><?= Yii::t('app', 'Выбранные фото') ?> <span
                                     class="badge"><?= (int)$linkModel->getSelectedPhotos()->count() ?></span> <i
                                     class="fas fa-chevron-down"></i></b>
                     </a>
@@ -158,7 +164,7 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo', 'id' => $linkMod
                                data-toggle="popover"
                                data-placement="top"
                                data-content="<?= $photo->comment ?>">
-                                <i class="fas fa-comment"></i> Комментарий
+                                <i class="fas fa-comment"></i> <?= Yii::t('app', 'Комментарий') ?>
                             </a>
                         <?php endif; ?>
 

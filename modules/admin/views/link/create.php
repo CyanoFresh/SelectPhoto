@@ -3,8 +3,9 @@
 /* @var $this yii\web\View */
 /* @var $model app\models\Link */
 
-$this->title = 'Добавить Ссылку';
-$this->params['breadcrumbs'][] = ['label' => 'Ссылки', 'url' => ['index']];
+$this->title = Yii::t('app', 'Создать Ссылку');
+
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Ссылки'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="link-create">

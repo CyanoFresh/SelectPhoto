@@ -3,12 +3,11 @@
 /* @var $this yii\web\View */
 /* @var $model app\models\Link */
 
-use yii\helpers\Html;
+$this->title = Yii::t('app', 'Изменить Ссылку: {name}', ['name' => $model->name]);
 
-$this->title = 'Изменить Ссылку: ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Ссылки', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Редактирование';
+$this->params['breadcrumbs'][] = Yii::t('app', 'Редактирование');
 ?>
 <div class="link-update">
 

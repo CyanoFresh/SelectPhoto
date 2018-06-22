@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <div class="row">
         <div class="col-md-6">
-            <h3>Основное</h3>
+            <h3><?= Yii::t('app', 'Основное') ?></h3>
 
             <?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
 
@@ -33,11 +33,11 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'allow_comment')->checkbox() ?>
         </div>
         <div class="col-md-6">
-            <h3>Настройки</h3>
+            <h3><?= Yii::t('app', 'Параметры') ?></h3>
 
             <?= $form->field($model, 'max_photos')->input('number', [
                 'min' => 0,
-            ])->hint('Максимальное количество фото, которые можно выбрать. 0 - без ограничений') ?>
+            ])->hint(Yii::t('app', 'Максимальное количество фото, которые можно выбрать. 0 - без ограничений')) ?>
 
             <?= $form->field($model, 'greeting_message')->textarea() ?>
 
@@ -50,7 +50,7 @@ use yii\widgets\ActiveForm;
     </div>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Добавить' : 'Сохранить',
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Добавить') : Yii::t('app', 'Сохранить'),
             ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 

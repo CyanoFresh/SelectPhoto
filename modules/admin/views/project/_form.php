@@ -2,12 +2,12 @@
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Project */
+
 /* @var $form yii\widgets\ActiveForm */
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$model->active = $model->isNewRecord ? true : $model->active;
 ?>
 
 <div class="project-form">
@@ -21,7 +21,8 @@ $model->active = $model->isNewRecord ? true : $model->active;
     <?= $form->field($model, 'active')->checkbox() ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Добавить' : 'Сохранить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Добавить') : Yii::t('app', 'Сохранить'),
+            ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

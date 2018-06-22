@@ -5,7 +5,7 @@
 
 use yii\widgets\ListView;
 
-$this->title = 'Админпанель';
+$this->title = Yii::t('app', 'Админпанель');
 ?>
 
 <h1 class="page-header">

@@ -6,6 +6,7 @@ $db = require(__DIR__ . '/db.php');
 return [
     'id' => 'APP_NAME-web',
     'language' => 'ru',
+    'sourceLanguage' => 'ru',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
@@ -59,6 +60,14 @@ return [
                 'yii\bootstrap\BootstrapAsset' => [
                     'css' => [],
 //                    'js' => [],
+                ],
+            ],
+        ],
+        'i18n' => [
+            'translations' => [
+                'app' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/i18n',
                 ],
             ],
         ],

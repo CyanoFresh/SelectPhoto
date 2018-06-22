@@ -25,10 +25,10 @@ use yii\widgets\Breadcrumbs;
     ]);
 
     $items = [
-        ['label' => 'Админпанель', 'url' => ['/admin/default/index']],
-        ['label' => 'Проекты', 'url' => ['/admin/project/index']],
-        ['label' => 'Ссылки', 'url' => ['/admin/link/index']],
-        ['label' => 'Выйти', 'url' => ['/admin/auth/logout'], 'linkOptions' => ['data-method' => 'post']],
+        ['label' => Yii::t('app', 'Админпанель'), 'url' => ['/admin/default/index']],
+        ['label' => Yii::t('app', 'Проекты'), 'url' => ['/admin/project/index']],
+        ['label' => Yii::t('app', 'Ссылки'), 'url' => ['/admin/link/index']],
+        ['label' => Yii::t('app', 'Выйти'), 'url' => ['/admin/auth/logout'], 'linkOptions' => ['data-method' => 'post']],
     ];
 
     echo Nav::widget([
@@ -44,7 +44,7 @@ use yii\widgets\Breadcrumbs;
         <?= Breadcrumbs::widget([
             'links' => $this->params['breadcrumbs'] ?? [],
             'homeLink' => [
-                'label' => 'Админпанель',
+                'label' => Yii::t('app', 'Админпанель'),
                 'url' => ['/admin/default/index'],
             ],
         ]) ?>

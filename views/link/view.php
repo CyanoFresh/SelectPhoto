@@ -5,6 +5,10 @@
 
 /* @var $photosModels \app\models\Photo[] */
 
+/**
+ * TODO: translation
+ */
+
 use yii\helpers\Url;
 
 \app\assets\LinkAsset::register($this);
@@ -50,7 +54,7 @@ $this->registerMetaTag([
 
 $this->registerMetaTag([
     'name' => 'og:image',
-    'content' => Url::home(true) . $photosModels[1]->getFileUrl(),
+    'content' => Url::home(true) . ($photosModels[0] ? $photosModels[0]->getFileUrl() : ''),
 ]);
 
 $this->registerMetaTag([

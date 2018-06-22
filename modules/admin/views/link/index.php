@@ -9,7 +9,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 
-$this->title = 'Ссылки';
+$this->title = Yii::t('app', 'Ссылки');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="link-index">
@@ -18,7 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $this->title ?>
         <?= Html::a('<i class="fas fa-plus"></i>', ['create'], ['class' => 'btn btn-success']) ?>
     </h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?php Pjax::begin(); ?>
     <?= GridView::widget([
@@ -31,10 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'active:boolean',
             'submitted:boolean',
-//            'link',
-//            'project_id',
-//            'allow_comment:boolean',
-//            'created_at:datetime',
 
             ['class' => 'app\modules\admin\components\ActionButtonColumn'],
         ],

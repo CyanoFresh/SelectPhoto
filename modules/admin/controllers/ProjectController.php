@@ -74,6 +74,7 @@ class ProjectController extends Controller
     public function actionCreate()
     {
         $model = new Project();
+        $model->loadDefaultValues();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -129,6 +130,6 @@ class ProjectController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException(Yii::t('app', 'Проект не найден'));
     }
 }

@@ -3,6 +3,8 @@
 namespace app\modules\admin\components;
 
 use app\models\Photo;
+use DomainException;
+use Yii;
 use yii\base\BaseObject;
 
 class PhotoSorter extends BaseObject
@@ -29,7 +31,7 @@ class PhotoSorter extends BaseObject
             $photoID = (int)$photoID;
 
             if ($this->validate && !in_array($photoID, $this->validIDs)) {
-                throw new \DomainException('Нельзя изменить это фото');
+                throw new DomainException(Yii::t('app', 'Нельзя изменить это фото'));
             }
 
             Photo::updateAll(

@@ -36,6 +36,7 @@ class Project extends \yii\db\ActiveRecord
         return [
             [['active', 'created_at'], 'integer'],
             [['name'], 'required'],
+            [['active'], 'default', 'value' => true],
             [['description'], 'string'],
             [['name'], 'string', 'max' => 255],
         ];
@@ -85,6 +86,9 @@ class Project extends \yii\db\ActiveRecord
         return new ProjectQuery(get_called_class());
     }
 
+    /**
+     * @return array
+     */
     public static function getList()
     {
         return ArrayHelper::map(self::find()->orderBy('name')->all(), 'id', 'name');

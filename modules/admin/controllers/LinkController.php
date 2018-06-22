@@ -196,7 +196,7 @@ class LinkController extends Controller
         $photoModel = Photo::findOne($photoId);
 
         if (!$photoModel or $link->id !== $photoModel->link_id) {
-            throw new NotFoundHttpException('Фото не найдено');
+            throw new NotFoundHttpException(Yii::t('app', 'Фото не найдено'));
         }
 
         $ok = $photoModel->delete() === 1;
@@ -217,6 +217,6 @@ class LinkController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('Ссылка не найдена');
+        throw new NotFoundHttpException(Yii::t('app', 'Ссылка не найдена'));
     }
 }

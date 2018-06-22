@@ -3,10 +3,9 @@
 /* @var $this yii\web\View */
 /* @var $model app\models\Project */
 
-use yii\helpers\Html;
+$this->title = Yii::t('app', 'Создать Проект');
 
-$this->title = 'Добавить Проект';
-$this->params['breadcrumbs'][] = ['label' => 'Проекты', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Проекты'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="project-create">
