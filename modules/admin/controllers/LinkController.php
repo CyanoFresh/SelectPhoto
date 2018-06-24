@@ -138,24 +138,31 @@ class LinkController extends Controller
      */
     public function actionUpload($id)
     {
-        Yii::$app->response->format = Response::FORMAT_JSON;
-
         $link = $this->findModel($id);
 
         $uploadForm = new LinkUploadForm();
         $uploadForm->file = UploadedFile::getInstance($uploadForm, 'file');
 
-        if (!$uploadForm->validate()) {
-            throw new BadRequestHttpException($uploadForm->getErrors()[0][0]);
+        if (!$uploadForm->upload($link)) {
+            Yii::$app->response->setStatusCode(400);
+
+            return $this->asJson([
+                'ok' => false,
+                'errors' => $uploadForm->errors,
+            ]);
         }
 
-        $photoModel = $uploadForm->upload($link);
+        $photoModel = $uploadForm->getPhoto();
 
-        if (!$photoModel) {
-            throw new BadRequestHttpException($uploadForm->getErrors()[0][0]);
-        }
-
-        return $photoModel;
+        return $this->asJson([
+            'ok' => true,
+            'photo' => [
+                'id' => $photoModel->id,
+                'filename' => $photoModel->filename,
+                'url' => $photoModel->getFileUrl(),
+                'thumbnailUrl' => $photoModel->getThumbnailUrl('300x180'),
+            ],
+        ]);
     }
 
     /**

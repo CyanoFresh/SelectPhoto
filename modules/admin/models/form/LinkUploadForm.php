@@ -20,6 +20,12 @@ class LinkUploadForm extends Model
      */
     public $file;
 
+    /**
+     * Resulting photo model
+     * @var Photo
+     */
+    protected $_photo;
+
     public function rules()
     {
         return [
@@ -39,12 +45,12 @@ class LinkUploadForm extends Model
 
     /**
      * @param Link $link
-     * @return Photo|bool
+     * @return bool
      */
     public function upload($link)
     {
         if (!$this->validate()) {
-            return null;
+            return false;
         }
 
         $lastSortOrder = Photo::find()
@@ -91,13 +97,24 @@ class LinkUploadForm extends Model
         if (!$this->file->saveAs($photoModel->getFilePath())) {
             $transaction->rollBack();
 
-            $this->addError('file', $this->file->error);
+            if ($this->file->error) {
+                $this->addError('file', $this->file->error);
+            }
 
             return false;
         }
 
         $transaction->commit();
+        $this->_photo = $photoModel;
 
-        return $photoModel;
+        return true;
+    }
+
+    /**
+     * @return Photo
+     */
+    public function getPhoto()
+    {
+        return $this->_photo;
     }
 }
