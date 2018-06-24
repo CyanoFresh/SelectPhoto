@@ -74,7 +74,7 @@ class LinkUploadForm extends Model
         // Create frontend thumbnail
         $imageHelper->thumbnail($this->file->tempName, $photoModel->getThumbnailPath());
         // Create admin thumbnail
-        $imageHelper->thumbnail($this->file->tempName, $photoModel->getThumbnailPath('300x180'), 300, 180, 95);
+        $imageHelper->thumbnail($this->file->tempName, $photoModel->getThumbnailPath('300x180'), 300, 180);
 
         if ($link->watermark) {
             // Place watermark and save to the same temp path

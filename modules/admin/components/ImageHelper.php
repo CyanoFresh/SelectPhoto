@@ -8,7 +8,7 @@ class ImageHelper extends BaseObject
 {
     public $thumbnailWidth = 100;
     public $thumbnailHeight = 80;
-    public $thumbnailQuality = 85;
+    public $thumbnailQuality = 100;
 
     public $watermarkPath;
 

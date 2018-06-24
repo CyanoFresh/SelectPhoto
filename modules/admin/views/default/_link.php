@@ -9,7 +9,7 @@ $photo = $model->getPhotos()->limit(1)->one();
 $photoUrl = false;
 
 if ($photo) {
-    $photoUrl = $photo->getFileUrl();
+    $photoUrl = $photo->getThumbnailUrl('300x180');
 }
 ?>
 
