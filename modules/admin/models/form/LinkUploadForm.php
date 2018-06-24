@@ -39,17 +39,19 @@ class LinkUploadForm extends Model
 
     /**
      * @param Link $link
-     * @return bool
+     * @return Photo|bool
      */
     public function upload($link)
     {
         if (!$this->validate()) {
-            return false;
+            return null;
         }
 
-        $transaction = Yii::$app->db->beginTransaction();
-
-        $lastSortOrder = Photo::find()->where(['link_id' => $link->id])->orderBy('sort_order DESC')->select('sort_order')->scalar();
+        $lastSortOrder = Photo::find()
+            ->select('sort_order')
+            ->where(['link_id' => $link->id])
+            ->orderBy('sort_order DESC')
+            ->scalar();
 
         if (!$lastSortOrder) {
             $lastSortOrder = 1;
@@ -62,11 +64,16 @@ class LinkUploadForm extends Model
         $photoModel->filename = $this->file->name;
         $photoModel->sort_order = $lastSortOrder;
 
+        // Ensure model creation and file existence
+        $transaction = Yii::$app->db->beginTransaction();
+
         if (!$photoModel->save()) {
-            $this->addError('file', $photoModel->errors);
+            $this->addErrors($photoModel->getErrors());
+
             return false;
         }
 
+        // Ensure files dir is created
         FileHelper::createDirectory($photoModel->link->getDirPath());
 
         $imageHelper = new ImageHelper();
@@ -83,11 +90,14 @@ class LinkUploadForm extends Model
 
         if (!$this->file->saveAs($photoModel->getFilePath())) {
             $transaction->rollBack();
+
+            $this->addError('file', $this->file->error);
+
             return false;
         }
 
         $transaction->commit();
 
-        return true;
+        return $photoModel;
     }
 }

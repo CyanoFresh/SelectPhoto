@@ -1,15 +1,3 @@
-if (LINK.options.disableRightClick) {
-    document.addEventListener('contextmenu', function (event) {
-        event.preventDefault();
-    });
-
-    $(document).keydown(function (event) {
-        if (event.keyCode === 123 || (event.ctrlKey && event.shiftKey && event.keyCode === 73)) { // Prevent Ctrl+Shift+I
-            return false;
-        }
-    });
-}
-
 /**
  * @param {string} title
  * @param {String} body
@@ -47,12 +35,17 @@ $(document).ready(function () {
             });
         });
 
-    // Help window
-    if (!localStorage.hideHelpModal) {
-        $('#helpModal').modal('show');
-    }
+    $('#helpModal').modal('show');
 
-    $('.btn-hide-forever').click(function (e) {
-        localStorage.hideHelpModal = true;
-    });
+    if (LINK.options.disableRightClick) {
+        document.addEventListener('contextmenu', function (event) {
+            event.preventDefault();
+        });
+
+        $(document).keydown(function (event) {
+            if (event.keyCode === 123 || (event.ctrlKey && event.shiftKey && event.keyCode === 73)) { // Prevent F12 and Ctrl+Shift+I
+                return false;
+            }
+        });
+    }
 });
