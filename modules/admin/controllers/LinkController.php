@@ -5,13 +5,11 @@ namespace app\modules\admin\controllers;
 use app\models\Photo;
 use app\modules\admin\components\PhotoSorter;
 use app\modules\admin\models\form\LinkUploadForm;
-use Ramsey\Uuid\Uuid;
 use Yii;
 use app\models\Link;
 use app\modules\admin\models\search\LinkSearch;
 use yii\filters\AccessControl;
 use yii\helpers\Json;
-use yii\helpers\VarDumper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
@@ -145,14 +143,26 @@ class LinkController extends Controller
         $uploadForm = new LinkUploadForm();
         $uploadForm->file = UploadedFile::getInstance($uploadForm, 'file');
 
-        $ok = $uploadForm->upload($link);
+        if (!$uploadForm->upload($link)) {
+            Yii::$app->response->setStatusCode(400);
 
-        if (!$ok) {
-            Yii::$app->response->statusCode = 400;
-            return VarDumper::dumpAsString($uploadForm->errors);
+            return $this->asJson([
+                'ok' => false,
+                'errors' => $uploadForm->errors,
+            ]);
         }
 
-        return 'ok';
+        $photoModel = $uploadForm->getPhoto();
+
+        return $this->asJson([
+            'ok' => true,
+            'photo' => [
+                'id' => $photoModel->id,
+                'filename' => $photoModel->filename,
+                'url' => $photoModel->getFileUrl(),
+                'thumbnailUrl' => $photoModel->getThumbnailUrl('300x180'),
+            ],
+        ]);
     }
 
     /**

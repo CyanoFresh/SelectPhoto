@@ -82,7 +82,7 @@ class Photo extends \yii\db\ActiveRecord
     }
 
     /**
-     * @param string $size (ex. 300x180)
+     * @param string $size (ex. '300x180')
      * @return string
      */
     public function getThumbnailPath($size = null)
@@ -93,7 +93,7 @@ class Photo extends \yii\db\ActiveRecord
     }
 
     /**
-     * @param string $size (ex. 300x180)
+     * @param string $size (ex. '300x180')
      * @return string
      */
     public function getThumbnailUrl($size = null)

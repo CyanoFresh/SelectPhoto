@@ -20,7 +20,7 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo', 'id' => $linkMod
 ?>
 <div class="link-view">
 
-    <h2>
+    <h1 class="page-header">
         <?= $this->title ?>
         <?= Html::a('<i class="fas fa-copy"></i>', '#',
             [
@@ -37,7 +37,7 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo', 'id' => $linkMod
                 'method' => 'post',
             ],
         ]) ?>
-    </h2>
+    </h1>
 
     <div class="row">
         <div class="col-sm-6">
@@ -172,6 +172,7 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo', 'id' => $linkMod
                             <i class="fas fa-trash-alt"></i>
                         </a>
                     </div>
+                    <div class="photo-filename"><?= $photo->filename ?></div>
                 </div>
             </div>
         <?php endforeach; ?>
