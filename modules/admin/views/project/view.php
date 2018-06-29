@@ -20,7 +20,14 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('<i class="fas fa-trash-alt"></i>', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                'confirm' => Yii::t('app', 'Вы действительно хотите удалить этот проект? Ссылки, принадлежащие этому проекту, останутся без изменений'),
+                'method' => 'post',
+            ],
+        ]) ?>
+        <?= Html::a('<i class="fas fa-trash-alt"></i> + ссылки', ['full-delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => Yii::t('app', 'Вы действительно хотите удалить этот проект? Ссылки, принадлежащие этому проекту, будут удалены'),
                 'method' => 'post',
             ],
         ]) ?>

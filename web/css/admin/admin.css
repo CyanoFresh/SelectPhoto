@@ -150,6 +150,10 @@ h1.page-header {
     margin-bottom: 20px;
 }
 
+.dropzone .dz-preview .dz-error-message {
+    width: 300px;
+}
+
 .photo {
     cursor: move;
 }

@@ -25,6 +25,7 @@ class ProjectController extends Controller
                 'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
+                    'full-delete' => ['POST'],
                 ],
             ],
             'access' => [
@@ -113,6 +114,25 @@ class ProjectController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * Deletes an existing Project model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionFullDelete($id)
+    {
+        $project = $this->findModel($id);
+
+        foreach ($project->links as $link) {
+            $link->delete();
+        }
+
+        $project->delete();
 
         return $this->redirect(['index']);
     }
