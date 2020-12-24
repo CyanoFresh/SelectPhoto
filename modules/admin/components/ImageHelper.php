@@ -27,13 +27,18 @@ class ImageHelper extends BaseObject
      * @param int|null $thumbnailQuality
      * @return bool
      */
-    public function thumbnail($sourcePath, $savePath, $thumbnailWidth = null, $thumbnailHeight = null, $thumbnailQuality = null)
-    {
+    public function thumbnail(
+        $sourcePath,
+        $savePath,
+        $thumbnailWidth = null,
+        $thumbnailHeight = null,
+        $thumbnailQuality = null
+    ) {
         $thumbnailWidth = $thumbnailWidth ?? $this->thumbnailWidth;
         $thumbnailHeight = $thumbnailHeight ?? $this->thumbnailHeight;
         $thumbnailQuality = $thumbnailQuality ?? $this->thumbnailQuality;
 
-        $sourceImage = imagecreatefromjpeg($sourcePath);
+        $sourceImage = imagecreatefromstring(file_get_contents($sourcePath));
 
         if (!$sourceImage) {
             return false;
@@ -80,7 +85,8 @@ class ImageHelper extends BaseObject
             $thumb_h_offset = (int)round(($thumb_h_resize - $thumbnailHeight) / 2);
         }
 
-        if (!imagecopy($result, $thumbImage, 0, 0, $thumb_w_offset, $thumb_h_offset, $thumb_w_resize, $thumb_h_resize)) {
+        if (!imagecopy($result, $thumbImage, 0, 0, $thumb_w_offset, $thumb_h_offset, $thumb_w_resize,
+            $thumb_h_resize)) {
             return false;
         }
 
@@ -95,7 +101,8 @@ class ImageHelper extends BaseObject
     public function watermark($sourcePath, $savePath)
     {
         $watermarkImage = imagecreatefrompng($this->watermarkPath);
-        $sourceImage = imagecreatefromjpeg($sourcePath);
+
+        $sourceImage = imagecreatefromstring(file_get_contents($sourcePath));
 
         $watermarkWidth = imagesx($watermarkImage);
         $watermarkHeight = imagesy($watermarkImage);

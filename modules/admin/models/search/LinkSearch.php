@@ -41,7 +41,7 @@ class LinkSearch extends Link
      */
     public function search($params)
     {
-        $query = Link::find();
+        $query = Yii::$app->user->identity->getLinks();
 
         // add conditions that should always apply here
 

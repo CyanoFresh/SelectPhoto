@@ -42,6 +42,7 @@ class ProjectController extends Controller
 
     /**
      * Lists all Project models.
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -57,6 +58,7 @@ class ProjectController extends Controller
 
     /**
      * Displays a single Project model.
+     *
      * @param integer $id
      * @return mixed
      */
@@ -70,6 +72,7 @@ class ProjectController extends Controller
     /**
      * Creates a new Project model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
      * @return mixed
      */
     public function actionCreate()
@@ -89,6 +92,7 @@ class ProjectController extends Controller
     /**
      * Updates an existing Project model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     *
      * @param integer $id
      * @return mixed
      */
@@ -108,6 +112,7 @@ class ProjectController extends Controller
     /**
      * Deletes an existing Project model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
      * @return mixed
      */
@@ -121,6 +126,7 @@ class ProjectController extends Controller
     /**
      * Deletes an existing Project model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
      * @return mixed
      */
@@ -140,13 +146,14 @@ class ProjectController extends Controller
     /**
      * Finds the Project model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
      * @return Project the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Project::findOne($id)) !== null) {
+        if (($model = Yii::$app->user->identity->getProjects()->where($id)->one()) !== null) {
             return $model;
         }
 

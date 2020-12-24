@@ -41,7 +41,7 @@ class ProjectSearch extends Project
      */
     public function search($params)
     {
-        $query = Project::find();
+        $query = Yii::$app->user->identity->getProjects();
 
         // add conditions that should always apply here
 

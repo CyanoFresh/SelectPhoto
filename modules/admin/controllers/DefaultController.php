@@ -2,7 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
-use app\models\Link;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -27,7 +27,7 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Link::find(),
+            'query' => Yii::$app->user->identity->getLinks(),
             'sort' => ['defaultOrder' => ['created_at' => SORT_DESC]]
         ]);
 

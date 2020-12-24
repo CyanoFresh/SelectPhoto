@@ -19,6 +19,7 @@ use yii\helpers\VarDumper;
  * @property string $link
  * @property string $name
  * @property int $project_id
+ * @property int $user_id
  * @property boolean $submitted
  * @property boolean $allow_comment
  * @property boolean $disable_after_submit
@@ -33,6 +34,7 @@ use yii\helpers\VarDumper;
  * @property Project $project
  * @property Photo[] $photos
  * @property Photo[] $selectedPhotos
+ * @property User $user
  */
 class Link extends \yii\db\ActiveRecord
 {
@@ -50,7 +52,7 @@ class Link extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['project_id', 'max_photos', 'created_at', 'submitted_at'], 'integer'],
+            [['max_photos', 'created_at', 'submitted_at'], 'integer'],
             [
                 [
                     'active',
@@ -58,9 +60,9 @@ class Link extends \yii\db\ActiveRecord
                     'disable_after_submit',
                     'watermark',
                     'show_tutorial',
-                    'disable_right_click'
+                    'disable_right_click',
                 ],
-                'boolean'
+                'boolean',
             ],
             [
                 [
@@ -69,13 +71,14 @@ class Link extends \yii\db\ActiveRecord
                     'disable_after_submit',
                     'watermark',
                     'show_tutorial',
-                    'disable_right_click'
+                    'disable_right_click',
                 ],
                 'default',
-                'value' => true
+                'value' => true,
             ],
             [['link', 'name'], 'required'],
             [['link'], 'default', 'value' => $this->generateLink()],
+            [['user_id'], 'default', 'value' => Yii::$app->user->id],
             [['link'], 'string', 'max' => 36],
             [['link'], 'unique'],
             [['name'], 'string', 'max' => 255],
@@ -85,7 +88,14 @@ class Link extends \yii\db\ActiveRecord
                 'exist',
                 'skipOnError' => false,
                 'targetClass' => Project::class,
-                'targetAttribute' => ['project_id' => 'id']
+                'targetAttribute' => ['project_id' => 'id'],
+            ],
+            [
+                ['user_id'],
+                'exist',
+                'skipOnError' => false,
+                'targetClass' => User::class,
+                'targetAttribute' => ['user_id' => 'id'],
             ],
         ];
     }
@@ -101,6 +111,7 @@ class Link extends \yii\db\ActiveRecord
             'link' => Yii::t('app', 'Ссылка'),
             'name' => Yii::t('app', 'Название'),
             'project_id' => Yii::t('app', 'Проект'),
+            'user_id' => Yii::t('app', 'Пользователь'),
             'submitted' => Yii::t('app', 'Завершено Пользователем'),
             'allow_comment' => Yii::t('app', 'Разрешить комментирование'),
             'disable_after_submit' => Yii::t('app', 'Отключить после завершения'),
@@ -123,7 +134,7 @@ class Link extends \yii\db\ActiveRecord
             [
                 'class' => TimestampBehavior::class,
                 'updatedAtAttribute' => false,
-            ]
+            ],
         ];
     }
 
@@ -133,6 +144,14 @@ class Link extends \yii\db\ActiveRecord
     public function getProject()
     {
         return $this->hasOne(Project::class, ['id' => 'project_id'])->inverseOf('links');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(User::class, ['id' => 'user_id'])->inverseOf('links');
     }
 
     /**
@@ -164,6 +183,7 @@ class Link extends \yii\db\ActiveRecord
 
     /**
      * Remove all photos when deleted
+     *
      * @inheritdoc
      */
     public function afterDelete()
@@ -199,7 +219,7 @@ class Link extends \yii\db\ActiveRecord
                 'selectedPhotoModels' => $this->getPhotos()->selected()->all(),
             ])
             ->setFrom(Yii::$app->params['fromEmail'])
-            ->setTo(Yii::$app->params['adminEmail'])
+            ->setTo($this->user->email)
             ->setSubject(Yii::t('app', 'Выбор фото для "{name}" завершен', [
                 'name' => $this->name,
             ]));

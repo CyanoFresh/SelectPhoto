@@ -11,12 +11,14 @@ use yii\helpers\ArrayHelper;
  * This is the model class for table "project".
  *
  * @property int $id
+ * @property int $user_id
  * @property int $active
  * @property string $name
  * @property string $description
  * @property int $created_at
  *
  * @property Link[] $links
+ * @property User $user
  */
 class Project extends \yii\db\ActiveRecord
 {
@@ -39,6 +41,14 @@ class Project extends \yii\db\ActiveRecord
             [['active'], 'default', 'value' => true],
             [['description'], 'string'],
             [['name'], 'string', 'max' => 255],
+            [['user_id'], 'default', 'value' => Yii::$app->user->id],
+            [
+                ['user_id'],
+                'exist',
+                'skipOnError' => false,
+                'targetClass' => User::class,
+                'targetAttribute' => ['user_id' => 'id'],
+            ],
         ];
     }
 
@@ -49,6 +59,7 @@ class Project extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
+            'user_id' => Yii::t('app', 'Пользователь'),
             'active' => Yii::t('app', 'Активен'),
             'name' => Yii::t('app', 'Название'),
             'description' => Yii::t('app', 'Описание'),
@@ -65,6 +76,14 @@ class Project extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(User::class, ['id' => 'user_id'])->inverseOf('projects');
+    }
+
+    /**
      * @inheritdoc
      */
     public function behaviors()
@@ -73,7 +92,7 @@ class Project extends \yii\db\ActiveRecord
             [
                 'class' => TimestampBehavior::class,
                 'updatedAtAttribute' => false,
-            ]
+            ],
         ];
     }
 

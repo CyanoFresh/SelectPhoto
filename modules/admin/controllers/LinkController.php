@@ -52,6 +52,7 @@ class LinkController extends Controller
 
     /**
      * Lists all Link models.
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -67,6 +68,7 @@ class LinkController extends Controller
 
     /**
      * Displays a single Link model.
+     *
      * @param integer $id
      * @return mixed
      */
@@ -82,17 +84,18 @@ class LinkController extends Controller
     /**
      * Creates a new Link model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
      * @return mixed
      */
     public function actionCreate()
     {
         $model = new Link();
+        $model->loadDefaultValues();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        $model->loadDefaultValues();
         $model->link = $model->link ?? $model->generateLink();
 
         return $this->render('create', [
@@ -103,6 +106,7 @@ class LinkController extends Controller
     /**
      * Updates an existing Link model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     *
      * @param integer $id
      * @return mixed
      */
@@ -122,6 +126,7 @@ class LinkController extends Controller
     /**
      * Deletes an existing Link model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
      * @return mixed
      */
@@ -217,13 +222,14 @@ class LinkController extends Controller
     /**
      * Finds the Link model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
      * @return Link the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Link::findOne($id)) !== null) {
+        if (($model = Yii::$app->user->identity->getLinks()->where($id)->one()) !== null) {
             return $model;
         }
 

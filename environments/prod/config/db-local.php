@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'dsn' => 'mysql:host=localhost;dbname=APP_NAME',
+    'dsn' => 'mysql:host=localhost;dbname=selectphoto',
     'username' => 'root',
     'password' => '',
     'enableSchemaCache' => true,

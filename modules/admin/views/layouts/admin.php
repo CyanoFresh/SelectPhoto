@@ -28,7 +28,16 @@ use yii\widgets\Breadcrumbs;
         ['label' => Yii::t('app', 'Админпанель'), 'url' => ['/admin/default/index']],
         ['label' => Yii::t('app', 'Проекты'), 'url' => ['/admin/project/index']],
         ['label' => Yii::t('app', 'Ссылки'), 'url' => ['/admin/link/index']],
-        ['label' => Yii::t('app', 'Выйти'), 'url' => ['/admin/auth/logout'], 'linkOptions' => ['data-method' => 'post']],
+        [
+            'label' => Yii::t('app', Yii::$app->user->identity->email),
+            'items' => [
+                [
+                    'label' => Yii::t('app', 'Выйти'),
+                    'url' => ['/admin/auth/logout'],
+                    'linkOptions' => ['data-method' => 'post'],
+                ],
+            ],
+        ],
     ];
 
     echo Nav::widget([
@@ -52,11 +61,5 @@ use yii\widgets\Breadcrumbs;
         <?= $content ?>
     </div>
 </div>
-
-<footer class="footer">
-    <div class="container">
-        <p>By <a href="https://solomaha.com" class="product-font" target="_blank">Alex Solomaha</a></p>
-    </div>
-</footer>
 
 <?php $this->endContent(); ?>

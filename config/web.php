@@ -19,7 +19,7 @@ return [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\modules\admin\models\User',
+            'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
             'loginUrl' => ['/admin/auth/login'],
         ],

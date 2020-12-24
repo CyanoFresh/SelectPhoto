@@ -134,6 +134,10 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo', 'id' => $linkMod
 
     <h3>Фото</h3>
 
+    <div class="alert alert-info">
+        Размер файла до 10 Мб, размер любой из сторон - до 2000px
+    </div>
+
     <form action=" <?= Url::to(['/admin/link/upload', 'id' => $linkModel->id]) ?>" method="post"
           class="dropzone" enctype="multipart/form-data" id="dropzone">
 
