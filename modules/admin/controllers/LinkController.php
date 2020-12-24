@@ -229,7 +229,7 @@ class LinkController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Yii::$app->user->identity->getLinks()->where($id)->one()) !== null) {
+        if (($model = Yii::$app->user->identity->getLinks()->where(['id' => $id])->one()) !== null) {
             return $model;
         }
 

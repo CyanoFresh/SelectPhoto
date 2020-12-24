@@ -98,9 +98,11 @@ $this->registerJsVar('LINK', [
                 </h4>
             </div>
             <div class="modal-body">
-                <blockquote>
-                    <p><?= $linkModel->greeting_message ?></p>
-                </blockquote>
+                <?php if ($linkModel->greeting_message): ?>
+                    <blockquote>
+                        <p><?= $linkModel->greeting_message ?></p>
+                    </blockquote>
+                <?php endif; ?>
 
                 <?php if ($linkModel->show_tutorial): ?>
                     <ol>

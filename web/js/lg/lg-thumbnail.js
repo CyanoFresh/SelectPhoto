@@ -444,7 +444,6 @@
         if (_this.core.s.toogleThumb) {
             _this.core.$outer.addClass('lg-can-toggle');
             _this.$thumbOuter.append('<span class="lg-toogle-thumb lg-icon"></span>');
-            _this.$thumbOuter.append('<a class="lg-sp-author product-font" href="https://solomaha.com/" target="_blank">Alex <span>Solomaha</span></a>');
             _this.core.$outer.find('.lg-toogle-thumb').on('click.lg', function() {
                 _this.core.$outer.toggleClass('lg-thumb-open');
             });

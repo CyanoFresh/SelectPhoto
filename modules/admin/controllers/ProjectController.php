@@ -153,7 +153,7 @@ class ProjectController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Yii::$app->user->identity->getProjects()->where($id)->one()) !== null) {
+        if (($model = Yii::$app->user->identity->getProjects()->where(['id' => $id])->one()) !== null) {
             return $model;
         }
 
