@@ -46,6 +46,7 @@
 
             $openComment.popover({
                 title: false,
+                sanitize: false,
                 content: function () {
                     const $this = $(this);
                     const index = $this.parents('.SelectPhoto-controls').data('index');
