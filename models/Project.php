@@ -110,6 +110,6 @@ class Project extends \yii\db\ActiveRecord
      */
     public static function getList()
     {
-        return ArrayHelper::map(self::find()->orderBy('name')->all(), 'id', 'name');
+        return ArrayHelper::map(Yii::$app->user->identity->getProjects()->orderBy('name')->all(), 'id', 'name');
     }
 }
