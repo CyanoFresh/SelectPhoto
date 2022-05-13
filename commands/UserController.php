@@ -31,6 +31,7 @@ class UserController extends Controller
         echo PHP_EOL;
 
         return 0;
+
     }
 
     public function actionChangePassword($id, $newPassword)

@@ -35,6 +35,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?php ActiveForm::end(); ?>
 
+            <?= Html::a(Yii::t('app', 'Sign up'), ['/admin/auth/signup']) ?>
+
         </div>
     </div>
 
