@@ -41,7 +41,7 @@ class Photo extends \yii\db\ActiveRecord
             [
                 ['link_id'],
                 'exist',
-                'skipOnError' => true,
+                'skipOnError' => false,
                 'targetClass' => Link::class,
                 'targetAttribute' => ['link_id' => 'id']
             ],

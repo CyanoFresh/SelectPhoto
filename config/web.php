@@ -47,6 +47,10 @@ return [
                 '' => 'link/index',
                 'l/<link>' => 'link/view',
                 'l/<link:\w+>/<id:\d+>' => 'link/select_photo',
+                'api/link/<link>' => 'api/link/view',
+                'api/link/<link>/submit' => 'api/link/submit',
+                'api/link/<link>/photo/<id>/select' => 'api/link/select',
+                'api/link/<link>/photo/<id>/comment' => 'api/link/comment',
             ],
         ],
         'view' => [
@@ -76,6 +80,9 @@ return [
     'modules' => [
         'admin' => [
             'class' => 'app\modules\admin\Module',
+        ],
+        'api' => [
+            'class' => 'app\modules\api\Module',
         ],
     ],
 ];

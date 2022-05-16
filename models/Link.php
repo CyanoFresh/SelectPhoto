@@ -9,7 +9,6 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\helpers\FileHelper;
-use yii\helpers\VarDumper;
 
 /**
  * This is the model class for table "link".
@@ -57,6 +56,7 @@ class Link extends \yii\db\ActiveRecord
                 [
                     'active',
                     'allow_comment',
+                    'submitted',
                     'disable_after_submit',
                     'watermark',
                     'show_tutorial',
