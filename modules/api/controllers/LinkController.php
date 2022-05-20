@@ -11,6 +11,25 @@ use yii\web\ServerErrorHttpException;
 
 class LinkController extends Controller
 {
+//
+//    public function behaviors()
+//    {
+//        return array_merge(parent::behaviors(), [
+//
+//            // For cross-domain AJAX request
+//            'corsFilter' => [
+//                'class' => \yii\filters\Cors::className(),
+//                'cors' => [
+//                    // restrict access to domains:
+//                    'Origin' => ['*',],
+//                    'Access-Control-Request-Method' => ['POST', 'GET',],
+//                    'Access-Control-Max-Age' => 3600,                 // Cache (seconds)
+//                ],
+//            ],
+//
+//        ]);
+//    }
+
     public function verbs()
     {
         return [
@@ -46,7 +65,7 @@ class LinkController extends Controller
             throw new ForbiddenHttpException("Link is not active");
         }
 
-        $photoModel = $linkModel->getPhotos()->where($id)->one();
+        $photoModel = $linkModel->getPhotos()->where(['id' => $id])->one();
 
         if (!$photoModel) {
             throw new NotFoundHttpException('Photo was not found');
@@ -87,7 +106,7 @@ class LinkController extends Controller
             throw new ForbiddenHttpException("Comments are not allowed");
         }
 
-        $photoModel = $linkModel->getPhotos()->where($id)->one();
+        $photoModel = $linkModel->getPhotos()->where(['id' => $id])->one();
 
         if (!$photoModel) {
             throw new NotFoundHttpException('Photo was not found');
