@@ -8,7 +8,7 @@ use app\assets\AppAsset;
 
 AppAsset::register($this);
 ?>
-<!-- By Alex Solomaha, https://solomaha.com/ -->
+
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
@@ -18,11 +18,9 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
 
-    <meta name="copyright" content="Alex Solomaha">
-    <meta name="author" content="Alex Solomaha, cyanofresh@gmail.com">
     <meta name="robots" content="noindex">
 
-    <title><?= $this->title ?> - SelectPhoto by Alex Solomaha</title>
+    <title><?= $this->title ?> - SelectPhoto</title>
 
     <?php $this->head() ?>
 

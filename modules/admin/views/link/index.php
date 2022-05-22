@@ -9,7 +9,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 
-$this->title = Yii::t('app', 'Ссылки');
+$this->title = Yii::t('app', 'Посилання');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="link-index">

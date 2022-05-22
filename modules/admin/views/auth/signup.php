@@ -8,7 +8,7 @@ use app\modules\admin\models\SignupForm;
 use yii\bootstrap\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = 'Signup';
+$this->title = 'Реєстрація';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
                 <div class="form-group">
-                    <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                    <?= Html::submitButton('Зареєструватися', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
                 </div>
 
                 <?= Html::a(Yii::t('app', 'Sign in'), ['/admin/auth/login']) ?>

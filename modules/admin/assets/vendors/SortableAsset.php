@@ -11,3 +11,4 @@ class SortableAsset extends AssetBundle
         'sortable.umd.js',
     ];
 }
+

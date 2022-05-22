@@ -31,7 +31,7 @@ class PhotoSorter extends BaseObject
             $photoID = (int)$photoID;
 
             if ($this->validate && !in_array($photoID, $this->validIDs)) {
-                throw new DomainException(Yii::t('app', 'Нельзя изменить это фото'));
+                throw new DomainException(Yii::t('app', 'Не можна змінити це фото'));
             }
 
             Photo::updateAll(

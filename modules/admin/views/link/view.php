@@ -12,7 +12,7 @@ use yii\widgets\DetailView;
 \app\modules\admin\assets\AdminLinkAsset::register($this);
 
 $this->title = $linkModel->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Ссылки'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Посилання'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->registerJsVar('orderPhotosUrl', Url::to(['order-photos', 'id' => $linkModel->id]));
@@ -50,10 +50,7 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo', 'id' => $linkMod
                         'value' =>
                             '<div class="input-group input-group-sm">' .
                             '<input type="text" value="' .
-                            Url::to([
-                                '/link/view',
-                                'link' => $linkModel->link
-                            ], true) .
+                            Url::to('/', true) . $linkModel->link .
                             '" class="form-control" id="copyTarget" readonly>' .
                             '<span class="input-group-btn">' .
                             '<button title="' . Yii::t('app',
@@ -138,7 +135,7 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo', 'id' => $linkMod
         Размер файла до 10 Мб, размер любой из сторон - до 2000px
     </div>
 
-    <form action=" <?= Url::to(['/admin/link/upload', 'id' => $linkModel->id]) ?>" method="post"
+    <form action="<?= Url::to(['/admin/link/upload', 'id' => $linkModel->id]) ?>" method="post"
           class="dropzone" enctype="multipart/form-data" id="dropzone">
 
         <input id="form-token" type="hidden" name="<?= Yii::$app->request->csrfParam ?>"
@@ -168,7 +165,7 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo', 'id' => $linkMod
                                data-toggle="popover"
                                data-placement="top"
                                data-content="<?= $photo->comment ?>">
-                                <i class="fas fa-comment"></i> <?= Yii::t('app', 'Комментарий') ?>
+                                <i class="fas fa-comment"></i> <?= Yii::t('app', 'Коментар') ?>
                             </a>
                         <?php endif; ?>
 

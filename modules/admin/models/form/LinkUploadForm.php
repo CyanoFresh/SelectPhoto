@@ -32,13 +32,13 @@ class LinkUploadForm extends Model
             [['file'], 'required'],
             [
                 ['file'],
-                'image',
+                'file',
                 'skipOnEmpty' => false,
-                'extensions' => 'jpg, png',
-                'mimeTypes' => 'image/jpeg,image/png',
-                'maxSize' => 10 * 1024 * 1024,
-                'maxWidth' => YII_DEBUG ? null : 2000,
-                'maxHeight' => YII_DEBUG ? null : 2000,
+                'extensions' => 'jpg, png, mov',
+                'mimeTypes' => 'image/jpeg,image/png,video/*',
+                'maxSize' => 100 * 1024 * 1024,
+//                'maxWidth' => YII_DEBUG ? null : 2000,
+//                'maxHeight' => YII_DEBUG ? null : 2000,
             ],
         ];
     }

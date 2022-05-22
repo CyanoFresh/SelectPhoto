@@ -8,7 +8,7 @@ use yii\widgets\DetailView;
 
 $this->title = $model->name;
 
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Проекты'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Проекти'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="project-view">
@@ -20,14 +20,14 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('<i class="fas fa-trash-alt"></i>', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Yii::t('app', 'Вы действительно хотите удалить этот проект? Ссылки, принадлежащие этому проекту, останутся без изменений'),
+                'confirm' => Yii::t('app', 'Ви дійсно хочете видалити цей проект? Посилання, що належали цьому проекту, залишаться без змін'),
                 'method' => 'post',
             ],
         ]) ?>
-        <?= Html::a('<i class="fas fa-trash-alt"></i> + ссылки', ['full-delete', 'id' => $model->id], [
+        <?= Html::a('<i class="fas fa-trash-alt"></i> + посилання', ['full-delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Yii::t('app', 'Вы действительно хотите удалить этот проект? Ссылки, принадлежащие этому проекту, будут удалены'),
+                'confirm' => Yii::t('app', 'Ви дійсно хочете видалити цей проект? Посилання, що належали цьому проекту, будуть видалені'),
                 'method' => 'post',
             ],
         ]) ?>

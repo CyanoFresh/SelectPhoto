@@ -59,11 +59,11 @@ class Project extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'user_id' => Yii::t('app', 'Пользователь'),
-            'active' => Yii::t('app', 'Активен'),
-            'name' => Yii::t('app', 'Название'),
-            'description' => Yii::t('app', 'Описание'),
-            'created_at' => Yii::t('app', 'Дата Создания'),
+            'user_id' => Yii::t('app', 'Користувач'),
+            'active' => Yii::t('app', 'Активний'),
+            'name' => Yii::t('app', 'Назва'),
+            'description' => Yii::t('app', 'Опис'),
+            'created_at' => Yii::t('app', 'Дата Створення'),
         ];
     }
 

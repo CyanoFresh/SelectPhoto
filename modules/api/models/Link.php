@@ -13,6 +13,7 @@ class Link extends \app\models\Link
         return [
             'id',
             'active',
+            'disable_after_submit',
             'link',
             'submitted',
             'allow_comment',

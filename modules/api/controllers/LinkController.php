@@ -76,7 +76,7 @@ class LinkController extends Controller
         if ($linkModel->max_photos !== 0) {
             $selectedCount = (int)$linkModel->getSelectedPhotos()->count();
 
-            if ($photoModel->selected && $selectedCount > $linkModel->max_photos) {
+            if ($photoModel->selected && $selectedCount >= $linkModel->max_photos) {
                 throw new ForbiddenHttpException("Already selected the max amount ($linkModel->max_photos)");
             }
         }
@@ -123,9 +123,7 @@ class LinkController extends Controller
 
     public function actionSubmit($link)
     {
-        $linkModel = Link::findOne([
-            'link' => $link,
-        ]);
+        $linkModel = Link::find()->where(['link' => $link])->with('photos')->one();
 
         if (!$linkModel) {
             throw new NotFoundHttpException('Link was not found');
@@ -139,6 +137,6 @@ class LinkController extends Controller
             throw new ServerErrorHttpException('Cannot submit');
         }
 
-        return $link;
+        return $linkModel;
     }
 }

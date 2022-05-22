@@ -5,8 +5,8 @@ $db = require(__DIR__ . '/db.php');
 
 return [
     'id' => 'APP_NAME-web',
-    'language' => 'en',
-    'sourceLanguage' => 'en',
+    'language' => 'uk',
+    'sourceLanguage' => 'uk',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [

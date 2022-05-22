@@ -25,14 +25,14 @@ use yii\widgets\Breadcrumbs;
     ]);
 
     $items = [
-        ['label' => Yii::t('app', 'Админпанель'), 'url' => ['/admin/default/index']],
-        ['label' => Yii::t('app', 'Проекты'), 'url' => ['/admin/project/index']],
-        ['label' => Yii::t('app', 'Ссылки'), 'url' => ['/admin/link/index']],
+        ['label' => Yii::t('app', 'Адмінпанель'), 'url' => ['/admin/default/index']],
+        ['label' => Yii::t('app', 'Проекти'), 'url' => ['/admin/project/index']],
+        ['label' => Yii::t('app', 'Посилання'), 'url' => ['/admin/link/index']],
         [
             'label' => Yii::t('app', Yii::$app->user->identity->email),
             'items' => [
                 [
-                    'label' => Yii::t('app', 'Выйти'),
+                    'label' => Yii::t('app', 'Вийти'),
                     'url' => ['/admin/auth/logout'],
                     'linkOptions' => ['data-method' => 'post'],
                 ],
@@ -53,7 +53,7 @@ use yii\widgets\Breadcrumbs;
         <?= Breadcrumbs::widget([
             'links' => $this->params['breadcrumbs'] ?? [],
             'homeLink' => [
-                'label' => Yii::t('app', 'Админпанель'),
+                'label' => Yii::t('app', 'Адмінпанель'),
                 'url' => ['/admin/default/index'],
             ],
         ]) ?>

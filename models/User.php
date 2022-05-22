@@ -76,8 +76,8 @@ class User extends ActiveRecord implements IdentityInterface
             'password' => 'Пароль',
             'email' => 'Email',
             'status' => 'Статус',
-            'created_at' => 'Дата создания',
-            'updated_at' => 'Дата изменения',
+            'created_at' => 'Дата створення',
+            'updated_at' => 'Дата зміни',
         ];
     }
 
@@ -87,8 +87,8 @@ class User extends ActiveRecord implements IdentityInterface
     public static function getStatuses()
     {
         return [
-            self::STATUS_ACTIVE => 'Активен',
-            self::STATUS_DELETED => 'Удален',
+            self::STATUS_ACTIVE => 'Активний',
+            self::STATUS_DELETED => 'Видалений',
         ];
     }
 

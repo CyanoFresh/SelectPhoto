@@ -1,6 +1,6 @@
 Dropzone.options.dropzone = {
     paramName: 'LinkUploadForm[file]',
-    acceptedFiles: 'image/jpeg,image/png',
+    acceptedFiles: 'image/jpeg,image/png,video/*',
     dictDefaultMessage: '<i class="fas fa-upload"></i> Перетащите изображения для загрузки',
     error: function (file, data) {
         if (data.ok) {

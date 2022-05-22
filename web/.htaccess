@@ -1,10 +1,17 @@
 # Settings to hide index.php and ensure pretty urls
 RewriteEngine on
+
 Header add Access-Control-Allow-Origin *
+
+RewriteCond %{REQUEST_URI} ^/(admin|gii|debug)
+RewriteRule . index.php [L]
+
+RewriteCond %{DOCUMENT_ROOT}/flutter/%{REQUEST_URI} -f
+RewriteRule (.*) /flutter/$1 [L]
 
 # if a directory or a file exists, use it directly
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
 # otherwise forward it to index.php
-RewriteRule . index.php
+RewriteRule . flutter/index.html [L]

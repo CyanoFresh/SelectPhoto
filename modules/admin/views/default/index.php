@@ -5,13 +5,13 @@
 
 use yii\widgets\ListView;
 
-$this->title = Yii::t('app', 'Админпанель');
+$this->title = Yii::t('app', 'Адмінпанель');
 ?>
 
 <h1 class="page-header">
-    Ссылки
+    Посилання
     <?= \yii\helpers\Html::a('<i class="fas fa-plus"></i>', ['/admin/link/create'], ['class' => 'btn btn-success']) ?>
-    <?= \yii\helpers\Html::a('<i class="fas fa-folder-open"></i><span class="hidden-xs"> Добавить проект</span>', ['/admin/project/create'], ['class' => 'btn btn-default']) ?>
+    <?= \yii\helpers\Html::a('<i class="fas fa-folder-open"></i><span class="hidden-xs"> Додати проект</span>', ['/admin/project/create'], ['class' => 'btn btn-default']) ?>
 </h1>
 
 <?= ListView::widget([
