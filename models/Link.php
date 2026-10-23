@@ -224,9 +224,17 @@ class Link extends \yii\db\ActiveRecord
                 'name' => $this->name,
             ]));
 
-        $ok = $this->save() && $message->send();
+        if (!$this->save()) {
+            return false;
+        }
 
-        return $ok;
+        try {
+            $message->send();
+        } catch (\Exception $e) {
+            Yii::error($e, __METHOD__);
+        }
+
+        return true;
     }
 
     /**

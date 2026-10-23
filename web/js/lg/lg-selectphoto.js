@@ -174,6 +174,11 @@
         $('#lg-counter #lg-sp-count').html(html);
     };
 
+    function onRequestFail() {
+        alert('Произошла ошибка. Сообщите фотографу');
+        window.location.reload();
+    }
+
     SelectPhoto.prototype.submitLink = function (callback) {
         $.post(URL.submitLink, function (data) {
             console.log(data);
@@ -183,7 +188,7 @@
             }
 
             return typeof callback === 'function' ? callback(data) : true;
-        }, 'json');
+        }, 'json').fail(onRequestFail);
     };
 
     SelectPhoto.prototype.selectPhoto = function (photoId, callback) {
@@ -195,7 +200,7 @@
             }
 
             return typeof callback === 'function' ? callback(data) : true;
-        }, 'json');
+        }, 'json').fail(onRequestFail);
     };
 
     SelectPhoto.prototype.commentPhoto = function (photoId, text, callback) {
@@ -216,7 +221,7 @@
             });
 
             return typeof callback === 'function' ? callback(data) : true;
-        }, 'json');
+        }, 'json').fail(onRequestFail);
     };
 
     SelectPhoto.prototype.destroy = function () {

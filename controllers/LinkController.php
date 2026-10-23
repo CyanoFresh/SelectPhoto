@@ -72,21 +72,17 @@ class LinkController extends Controller
 
         $id = Yii::$app->request->post('id');
 
-        $savedLinkModel = $this->getSavedLinkModel();
-
-        if (!$savedLinkModel or $link !== $savedLinkModel->link) {
-            throw new NotFoundHttpException(Yii::t('app', 'Ссылка не найдена'));
-        }
+        $linkModel = $this->findLink($link);
 
         $photoModel = Photo::findOne($id);
 
-        if (!$photoModel || $photoModel->link_id !== $savedLinkModel->id) {
+        if (!$photoModel || $photoModel->link_id !== $linkModel->id) {
             throw new NotFoundHttpException(Yii::t('app', 'Фото не найдено'));
         }
 
         $photoModel->selected = !((bool)$photoModel->selected);
 
-        if ($photoModel->selected && $savedLinkModel->max_photos !== 0 && (int)$savedLinkModel->getSelectedPhotos()->count() >= $savedLinkModel->max_photos) {
+        if ($photoModel->selected && $linkModel->max_photos !== 0 && (int)$linkModel->getSelectedPhotos()->count() >= $linkModel->max_photos) {
             return [
                 'ok' => false,
                 'errors' => [
@@ -120,19 +116,15 @@ class LinkController extends Controller
             throw new BadRequestHttpException(Yii::t('app', 'Сообщение отсутствует'));
         }
 
-        $savedLinkModel = $this->getSavedLinkModel();
+        $linkModel = $this->findLink($link);
 
-        if (!$savedLinkModel or $link !== $savedLinkModel->link) {
-            throw new NotFoundHttpException(Yii::t('app', 'Ссылка не найдена'));
-        }
-
-        if (!$savedLinkModel->allow_comment) {
+        if (!$linkModel->allow_comment) {
             throw new UnauthorizedHttpException(Yii::t('app', 'Комментирование не разрешено'));
         }
 
         $photoModel = Photo::findOne($id);
 
-        if (!$photoModel || $photoModel->link_id !== $savedLinkModel->id) {
+        if (!$photoModel || $photoModel->link_id !== $linkModel->id) {
             throw new NotFoundHttpException(Yii::t('app', 'Фото не найдено'));
         }
 
@@ -154,17 +146,7 @@ class LinkController extends Controller
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
 
-        $savedLinkModel = $this->getSavedLinkModel();
-
-        if (!$savedLinkModel or $link !== $savedLinkModel->link) {
-            throw new NotFoundHttpException(Yii::t('app', 'Ссылка не найдена'));
-        }
-
-        $linkModel = Link::find()->link($link)->active()->one();
-
-        if (!$linkModel) {
-            throw new NotFoundHttpException(Yii::t('app', 'Ссылка не найдена'));
-        }
+        $linkModel = $this->findLink($link);
 
         $ok = $linkModel->submit();
 
