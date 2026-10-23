@@ -13,7 +13,7 @@ use yii\helpers\Url;
 
 \app\assets\LinkAsset::register($this);
 
-$this->title = 'Выберите фото';
+$this->title = 'Оберіть фото';
 
 $photos = [];
 $selectedCount = 0;
@@ -39,7 +39,7 @@ if (class_exists('yii\debug\Module')) {
 // Social optimization
 $this->registerMetaTag([
     'name' => 'og:title',
-    'content' => 'Выберите' . ($linkModel->max_photos !== 0 ? ' ' . $linkModel->max_photos : '') . ' фото',
+    'content' => 'Оберіть' . ($linkModel->max_photos !== 0 ? ' ' . $linkModel->max_photos : '') . ' фото',
 ]);
 
 $this->registerMetaTag([
@@ -64,7 +64,7 @@ $this->registerMetaTag([
 
 $this->registerMetaTag([
     'name' => 'og:description',
-    'content' => 'Выберите наилучшие фото и нажмите кнопку ЗАВЕРШИТЬ, чтобы фотограф знал, когда вы закончите',
+    'content' => 'Оберіть найкращі фото і натисніть кнопку ЗАВЕРШИТИ, щоб фотограф знав, коли ви завершите відбір',
 ]);
 
 // Client variables
@@ -94,7 +94,7 @@ $this->registerJsVar('LINK', [
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="modal-title" id="helpModalLabel">
-                    Выберите <?= $linkModel->max_photos ? $linkModel->max_photos : '' ?> фото
+                    Оберіть <?= $linkModel->max_photos ? $linkModel->max_photos : '' ?> фото
                 </h4>
             </div>
             <div class="modal-body">
@@ -106,24 +106,24 @@ $this->registerJsVar('LINK', [
 
                 <?php if ($linkModel->show_tutorial): ?>
                     <ol>
-                        <li>Листайте фото кнопками влево или вправо.</li>
+                        <li>Листайте фото кнопками вліво або вправо.</li>
                         <li>
-                            Нажимайте кнопку <a class="btn btn-xs btn-round btn-success">Выбрать</a> на понравившиеся
-                            фото. Вы можете отменить выбор повторным нажатием.
+                            Натискайте кнопку <a class="btn btn-xs btn-round btn-success">Обрати</a> на фото, яке сподобалось.
+                            Ви можете відмінити вибір повторним натисканням.
                         </li>
                         <li>
-                            Чтобы фотограф знал, когда вы закончите, нажмите
-                            <a class="btn btn-xs btn-round btn-warning">Завершить</a>
+                            Щоб фотограф знав, коли ви завершите, натисніть
+                            <a class="btn btn-xs btn-round btn-warning">Завершити</a>
                         </li>
                     </ol>
                 <?php endif; ?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-hide-forever" data-dismiss="modal">
-                    больше не показывать
+                    більше не показувати
                 </button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">
-                    Закрыть
+                    Закрити
                 </button>
             </div>
         </div>
@@ -142,7 +142,7 @@ $this->registerJsVar('LINK', [
             <div class="modal-body"></div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">
-                    Закрыть
+                    Закрити
                 </button>
             </div>
         </div>
@@ -154,7 +154,7 @@ $this->registerJsVar('LINK', [
 <div class="fullpage">
     <div class="fullpage-content">
         <div class="fullpage-icon"><i class="fas fa-check"></i></div>
-        <h1 class="fullpage-title">Отправлено. Можете закрыть вкладку</h1>
+        <h1 class="fullpage-title">Відправлено. Можете закрити вкладку</h1>
     </div>
 </div>
 

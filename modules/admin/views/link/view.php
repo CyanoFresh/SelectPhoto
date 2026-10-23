@@ -12,7 +12,7 @@ use yii\widgets\DetailView;
 \app\modules\admin\assets\AdminLinkAsset::register($this);
 
 $this->title = $linkModel->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Ссылки'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Посилання'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->registerJsVar('orderPhotosUrl', Url::to(['order-photos', 'id' => $linkModel->id]));
@@ -106,7 +106,7 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo', 'id' => $linkMod
                 <h4 class="panel-title">
                     <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
                        aria-expanded="false" aria-controls="collapseOne">
-                        <b><?= Yii::t('app', 'Выбранные фото') ?> <span
+                        <b><?= Yii::t('app', 'Обрані фото') ?> <span
                                     class="badge"><?= (int)$linkModel->getSelectedPhotos()->count() ?></span> <i
                                     class="fas fa-chevron-down"></i></b>
                     </a>
@@ -168,7 +168,7 @@ $this->registerJsVar('deletePhotoUrl', Url::to(['delete-photo', 'id' => $linkMod
                                data-toggle="popover"
                                data-placement="top"
                                data-content="<?= $photo->comment ?>">
-                                <i class="fas fa-comment"></i> <?= Yii::t('app', 'Комментарий') ?>
+                                <i class="fas fa-comment"></i> <?= Yii::t('app', 'Коментар') ?>
                             </a>
                         <?php endif; ?>
 

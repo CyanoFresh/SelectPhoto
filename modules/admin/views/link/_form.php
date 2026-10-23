@@ -16,14 +16,14 @@ use yii\widgets\ActiveForm;
 
     <div class="row">
         <div class="col-md-6">
-            <h3><?= Yii::t('app', 'Основное') ?></h3>
+            <h3><?= Yii::t('app', 'Основне') ?></h3>
 
             <?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
 
             <?= $form->field($model, 'link')->textInput(['maxlength' => 36]) ?>
 
             <?= $form->field($model, 'project_id')->dropDownList(\app\models\Project::getList(), [
-                'prompt' => '--- Выберите проект ---'
+                'prompt' => '--- Оберіть проект ---'
             ]) ?>
 
             <?= $form->field($model, 'active')->checkbox() ?>
@@ -33,11 +33,11 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'allow_comment')->checkbox() ?>
         </div>
         <div class="col-md-6">
-            <h3><?= Yii::t('app', 'Параметры') ?></h3>
+            <h3><?= Yii::t('app', 'Параметри') ?></h3>
 
             <?= $form->field($model, 'max_photos')->input('number', [
                 'min' => 0,
-            ])->hint(Yii::t('app', 'Максимальное количество фото, которые можно выбрать. 0 - без ограничений')) ?>
+            ])->hint(Yii::t('app', 'Максимальна кількість фото, які можна обрати. 0 - без обмежень')) ?>
 
             <?= $form->field($model, 'greeting_message')->textarea() ?>
 
@@ -50,7 +50,7 @@ use yii\widgets\ActiveForm;
     </div>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Добавить') : Yii::t('app', 'Сохранить'),
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Додати') : Yii::t('app', 'Зберегти'),
             ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
